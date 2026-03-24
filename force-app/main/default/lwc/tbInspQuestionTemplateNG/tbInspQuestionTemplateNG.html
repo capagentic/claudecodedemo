@@ -1,0 +1,125 @@
+<template>
+    <div if:true={showRadio} class="modal">
+        <c-tb-insp-question-radio-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-radio-n-g>
+    </div>
+    <div if:true={showPassFail} class="modal">
+        <c-tb-insp-question-pass-fail-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-pass-fail-n-g>
+    </div>
+    <div if:true={showYesNo} class="modal">
+        <c-tb-insp-question-pass-fail-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-pass-fail-n-g>
+    </div>
+    <div if:true={showComplientNonCompliant} class="modal">
+        <c-tb-insp-question-pass-fail-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-pass-fail-n-g>
+    </div>
+    <div if:true={showMultiChoice} class="modal">
+        <c-tb-insp-question-multi-choice-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-multi-choice-n-g>
+    </div>
+    <div if:true={showCurrency} class="modal">
+        <c-tb-insp-question-currency-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-currency-n-g>
+    </div>
+    <div if:true={showDate} class="modal">
+        <c-tb-insp-question-date-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-date-n-g>
+    </div>
+    <div if:true={showDateTime} class="modal">
+        <c-tb-insp-question-date-time-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-date-time-n-g>
+    </div>
+
+    <div if:true={showText} class="modal">
+        <c-tb-insp-question-text-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            onquestiononblur={handleQuestionOnblur} read-only={readOnly}>
+        </c-tb-insp-question-text-n-g>
+    </div>
+
+    <div if:true={showTextArea} class="modal">
+        <c-tb-insp-question-text-area-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            read-only={readOnly}>
+        </c-tb-insp-question-text-area-n-g>
+    </div>
+
+    <div if:true={showNum} class="modal">
+        <c-tb-insp-question-number-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId} read-only={readOnly}>
+        </c-tb-insp-question-number-n-g>
+    </div>
+
+    <div if:true={showUrl} class="modal">
+        <c-tb-insp-question-url-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId} read-only={readOnly}>
+        </c-tb-insp-question-url-n-g>
+    </div>
+    <div if:true={showEmail} class="modal">
+        <c-tb-insp-question-email-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId} read-only={readOnly}>
+        </c-tb-insp-question-email-n-g>
+    </div>
+    <div if:true={showPercentage} class="modal">
+        <c-tb-insp-question-percentage-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId} read-only={readOnly}>
+        </c-tb-insp-question-percentage-n-g>
+    </div>
+    <div if:true={showSignature} class="modal">
+        <c-tb-insp-question-signature-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId} files-list={files} read-only={readOnly}>
+        </c-tb-insp-question-signature-n-g>
+    </div>
+    <div if:true={showGeoLocation} class="modal">
+        <c-tb-insp-question-geo-location-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-geo-location-n-g>
+    </div>
+
+    <div if:true={showNPS} class="modal">
+        <c-tb-insp-question-n-p-s-n-g max-number=9 question={currentQuestion}
+            question-id={currentQuestion.templateQuestionId} onvaluechanged={handleValueChanged} read-only={readOnly}>
+        </c-tb-insp-question-n-p-s-n-g>
+    </div>
+
+    <div if:true={showRating} class="modal">
+        <c-tb-insp-question-star-rating-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} label-text="Customize Rating colors" label-position="top"
+            color-positive="#4AB615" color-default="#F5C823" color-ok="#F5C823" color-negative="#E54958"
+            number-of-stars="10" rating="5.0" label-hidden show-half-stars="true" size="small" space-between="small"
+            read-only={readOnly}>
+        </c-tb-insp-question-star-rating-n-g>
+    </div>
+    <div if:true={showFile} class="modal">
+        <c-tb-insp-question-file-upload-n-g question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged} inspection-rec={inspectionRec} read-only={readOnly}>
+        </c-tb-insp-question-file-upload-n-g>
+    </div>
+    <div if:true={showSalesforceField} class="modal">
+        <c-tb-insp-question-salesforce-field-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            inspection-rec={inspectionRec} read-only={readOnly}>
+        </c-tb-insp-question-salesforce-field-n-g>
+    </div>
+    <div if:true={showCaptureAudio} class="modal">
+        <c-tb-insp-question-audio-capture-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            read-only={readOnly}>
+        </c-tb-insp-question-audio-capture-n-g>
+    </div>
+    <div if:true={showBarcodeScanner} class="modal">
+        <c-tb-insp-question-barcode-scanner-n-g question={currentQuestion} onvaluechanged={handleValueChanged}
+            read-only={readOnly}>
+        </c-tb-insp-question-barcode-scanner-n-g>
+    </div>
+    <div if:true={showSalesforceFlow} class="modal">
+        <c-tb-insp-question-salesforce-flow-n-g question={currentQuestion} onvaluechanged={handleValueChanged}>
+        </c-tb-insp-question-salesforce-flow-n-g>
+    </div>
+</template>

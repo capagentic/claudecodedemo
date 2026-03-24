@@ -1,0 +1,287 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container">
+                            <lightning-icon icon-name="action:new_opportunity" alternative-text="follow"
+                                title="preview"></lightning-icon>
+                            <span class="slds-assistive-text">Spreadsheet Builder</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate"
+                                        title="Spreadsheet Builder">Spreadsheet Builder</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <div if:false={showHelp}><a onclick={toggleHelpContainer}>How does it work?</a></div>
+
+
+                        <div class="helpContainer" lwc:if={showHelp}>
+                            <div class="slds-m-vertical_medium">
+                                <p>The Spreadsheet Builder is a tool that is designed for creating spreadsheet templates
+                                    that seamlessly integrated with the data models in Salesforce. This builder empowers
+                                    users to effortlessly add columns and map values to objects and custom fields,
+                                    streamlining the data entry process. With user-friendly features, it transforms
+                                    complex
+                                    data structures into a visually intuitive format, enhancing efficiency and accuracy.
+                                </p>
+                            </div>
+                            <div class="processImage">
+                                <h1>Build a Spreadsheet template in 3 easy steps!</h1>
+                                <img class="image" src={processImage}>
+                                <div><a onclick={toggleHelpContainer}>Don't show this</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="builder">
+        <div class="section">
+            <h2 class="slds-text-heading_medium">
+                1. Define Template Description
+            </h2>
+            <div class="fields">
+                <lightning-input type="text" data-name="Name" label="Spreadsheet Template Name"
+                    onchange={handleInputFieldChange} value={spreadsheetMetadata.selectedFormValue.Name}
+                    field-level-help="Name of the template" required></lightning-input>
+
+                <lightning-textarea data-name="Kinetics__Instructions__c" name="Kinetics__Instructions__c"
+                    label="Description" placeholder="type description here..." onchange={handleInputFieldChange}
+                    value={spreadsheetMetadata.selectedFormValue.Kinetics__Instructions__c}></lightning-textarea>
+            </div>
+        </div>
+        <div class="section">
+            <h2 class="slds-text-heading_medium">
+                2. Select An Object (optional)
+            </h2>
+            <div class="fields">
+                <template if:true={objectListPresent}>
+                    <lightning-combobox name="Kinetics__Object_API_Name__c" label="Select Object Name"
+                        value={selectedObjectName} placeholder="Select Object Name" options={ObjectOptions}
+                        onchange={handleObjectChange}></lightning-combobox>
+                </template>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="slds-text-heading_medium">
+                3. Add Columns
+            </h2>
+            <div class="columnBuilder">
+                <template for:each={spreadsheetMetadata.rowMetadata} for:item="row">
+                    <article class="slds-card slds-card_boundary cardbackground" key={row.rowno}>
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__body">
+                                <h2 class="">
+                                    <div class="slds-card__header-link slds-truncate slds-text-title_bold slds-grid slds-wrap"
+                                        title="row">
+                                        <div class="titleBody slds-col slds-size_10-of-12 ">
+
+                                        </div>
+                                        <div class="rowIconContainer slds-col slds-size_2-of-12 ">
+                                            <!-- <lightning-button-icon variant="bare"
+                                                            icon-name="utility:delete"
+                                                            alternative-text="Delete row" title="Delete row"
+                                                            class="columnActionIcon" onclick={deleteRow}
+                                                            data-rowno={row.rowno}>
+                                                        </lightning-button-icon> -->
+                                        </div>
+                                    </div>
+                                </h2>
+                            </div>
+                        </header>
+
+                        <template for:each={row.columnWrapperList} for:item="columnwrapper">
+                            <div key={columnwrapper.uid} class="slds-p-vertical_medium columnRow">
+                                <div class="slds-grid slds-wrap slds-hint-parent columnItem"
+                                    data-customuid={columnwrapper.uid} data-uid={columnwrapper.uid}
+                                    data-rowno={row.rowno}>
+                                    <div class="slds-col slds-size_10-of-12 ">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" small-device-size="4"
+                                                padding="horizontal-medium">
+                                                <div class="columnInput">
+                                                    <lightning-input type="text" data-name="label"
+                                                        data-uid={columnwrapper.uid} value={columnwrapper.label}
+                                                        onchange={handleColumnInputChange}
+                                                        placeholder="type column label" required="true"
+                                                        aria-required="true" label="Column Label"
+                                                        variant="label-stacked" onfocus={handleonfocus}
+                                                        onblur={handleofffocus} autocomplete="off">
+                                                    </lightning-input>
+                                                </div>
+                                            </lightning-layout-item>
+
+                                            <lightning-layout-item size="12" small-device-size="4"
+                                                padding="horizontal-medium">
+                                                <lightning-combobox data-name="type" data-uid={columnwrapper.uid}
+                                                    label="Column Data Type" value={columnwrapper.type}
+                                                    placeholder="Select Column Type" options={columnTypeOptions}
+                                                    onchange={handleColumnInputChange}></lightning-combobox>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" small-device-size="4"
+                                                padding="horizontal-medium">
+                                                <lightning-combobox data-name="fieldName" data-uid={columnwrapper.uid}
+                                                    label="Field Name (Optional)" value={columnwrapper.fieldName}
+                                                    placeholder="Select Field API Name"
+                                                    options={selectedObjectFieldsOptions}
+                                                    onchange={handleColumnInputChange}></lightning-combobox>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <div class="slds-p-around_x-small">
+                            <lightning-button variant="brand-outline" label="Add column" title="Add column"
+                                onclick={addcolumnInList} class="slds-p-around_xxx-small" icon-name="utility:add"
+                                data-rowno={row.rowno}>
+                            </lightning-button>
+                        </div>
+                    </article>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div class="btnContrainer">
+        <lightning-button variant="brand" class="slds-m-around_small" label="Submit" title="Submit"
+            onclick={handleSubmit}></lightning-button>
+
+        <lightning-button class="slds-m-around_small" label="Cancel" title="Cancel"
+            onclick={handleCancel}></lightning-button>
+
+    </div>
+
+
+    <!-- <div>
+        <div class="width100 titleContainer">
+            <div class="titleBody titleBox">
+                <input type="text" data-name="Name" onchange={handleInputFieldChange}
+                    value={spreadsheetMetadata.selectedFormValue.Name} required placeholder="Untitled Spreadsheet"
+                    class="spreadsheetTitleInputText"></input>
+
+                <textarea data-name="Kinetics__Instructions__c" onchange={handleInputFieldChange}
+                    value={spreadsheetMetadata.selectedFormValue.Kinetics__Instructions__c}
+                    placeholder="Add instructions" rows="2"
+                    class="spreadsheetInstructionInput">{spreadsheetMetadata.selectedFormValue.Kinetics__Instructions__c}</textarea>
+            </div>
+            <div class="titleBody titleBox">
+                <template if:true={objectListPresent}>
+                    <lightning-combobox name="Kinetics__Object_API_Name__c" label="Select Object Name"
+                        value={selectedObjectName} placeholder="Select Object Name" options={ObjectOptions}
+                        onchange={handleObjectChange}></lightning-combobox>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div class="btnContrainer">
+        <lightning-button variant="brand" class="slds-m-around_small" label="Submit" title="Submit"
+            onclick={handleSubmit}></lightning-button>
+
+        <lightning-button class="slds-m-around_small" label="Cancel" title="Cancel"
+            onclick={handleCancel}></lightning-button>
+
+    </div>
+    <div class="width100">
+        <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12">
+            <article class="slds-card slds-card_boundary slds-grow">
+                <div class="slds-card__body slds-card__body_inner">
+                    <template for:each={spreadsheetMetadata.rowMetadata} for:item="row">
+                        <article class="slds-card slds-card_boundary cardbackground" key={row.rowno}>
+                            <div class="slds-card__header slds-grid slds-border_bottom slds-p-vertical_medium">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__body">
+                                        <h2 class="">
+                                            <div class="slds-card__header-link slds-truncate slds-text-title_bold slds-grid slds-wrap"
+                                                title="row">
+                                                <div class="titleBody slds-col slds-size_10-of-12 ">
+
+                                                </div>
+                                                <div class="rowIconContainer slds-col slds-size_2-of-12 ">
+                                                </div>
+                                            </div>
+                                        </h2>
+                                    </div>
+                                </header>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner content">
+                                <div class="slds-card">
+                                    <template for:each={row.columnWrapperList} for:item="columnwrapper">
+                                        <div key={columnwrapper.uid} class="slds-p-vertical_medium columnRow">
+                                            <div class="slds-grid slds-wrap slds-hint-parent columnItem"
+                                                data-customuid={columnwrapper.uid} data-uid={columnwrapper.uid}
+                                                data-rowno={row.rowno}>
+                                                <div class="slds-col slds-size_10-of-12 ">
+                                                    <lightning-layout multiple-rows>
+                                                        <lightning-layout-item size="12" small-device-size="4"
+                                                            padding="left-small" class="questionTypeContainer">
+                                                            <lightning-combobox data-name="fieldName"
+                                                                data-uid={columnwrapper.uid}
+                                                                label="Select Field API Name"
+                                                                value={columnwrapper.fieldName}
+                                                                placeholder="Select Field API Name"
+                                                                options={selectedObjectFieldsOptions}
+                                                                onchange={handleColumnInputChange}></lightning-combobox>
+                                                        </lightning-layout-item>
+
+                                                        <lightning-layout-item size="12" small-device-size="4"
+                                                            padding="left-small">
+                                                            <div class="columnInput">
+                                                                <lightning-input type="text" data-name="label"
+                                                                    data-uid={columnwrapper.uid}
+                                                                    value={columnwrapper.label}
+                                                                    onchange={handleColumnInputChange}
+                                                                    placeholder="Type Column Label" required="true"
+                                                                    aria-required="true" label="Column Label"
+                                                                    variant="label-stacked" onfocus={handleonfocus}
+                                                                    onblur={handleofffocus} autocomplete="off">
+                                                                </lightning-input>
+                                                            </div>
+                                                        </lightning-layout-item>
+
+                                                        <lightning-layout-item size="12" small-device-size="4"
+                                                            padding="left-small" class="questionTypeContainer">
+                                                            <lightning-combobox data-name="type"
+                                                                data-uid={columnwrapper.uid} label="Select Column Type"
+                                                                value={columnwrapper.type}
+                                                                placeholder="Select Column Type"
+                                                                options={columnTypeOptions}
+                                                                onchange={handleColumnInputChange}></lightning-combobox>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>
+                                                </div>          
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div class="slds-p-around_x-small">
+                                        <lightning-button variant="brand-outline" label="Add column" title="Add column"
+                                            onclick={addcolumnInList} class="slds-p-around_xxx-small"
+                                            icon-name="utility:add" data-rowno={row.rowno}>
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </article>
+            <div style="height: var(--lwc-heightDockedBar,2.5rem);"></div>
+        </div> 
+
+    </div> -->
+</template>

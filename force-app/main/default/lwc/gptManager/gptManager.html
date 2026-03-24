@@ -1,0 +1,51 @@
+<template>
+    <div class="slds-card appContainer">
+        <div class="slds-card__header">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                <div class="slds-media__body">
+                    <h1 class="slds-card__header-title header1">
+                        GPT Management Setting
+                    </h1>
+                    <p>Welcome to the System Settings page, where you, as the system administrator, can monitor and
+                        manage the usage of GPT tokens in your environment.
+                    </p>
+                    <!-- <div class="slds-box slds-theme_shade slds-m-vertical_small">
+                        <p>Welcome to the System Settings page, where you, as the system administrator, can monitor and
+                            manage the usage of GPT tokens in your environment.
+                        </p>
+                    </div> -->
+                </div>
+            </header>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="totalTokenBox slds-m-vertical_large ">
+                <h2>Token availability: <span> {currentToken} </span></h2>
+                <p>This section provides you with crucial information about the total number of GPT tokens available in
+                    your system. This metric is essential for ensuring the smooth operation of your applications and
+                    preventing any unexpected interruptions.</p>
+            </div>
+
+            <div class="totalTokenBox slds-m-vertical_large ">
+                <h2>Usage:</h2>
+                <p>Below you'll find a summary of ChatGPT token usage for your organization. The usage data may be
+                    delayed up to 5 minutes.</p>
+                <div>
+                    <div if:true={jobs}>
+                        <lightning-datatable key-field="name" data={jobs} columns={jobColumns} hide-checkbox-column>
+                        </lightning-datatable>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <div if:true={showSpinner} class="spinnerContainer">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+</template>

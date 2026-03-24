@@ -1,0 +1,8 @@
+.fkbackgroundcolor{
+    background-color: #d2d2cf1f;
+}
+
+.requiredheight {
+    max-height: 330px;
+    min-height: 300px;
+}

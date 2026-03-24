@@ -1,0 +1,199 @@
+<template>
+    <div if:true={showSpinner} class='spinnerContainer'>
+        <lightning-spinner class="spins" variant="brand" size="large" data-text="Uploading....">
+        </lightning-spinner>
+    </div>
+    <div if:true={showError}>
+        {errorMessage}
+    </div>
+    <template if:true={isMetadataLoaded}>
+        <div>
+            <div class={openState}>
+                <div>
+                    <div class="previewpageheader header-bottom-border">
+                        <div class="slds-page-header">
+                            <div class="slds-page-header__row">
+                                <div class="slds-page-header__col-title">
+                                    <div class="slds-media">
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <div class="slds-page-header__name">
+                                            <div class="slds-page-header__name-title">
+                                                <h1>
+                                                    <span class="slds-page-header__title slds-truncate"
+                                                        title={templatePageMetadata.selectedFormValue.Name}>{templatePageMetadata.selectedFormValue.Name}</span>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <p class="slds-page-header__name-meta">
+                                            {templatePageMetadata.selectedFormValue.Kinetics__Instructions__c}</p>
+                                        <p class="slds-page-header__name-meta textcenteraligned">
+                                            Score: {totalObtainedScore}/{totalOutofScore} ({scorePercentage}%)
+                                        </p>
+                                        <div class="slds-page-header__name-meta textcenteraligned slds-p-top_small">
+                                            <lightning-progress-bar value={currentpageprogress}
+                                                size="small"></lightning-progress-bar>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div if:true={showComplete} class="modal slds-align_absolute-center slds-p-around_small">
+                        This Inspection is completed. Please use 'View Inspection' button to view all the answers.
+                    </div>
+                    <div class="questionContainer">
+                        <template for:each={page.sectionlist} for:item="section">
+                            <div aria-selected="true" class="sectionBreakBar" key={section.sectionno}>
+                                <span class="slds-hint-parent slds-text-heading_small sectionBreakBarText">
+                                    {section.stitle}
+                                </span>
+                            </div>
+                            <div for:each={section.questionWrapperList} for:item="currentQuestion"
+                                key={currentQuestion.templateQuestionId}>
+                                <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder">
+                                    <div class="slds-card__header slds-grid zeromargin">
+                                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                            <div class="slds-media__body">
+                                                <h2 class="slds-card__header-title">
+                                                    <div slot="title"
+                                                        class="slds-card__header slds-text-heading--small textfont">
+                                                        <div class="slds-p-bottom_large">
+                                                            <lightning-formatted-rich-text
+                                                                value={currentQuestion.qInstructions}
+                                                                class="slds-text-heading_small">
+
+                                                            </lightning-formatted-rich-text>
+                                                        </div>
+                                                        <template if:true={currentQuestion.answerrequired}>
+                                                            <span style="color:red">*</span>
+                                                        </template>{currentQuestion.questionDetails}
+                                                        <br />
+                                                        <!-- <template for:each={currentQuestion.parentRelatedRecordDetailsList} for:item="parentRelatedRec">
+                                                                <a key={parentRelatedRec.parentRecordId}
+                                                                    data-parent-record-id={parentRelatedRec.parentRecordId}
+                                                                    data-parent-object-name={parentRelatedRec.parentObjectName}
+                                                                    data-parent-record-name ={parentRelatedRec.parentRecordName}
+                                                                    onclick={handleShowDetails}>
+                                                                    ({parentRelatedRec.parentRecordName}) &nbsp;
+                                                                </a>
+                                                            </template> -->
+                                                        <lightning-helptext content={currentQuestion.helpText}
+                                                            class="helptext" if:true={currentQuestion.helpText}>
+                                                        </lightning-helptext>
+                                                    </div>
+                                                </h2>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <div class="slds-card__body slds-card__body_inner questionInputContainer">
+                                        <c-tb-insp-question-template-n-g current-question={currentQuestion}
+                                            onvaluechanged={handleValueChanged} onquestiononblur={handleQuestionOnblur}
+                                            inspection-rec={inspectionRec}
+                                            files={files}></c-tb-insp-question-template-n-g>
+                                    </div>
+                                    <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+                                        <c-tb-insp-question-footer-actions-n-g question={currentQuestion}
+                                            ispreviewshown={templatePageMetadata.ispreviewshown}
+                                            inspection-rec={inspectionRec} template-name={templateName}
+                                            onnoterecordcreate={maintainVisitNotesRecords}
+                                            ontaskrecordcreate={maintainTaskRecords} onfileupload={maintainFileUpload}>
+                                        </c-tb-insp-question-footer-actions-n-g>
+                                    </footer>
+
+                                    <div if:true={currentQuestion.showDependantQuestion} class="slds-m-vertical_large">
+                                        <h2 class="slds-card__header-title">
+                                            <div slot="title"
+                                                class="slds-card__header slds-text-heading--small textfont">
+                                                {currentQuestion.currentDependantQuestion.name}
+                                            </div>
+                                        </h2>
+
+                                        <div class="slds-card__body slds-card__body_inner questionInputContainer">
+                                            <c-tb-insp-question-dependant
+                                                current-question={currentQuestion.currentDependantQuestion}
+                                                onvaluechanged={handleValueChanged}></c-tb-insp-question-dependant>
+                                        </div>
+                                        <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+                                            <c-tb-insp-question-footer-actions-n-g
+                                                question={currentQuestion.currentDependantQuestion} ispreviewshown=false
+                                                inspection-rec={inspectionRec} template-name={templateName}
+                                                onnoterecordcreate={maintainVisitNotesRecords}
+                                                ontaskrecordcreate={maintainTaskRecords}
+                                                onfileupload={maintainFileUpload}>
+                                            </c-tb-insp-question-footer-actions-n-g>
+                                        </footer>
+                                    </div>
+                                </article>
+
+                                <!-- <template if:true={showParentRecordDetailPopup}>
+                                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                            <div class="slds-modal__container">
+                                                <header class="slds-modal__header">
+                                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                                                        <lightning-icon icon-name="utility:close"
+                                                            alternative-text="close"
+                                                            variant="inverse"
+                                                            size="small" >
+                                                        </lightning-icon>
+                                                        <span class="slds-assistive-text">Close</span>
+                                                    </button>
+                                                    <h2 id={currentQuestion.templateQuestionId} class="slds-text-heading_medium slds-hyphenate">{parentRecordName}</h2>
+                                                </header>
+
+                                                <div class="slds-modal__content slds-p-around_medium" style="height:45%; overflow:auto;">
+                                                    <lightning-record-form
+                                                        record-id={parentRecordId}
+                                                        object-api-name={parentObject}
+                                                        layout-type="Full"
+                                                        mode="readonly"
+                                                    >
+                                                    </lightning-record-form>
+                                                </div>
+
+                                                <footer class="slds-modal__footer">
+                                                    <button class="slds-button slds-button_neutral" onclick={hideModalBox}>Cancel</button>
+                                                </footer>
+                                            </div>
+                                        </section>
+                                        <div class="slds-backdrop slds-backdrop_open"></div>
+                                    </template> -->
+                            </div>
+                        </template>
+                        <!-- </template> -->
+                    </div>
+                    <div class="slds-grid slds-gutters slds-grid_align-spread slds-p-around_medium" slot="footer">
+                        <div class="slds-col slds-size_1-of-3 slds-grid slds-grid_align-center">
+                            <template if:true={prepageavailabel}>
+                                <lightning-button-icon class="slds-button slds-float_left" size="medium"
+                                    icon-name="utility:chevronleft" variant="bare" alternative-text="Prev" title="Prev"
+                                    onclick={handlePrevClick}></lightning-button-icon>
+                            </template>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-grid slds-grid_align-center">
+                            <template if:false={templatePageMetadata.ispreviewshown}>
+                                <div class="slds-col">
+                                    <lightning-button class="slds-m-right_medium" variant="neutral" name="Cancel"
+                                        label="Cancel" onclick={handleCancel} disabled={readOnly}>
+                                    </lightning-button>
+                                </div>
+                                <div class="slds-col">
+                                    <lightning-button variant="brand" name="Save" label="Save" onclick={handleSave}
+                                        disabled={readOnly}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-grid slds-grid_align-center">
+                            <template if:true={nextpageavailable}>
+                                <lightning-button-icon class="slds-button slds-float_right" size="medium"
+                                    icon-name="utility:chevronright" variant="bare" alternative-text="Next" title="Next"
+                                    onclick={handleNextClick}></lightning-button-icon>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

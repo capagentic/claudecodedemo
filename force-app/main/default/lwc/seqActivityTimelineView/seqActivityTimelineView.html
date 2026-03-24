@@ -1,0 +1,41 @@
+<template>
+    <lightning-messages></lightning-messages>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <ul class="slds-timeline">
+        <div class="slds-section open-activity-group slds-timeline__item_expandable openActivities" data-id="upcoming-activity-section">
+            <h3 class="openActivitiesHeader slds-section__title">
+                <button class="slds-button slds-section__title-action" aria-controls="upcoming-activity-section-content" 
+                    aria-expanded="false" title="Upcoming &amp; Overdue"
+                    onclick={toggleExpandedView} data-recordid="upcoming-activity-section">
+                    <span class="slds-icon_container slds-button__icon slds-timeline__details-action-icon slds-button__icon_left">
+                        <lightning-icon icon-name="utility:switch" size="x-small"></lightning-icon>
+                    </span>
+                    Upcoming &amp; Overdue
+                </button>
+            </h3>
+            <div class="slds-section__content" data-id="upcoming-activity-section-content" aria-hidden="true">
+                <c-seq-activity-timeline-content activity-list={futureActivityList}>
+                </c-seq-activity-timeline-content>
+            </div>
+        </div>
+        <div class="slds-section open-activity-group slds-timeline__item_expandable pastActivities" data-id="past-activity-section">
+            <h3 class="pastActivitiesHeader slds-section__title">
+                <button class="slds-button slds-section__title-action" aria-controls="past-activity-section-content" 
+                    aria-expanded="true" title="past &amp; Overdue"
+                    onclick={toggleExpandedView} data-recordid="past-activity-section">
+                    <span class="slds-icon_container slds-button__icon slds-timeline__details-action-icon slds-button__icon_left">
+                        <lightning-icon icon-name="utility:switch" size="x-small"></lightning-icon>
+                    </span>
+                   Past
+                </button>
+            </h3>
+            <div class="slds-section__content" data-id="past-activity-section-content" aria-hidden="true">
+                <c-seq-activity-timeline-content activity-list={pastActivityList}>
+                </c-seq-activity-timeline-content>
+            </div>
+        </div>
+    </ul>    
+</template>

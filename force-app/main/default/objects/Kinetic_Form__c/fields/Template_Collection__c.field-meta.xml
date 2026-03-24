@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Template_Collection__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Template Collection</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BAI Communications</fullName>
+                <default>false</default>
+                <label>BAI Communications</label>
+            </value>
+            <value>
+                <fullName>Generic Demo</fullName>
+                <default>false</default>
+                <label>Generic Demo</label>
+            </value>
+            <value>
+                <fullName>Metro South Health</fullName>
+                <default>false</default>
+                <label>Metro South Health</label>
+            </value>
+            <value>
+                <fullName>Safety</fullName>
+                <default>false</default>
+                <label>Safety</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

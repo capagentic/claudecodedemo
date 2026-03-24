@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Meeting_Platform__c</fullName>
+    <externalId>false</externalId>
+    <label>Meeting Platform</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Zoom</fullName>
+                <default>false</default>
+                <label>Zoom</label>
+            </value>
+            <value>
+                <fullName>Webex</fullName>
+                <default>false</default>
+                <label>Webex</label>
+            </value>
+            <value>
+                <fullName>google_meet</fullName>
+                <default>false</default>
+                <label>google_meet</label>
+            </value>
+            <value>
+                <fullName>microsoft_teams</fullName>
+                <default>false</default>
+                <label>microsoft_teams</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

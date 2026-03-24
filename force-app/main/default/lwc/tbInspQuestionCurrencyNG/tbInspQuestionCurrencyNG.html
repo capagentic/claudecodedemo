@@ -1,0 +1,6 @@
+<template>
+    <lightning-input type="number" variant="label-hidden" name="currency" class="textfont" onchange={handleChange}
+        value={question.answer} min="0" formatter="currency" step=".01" accuracy="2" required={question.answerrequired}
+        disabled={readOnly}>
+    </lightning-input>
+</template>

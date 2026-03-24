@@ -1,0 +1,37 @@
+<template>
+
+    <template if:true={showPanel}>
+        <div><a onclick={handleAdvancedSetting}>Advanced setting</a>
+
+            <div if:true={showAdvancedSetting} class="slds-border_top slds-border_bottom slds-m-vertical_x-small">
+                <div>
+                    Temperature
+                </div>
+                <lightning-button-group>
+                    <lightning-button label="Low " variant={tempBtnVariant.Low}
+                        onclick={handleTemperatureSetting}></lightning-button>
+                    <lightning-button label="Medium" variant={tempBtnVariant.Medium}
+                        onclick={handleTemperatureSetting}></lightning-button>
+                    <lightning-button label="High" variant={tempBtnVariant.High}
+                        onclick={handleTemperatureSetting}></lightning-button>
+                </lightning-button-group>
+                <div class="slds-box slds-theme_shade slds-theme_alert-texture slds-m-vertical_x-small">
+                    <div><strong>What is temperature and how does it work ? </strong></div>
+                    <p>The temperature is a parameter that we can adjust when generating text with a language model. A
+                        higher temperature makes the model's output more creative, while a lower temperature makes it
+                        more
+                        deterministic.
+                    </p>
+
+                    <p></p>
+                </div>
+
+                <!-- <div> <lightning-button variant="brand" label="Save" title="Save" onclick={handleSaveSetting}
+                        class="slds-p-around_xxx-small">
+                    </lightning-button></div> -->
+
+            </div>
+        </div>
+
+    </template>
+</template>

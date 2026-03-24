@@ -1,0 +1,18 @@
+.qCard{
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.qLabel{
+    font-size:1.5em;
+}
+
+.cTextArea{
+    --sds-c-textarea-sizing-min-height:200px;
+}
+
+.helptext{
+    position: relative;
+    top: -7px;
+    left: 4px;
+  }

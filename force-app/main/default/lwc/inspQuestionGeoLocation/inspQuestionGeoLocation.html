@@ -1,0 +1,44 @@
+<template>
+    <!-- <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder">
+        <div class="slds-card__header slds-grid zeromargin">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <div  slot="title" class="slds-card__header slds-text-heading_small textfont">
+                            {question.questionDetails} <lightning-helptext
+                                content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+                        </div>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner zeromargin" style="text-align: center;"> 
+            <div class="slds-m-around_small">
+                <lightning-button variant="Neutral" label="Share My Location" title="Share My Location" onclick={showmap} icon-name="utility:location"></lightning-button>
+            </div>
+            <div class="slds-m-around_large">
+                <lightning-map if:true={displayMap} map-markers={mapMarkers} zoom-level="12" class="googleMap"></lightning-map>
+            </div>
+            <div class="slds-m-around_large">
+                <lightning-textarea class="textfont cTextArea" variant="label-hidden" type="text" onchange={updateAddress}
+                    value={address}>
+                </lightning-textarea>
+            </div>
+        </div>
+        <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+            <c-fk-question-footer-actions question={question}></c-fk-question-footer-actions>
+        </footer>
+    </article> -->
+
+    <div class="slds-m-around_small">
+        <lightning-button variant="Neutral" label="Share My Location" title="Share My Location" onclick={showmap} icon-name="utility:location"></lightning-button>
+    </div>
+    <div class="slds-m-around_large">
+        <lightning-map if:true={displayMap} map-markers={mapMarkers} zoom-level="12" class="googleMap"></lightning-map>
+    </div>
+    <div class="slds-m-around_large">
+        <lightning-textarea class="textfont cTextArea" variant="label-hidden" type="text" onchange={updateAddress}
+            value={address}>
+        </lightning-textarea>
+    </div>
+</template>

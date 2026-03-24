@@ -1,0 +1,32 @@
+<template>
+    <template for:each={typeCollection} for:item="item">
+        <div class="slds-visual-picker slds-visual-picker_small" key={item.value}>
+            <input type="radio" name={fieldname} id={item.value} value={item.value} 
+                data-id={item.value} onchange={handleChange} />
+            <label for={item.value}>
+                <span class="slds-visual-picker__figure slds-visual-picker__text slds-align_absolute-center">
+                    <span>
+                        <template if:true={item.icon}>
+                            <lightning-icon icon-name={item.icon} alternative-text={item.label}
+                                size="small"></lightning-icon>
+                        </template>
+                        <template if:true={item.imageSrc}>
+                            <p class="slds-truncate slds-p-horizontal_x-small">
+                                <img src={item.imageSrc} width="200" style="margin-right:10px;"
+                                alt={item.label}>
+                            </p>
+                        </template>
+                        <span class="slds-text-title">{item.label}</span>
+                    </span>
+                </span>
+                <lightning-icon variant="inverse"
+                    class="slds-icon_container slds-visual-picker__text-check"
+                    icon-name="utility:check" alternative-text="check" size="x-small"
+                    title="small size"></lightning-icon>
+                <span class="slds-visual-picker__body">
+                    <span class="slds-text-title">{item.description}</span>
+                </span>
+            </label>
+        </div>
+    </template>
+</template>

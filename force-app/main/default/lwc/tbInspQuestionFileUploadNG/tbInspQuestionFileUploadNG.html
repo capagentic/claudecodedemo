@@ -1,0 +1,16 @@
+<template>
+    <div if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+    <div class="fileUploadContainer">
+        <lightning-input variant="label-hidden" label="" name="file uploader" onchange={handleChange} type="file"
+            disabled={readOnly}>
+        </lightning-input>
+        <div class="textfont">
+            <template if:true={fileName}>
+                {fileName} &nbsp; &nbsp; {fileSize}
+            </template>
+        </div>
+    </div>
+
+</template>

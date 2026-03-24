@@ -1,0 +1,20 @@
+.typeDropdown {
+    margin-left: 0px;
+}
+
+.questionTypeLabel {
+    margin-left: 5px;
+}
+
+.optionLabel {
+    margin-left: 5px;
+}
+
+.typeDropdown button {
+    min-width: 225px;
+
+}
+
+button {
+    width: 230px !important;
+}

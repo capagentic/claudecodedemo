@@ -1,0 +1,8 @@
+<template>
+    <!-- <lightning-input class="textfont" type="text" variant="label-hidden" label="" onchange={handleChange} 
+        value={question.answer} disabled={question.markAnswerReadOnly} required={question.answerrequired}>
+    </lightning-input> -->
+    <lightning-input class="textfont" type="text" variant="label-hidden" label="" onchange={handleChange}
+        onblur={handleOnblur} value={question.answer} disabled={readOnly} required={question.answerrequired}>
+    </lightning-input>
+</template>

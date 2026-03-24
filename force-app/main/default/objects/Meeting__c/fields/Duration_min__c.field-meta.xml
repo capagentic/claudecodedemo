@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Duration_min__c</fullName>
+    <description>Length of the meeting in minutes</description>
+    <externalId>false</externalId>
+    <formula>( Meeting_End_Time__c - Meeting_Date_Time__c )*24*60</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Length of the meeting in minutes</inlineHelpText>
+    <label>Duration (min)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

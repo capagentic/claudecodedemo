@@ -1,0 +1,126 @@
+<template>
+    <ul class="slds-timeline">
+        <li for:each={activityList} for:item="tal" key={tal.Id} if:true={activitiesPresent}>
+            <div class="slds-timeline__item_expandable slds-timeline__item_task" data-id={tal.Id}>
+                <span class="slds-assistive-text">task</span>
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <button class="slds-button slds-button_icon" title="Toggle details" 
+                            aria-controls="task-item-expanded" aria-expanded="true"
+                            onclick={toggleExpandedView} data-recordid={tal.Id}>
+                            <span class="slds-icon_container slds-button__icon slds-timeline__details-action-icon">
+                                <lightning-icon icon-name="utility:switch" size="x-small"></lightning-icon>
+                            </span>
+                            <span class="slds-assistive-text">Toggle details</span>
+                        </button>
+                        <div class="slds-icon_container slds-icon-standard-task slds-timeline__icon" title="task">
+                            <span class="slds-icon_container slds-icon slds-icon_small">
+                                <lightning-icon icon-name="standard:task" size="small"></lightning-icon>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                                <h3 class="slds-truncate" title={tal.Kinetics__Kinetic_Form__r.Name}>
+                                    <strong>
+                                        <a target="_blank" onclick={handleClickForNavigateToRecordPage} 
+                                            data-recordid={tal.Kinetics__Kinetic_Form__c} data-objectname="Kinetics__Kinetic_Form__c">
+                                            {tal.Kinetics__Kinetic_Form__r.Name}
+                                        </a>
+                                    </strong>
+                                </h3>
+                            </div>
+                            <div class="slds-timeline__actions slds-timeline__actions_inline">
+                                <p class="slds-timeline__date">{tal.expiresTime} | {tal.expiresDate}</p>
+                            </div>
+                        </div>
+                        <p class="slds-m-horizontal_xx-small" if:true={tal.isEmailOpened} style="font-size:11px">
+                            <span class="slds-icon_container slds-icon slds-icon_xx-small">
+                                <lightning-icon icon-name="utility:email_open" size="xx-small"></lightning-icon>
+                            </span>
+                            &nbsp;Last opened {tal.lastOpenedDifference} day(s) ago
+                        </p>
+                        <p class="slds-m-horizontal_xx-small" if:false={tal.isEmailOpened} style="font-size:11px">
+                            <span class="slds-icon_container slds-icon slds-icon_xx-small">
+                                <lightning-icon icon-name="utility:email" size="xx-small"></lightning-icon>
+                            </span>
+                            &nbsp;Unopened
+                        </p>
+                        <p class="slds-m-horizontal_xx-small">
+                            You sent a Kinetic Link to <a target="_blank" onclick={handleClickForNavigateToRecordPage} 
+                            data-recordid={tal.Kinetics__Contact__c} data-objectname="Contact">{tal.Kinetics__Contact__r.Name}</a>
+                        </p>
+                        <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_medium" 
+                            id="task-item-expanded" aria-hidden="true">
+                            <ul class="slds-list_horizontal slds-wrap">
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                    <span class="slds-text-title slds-p-bottom_x-small">Sent</span>
+                                    <span class="slds-text-body_medium slds-truncate" title={tal.sentDate}>
+                                        {tal.sentDate}
+                                    </span>
+                                </li>
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                    <span class="slds-text-title slds-p-bottom_x-small">Expires</span>
+                                    <span class="slds-text-body_medium slds-truncate" title={tal.expiresOnDate}>
+                                        {tal.expiresOnDate}
+                                    </span>
+                                </li>
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                    <span class="slds-text-title slds-p-bottom_x-small">Channel</span>
+                                    <span class="slds-text-body_medium slds-truncate" title={tal.Kinetics__Channel__c}>
+                                        {tal.Kinetics__Channel__c}
+                                    </span>
+                                </li>
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                    <span class="slds-text-title slds-p-bottom_x-small">Stage</span>
+                                    <span class="slds-text-body_medium slds-truncate" title={tal.Kinetics__Stage__c}>
+                                        {tal.Kinetics__Stage__c}
+                                    </span>
+                                </li>
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                    <span class="slds-text-title slds-p-bottom_x-small">Recipient</span>
+                                    <span class="slds-text-body_medium slds-truncate" title="Recipient">
+                                        <a target="_blank" onclick={handleClickForNavigateToRecordPage} 
+                                            data-recordid={tal.Kinetics__Contact__c} data-objectname="Contact">
+                                            {tal.Kinetics__Contact__r.Name} 
+                                        </a>
+                                    </span>
+                                </li>
+                                <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                    <span class="slds-text-title slds-p-bottom_x-small">Results</span>
+                                    <span class="slds-text-body_medium slds-truncate" title={tal.Name}>
+                                        <a target="_blank" onclick={handleClickForNavigateToRecordPage} 
+                                            data-recordid={tal.Id} data-objectname="Kinetics__Survey_Invitation__c">
+                                            {tal.Name} 
+                                        </a>
+                                    </span>
+                                </li>
+                            </ul>
+                            <div>
+                                <ul class="slds-list_horizontal slds-wrap">
+                                    <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small">
+                                        <lightning-button class="slds-button slds-button_icon" label="Resend" 
+                                            onclick={resendInvite} data-recordid={tal.Id} variant="base" icon-name="utility:reply"
+                                            data-contactid={tal.Kinetics__Contact__c} data-surveyid={tal.Kinetics__Kinetic_Form__c}
+                                            style="justify-content: left;">
+                                        </lightning-button>
+                                    </li>
+                                    <li class="slds-grid slds-grid_vertical slds-size_1-of-2 slds-p-bottom_small" if:true={tal.cancelButtonRequired}>
+                                        <lightning-button class="slds-button slds-button_icon" label="Cancel" 
+                                            onclick={cancelInvite} data-recordid={tal.Id} variant="base" icon-name="utility:close"
+                                            style="justify-content: left;">
+                                        </lightning-button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li if:false={activitiesPresent} style="padding: 5px">
+            No activities to load.
+        </li>
+    </ul>
+</template>

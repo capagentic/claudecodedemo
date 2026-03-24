@@ -1,0 +1,199 @@
+.titleBody {
+    background-color: #F3F3F3;
+}
+
+.spreadsheetTitleInputText {
+    border: transparent;
+    background: #F3F3F3;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.spreadsheetTitleInputText:focus {
+    background: #FFFFFF;
+}
+
+.spreadsheetInstructionInput {
+    width: 100%;
+    padding: 0.5rem;
+    border: transparent;
+    background: #F3F3F3;
+}
+
+.spreadsheetInstructionInput:focus {
+    background: #FFFFFF;
+}
+
+.columnIconContainer {
+    text-align: right;
+    display: none;
+}
+
+.titleContainer {
+    background: #F3F3F3;
+}
+
+.columnNumber {
+    vertical-align: top;
+    top: 29px;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: white;
+    transition: background-color 1s;
+}
+
+.columnContainer {
+    display: inline-block;
+}
+
+.columnActionIcon {
+    position: relative;
+    margin-right: 13px;
+}
+
+.deleteIcon {
+    position: relative;
+
+}
+
+.rowIconContainer {
+    text-align: right;
+}
+
+.cardbackground {
+    background-color: #F3F3F3;
+}
+
+.pageSectionInputText {
+    border: transparent;
+    background: #F3F3F3;
+    font-size: 1rem;
+    font-weight: 300;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.pageSectionInputText:focus {
+    background: #FFFFFF;
+}
+
+.pageInputText {
+    border: transparent;
+    /* background: #F3F3F3; */
+    font-size: 1rem;
+    font-weight: 300;
+    /* width: 100%; */
+    padding: 0.5rem;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.buttonBox {
+    width: 50%;
+    display: inline-block;
+}
+
+.titleBox {
+    width: 50%;
+    display: inline-block;
+}
+
+.width95 {
+    width: 95%;
+    display: inline-block;
+}
+
+.width5 {
+    width: 5%;
+    display: inline-block;
+}
+
+.buttonIcon {
+    --sds-c-icon-color-foreground-default: #1C76D3;
+    margin-right: 10px;
+}
+
+.buttonIconWhite {
+    --sds-c-icon-color-foreground-default: #ffffff;
+    margin-right: 5px;
+}
+
+.columnRow:hover {
+    /* background-color: #D8EBFB; */
+    background-color: #FCF3E0;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 10px;
+}
+
+.columnRow:hover .columnIconContainer {
+    display: block;
+}
+
+.objectLabel {
+    margin-left: 5px;
+}
+
+.typeDropdown {
+    margin-left: 0px;
+}
+
+.typeDropdown button {
+    min-width: 225px;
+
+}
+
+.btnContrainer {
+    text-align: center;
+    margin: 10px 0px;
+    padding-bottom: 30px;
+}
+
+.builder .fields {
+    width: 70%;
+}
+
+.builder .columnBuilder {
+    width: 90%;
+}
+
+.builder .section {
+    margin: 50px 36px;
+}
+
+.builder h2 {
+    font-family: "HelveticaNeue-Light", Arial, sans-serif;
+    font-size: 1.5em;
+    line-height: 1.25em;
+    display: block;
+    color: #5d5d5d;
+}
+
+.columnItem {
+    width: 90%;
+}
+
+.helpContainer {
+    margin: 7px;
+}
+
+.helpContainer h1 {
+    font-size: 20px;
+    color: #353535;
+}
+
+.helpContainer .processImage {
+    text-align: center;
+}
+
+.helpContainer .image {
+    height: 160px;
+}

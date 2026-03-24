@@ -1,0 +1,64 @@
+<template>
+    <div class="slds-card appContainer">
+        <div class="slds-card__header">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                <div class="slds-media__body">
+                    <h1 class="slds-card__header-title header1">
+                        FieldKo Copilot Bot Setting
+                    </h1>
+                    <p>The calendar integration allows every unique user in your app to connect their Google/Microsoft
+                        calendars and have Recall bots join their meetings automatically.
+                    </p>
+                </div>
+            </header>
+        </div>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-m-vertical_medium">
+                <template if:true={authTokenValid}>
+                    <lightning-icon icon-name="action:approval" alternative-text="Approved"
+                        title="Approved"></lightning-icon><span class="slds-m-horizontal_small">
+                        The integration with your Google Calendar has been completed.</span>
+                </template>
+                <template if:false={authTokenValid}>
+                    <div class="emailInputContainer">
+                        <lightning-input type="text" label="Enter your Google Calendar Username"
+                            value={userEmail}></lightning-input>
+                        <div class="slds-m-vertical_small">
+                            <lightning-button variant="brand" label="Confirm" title="Confirm"
+                                onclick={handleConfirmUsername} class="slds-m-left_x-small"></lightning-button>
+                        </div>
+                    </div>
+
+                </template>
+
+                <template if:true={showPreferences}>
+                    <div class="slds-m-vertical_medium">
+                        <p>Calendar meetings do not get recorded by default. Please update the meeting preference by
+                            clicking the update button below. </p>
+                        <!-- <lightning-checkbox-group name="Recording Preference" label="Recording Preference"
+                            options={preferenceOptions} value={value}
+                            onchange={handlePreferenceChange}></lightning-checkbox-group> -->
+                        <div class="slds-m-vertical_small">
+                            <lightning-button variant="brand" label="Update Recording Peference"
+                                title="Update Recording Peference" onclick={haneldUpdateRecordingPreference}
+                                class=""></lightning-button>
+
+                            <lightning-button variant="brand" label="Revoke Calendar Integration "
+                                title="Revoke Calendar Integration" onclick={haneldDeleteCalendarUser}
+                                class="slds-m-left_small"></lightning-button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div if:true={showSpinner} class="spinnerContainer">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </div>
+
+
+
+</template>

@@ -1,0 +1,14 @@
+<template>
+    <ul class="radioButtonGroup">
+        <template for:each={options} for:item="option">
+            <li key={option.value}>
+                <div>
+                    <input type="checkbox" id={option.value} name={option.questionId} onclick={handleOptionSelected}
+                        value={option.value} checked={option.checked} required={question.answerrequired}
+                        style={option.styleAtt} disabled={readOnly} />
+                    <label for={option.value} style={option.styleAtt}>{option.value}</label>
+                </div>
+            </li>
+        </template>
+    </ul>
+</template>

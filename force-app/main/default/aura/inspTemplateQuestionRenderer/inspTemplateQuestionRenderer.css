@@ -1,0 +1,178 @@
+.THIS .fixedfooter {
+    bottom: 0px !important;
+    background-color: rgb(243, 243, 243);
+    width: 100% !important;
+    height: 75px;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    z-index: 1001;
+    margin-top: 0px;
+}
+
+.THIS .fixedheader {
+    width: 100%;
+    height: 100px;
+    z-index: 190;
+    background: rgb(243, 243, 243);
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    margin: 0px;
+}
+
+.THIS .fontsize_10 {
+    font-size: 12px;
+}
+
+.THIS .custom_body__content {
+    width: 100%;
+    top: 100px;
+    margin: 0px;
+}
+
+.THIS .height100height {
+    height: 100%;
+}
+
+.THIS .scrollToTopClass {
+    scroll-behavior: smooth;
+}
+
+@media only screen and (min-width: 600px) {
+    .THIS .height100height {
+        max-width: 550px;
+        min-width: 550px;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-device-width: 480px) and (max-device-width: 600px) {
+    .THIS .height100height {
+        max-width: 550px;
+        min-width: 550px;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    .THIS .height100height {
+        max-width: 350px;
+        min-width: 350px;
+        margin: auto;
+    }
+
+    .THIS .requiredheight {
+        min-height: 70vh;
+        max-height: 70vh;
+        overflow-y: scroll
+    }
+}
+
+@media only screen and (max-device-width: 320px) {
+    .THIS .height100height {
+        max-width: 300px;
+        min-width: 300px;
+        margin: auto;
+    }
+
+    .THIS .requiredheight {
+        min-height: 70vh;
+        max-height: 70vh;
+        overflow-y: scroll
+    }
+
+}
+
+@media only screen and (device-width: 390px) and (-webkit-device-pixel-ratio: 3) {
+    .THIS .height100height {
+        max-width: 350px;
+        min-width: 350px;
+        margin: auto;
+    }
+}
+
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) and (orientation:portrait) {
+    .THIS .requiredheight {
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: scroll
+    }
+}
+
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) and (orientation:landscape) {
+    .THIS .requiredheight {
+        min-height: 70vh;
+        max-height: 70vh;
+        overflow-y: scroll
+    }
+}
+
+.THIS .questionContainer {
+    position: relative;
+    /* z-index: -999; */
+}
+
+/* @media only screen and (min-device-width: 1025px) and (max-device-width: 1200px) {
+    /* .THIS .requiredheight {
+        min-height: 35vh;
+        max-height : 35vh; 
+        overflow-y : scroll 
+    } */
+/*
+    .THIS .requiredheight {
+        overflow-y : scroll;
+        position: absolute;
+        bottom: 36px;
+        top: 100px;
+        left: 0px;
+    }
+
+    .THIS .fixedfooter {
+        // might need to adjust below for phone
+        position: fixed;
+    }
+    .THIS .fixedheader {
+        // might need to adjust below for phone
+        position: fixed;
+    }
+}
+@media only screen and (min-device-width: 1201px) {
+    .THIS .desktoprequiredheight {
+        overflow-y : scroll;
+        position: absolute;
+        bottom: 36px;
+        top: 100px;
+        left: 0px;
+    }
+    .THIS .desktopfixedfooter {
+        // might need to adjust below for phone
+        position: fixed;
+    }
+    .THIS .desktopfixedheader {
+        // might need to adjust below for phone 
+        position: fixed;
+    }
+} */
+
+.THIS .desktoprequiredheight {
+    overflow-y: scroll;
+    /* this is commented out by KW to test on community */
+    position: absolute;
+    /* this is commented out by KW to test on community */
+    bottom: 36px;/* this is uncommented by Shankar to fix the issue of question going below footer */
+    top: 100px;
+    left: 0px;
+}
+
+.THIS .desktopfixedfooter {
+    /* might need to adjust below for phone */
+    position: fixed;
+}
+
+.THIS .desktopfixedheader {
+    /* might need to adjust below for phone */
+    position: fixed;
+}
+
+.THIS .hideelement {
+    display: none;
+}

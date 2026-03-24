@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-box">
+        <template if:true={isLoaded}>
+            <lightning-spinner alternative-text="Loading..." variant="brand">
+            </lightning-spinner>
+        </template>
+        <lightning-button variant="brand" label="Create Assistant Records FROM OpenAI" title="Create Assistant Records FROM OpenAI" 
+            onclick={createRecords} class="slds-m-around_x-small slds-align_absolute-center"></lightning-button>
+    </div>
+</template>

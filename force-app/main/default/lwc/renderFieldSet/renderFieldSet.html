@@ -1,0 +1,27 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+   </template>
+    <!-- <lightning-card class="slds-size_full"> -->
+        <section class="slds-card slds-card_boundary slds-size_full">
+            <h1 slot="title" class="slds-card__header slds-text-heading_small">
+                {cardtitle}
+            </h1>
+            <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y requiredheight">
+                <lightning-record-edit-form 
+                    object-api-name={objectname} 
+                    record-id={recordId} >
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                        <template for:each={extraDetailFields} for:item="efield">
+                            <div class="slds-col slds-size_1-of-1"  key={efield.fieldPath}>
+                                <lightning-input-field field-name={efield.fieldPath} onchange={handleChange}
+                                    value={efield.value} required={efield.required}></lightning-input-field>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-record-edit-form>
+            </div>
+        </section>
+    <!-- </lightning-card> -->
+</template>

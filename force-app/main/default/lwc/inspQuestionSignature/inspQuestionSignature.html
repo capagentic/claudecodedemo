@@ -1,0 +1,33 @@
+<template>
+    <!-- <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder">
+        <div class="slds-card__header slds-grid zeromargin">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <div  slot="title" class="slds-card__header slds-text-heading_small textfont">
+                            {question.questionDetails} <lightning-helptext
+                                content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+                        </div>
+                    </h2>
+                </div>
+        </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner outerDiv" style="text-align: center;"> 
+            <canvas class="signature-pad canvasBorder" lwc:dom="manual" style="width: 100%;"></canvas>
+            <div class="slds-var-m-top_small">
+                <lightning-button variant="destructive" label="Clear" title="Clear" 
+                    onclick={handleClearClick}></lightning-button>
+            </div>
+        </div>
+        <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+            <c-fk-question-footer-actions question={question}></c-fk-question-footer-actions>
+        </footer>
+    </article> -->
+    <div class="outerDiv">
+        <canvas class="signature-pad canvasBorder" lwc:dom="manual" style="width: 100%;"></canvas>
+        <div class="slds-var-m-top_small">
+            <lightning-button variant="destructive" label="Clear" title="Clear" 
+                onclick={handleClearClick}></lightning-button>
+        </div>
+    </div>
+</template>

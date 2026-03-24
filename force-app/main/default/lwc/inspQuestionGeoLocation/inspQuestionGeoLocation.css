@@ -1,0 +1,26 @@
+.helptext{
+  position: relative;
+  top: -7px;
+  left: 4px;
+}
+
+.googleMap{
+  height: 180px;
+  width:100%;
+}
+.textfont {
+  font-weight: normal;
+  font-size: 1rem;
+  font-family: Helvetica;
+}  
+.zeromargin {
+  margin: 0px;
+}
+.cardborder {
+  border: solid grey 0.1px;
+  border-radius: 16px;
+}
+
+.cTextArea{
+  --sds-c-textarea-sizing-min-height:100px;
+}

@@ -1,0 +1,24 @@
+<template>
+    <!-- <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder">
+        <div class="slds-card__header slds-grid zeromargin">
+            <h2 class="slds-card__header-title">
+                <div  slot="title" class="slds-card__header slds-text-heading_small textfont">
+                    {question.questionDetails} <lightning-helptext
+                        content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+                </div>
+            </h2>
+        </div>
+        <div class="slds-card__body slds-card__body_inner textfont" style="text-align: center;"> 
+            <lightning-radio-group name="nps" variant="label-hidden" options={options} value={question.answer} type="button"
+                onchange={handleChange}>
+            </lightning-radio-group>
+        </div>
+        <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+            <c-fk-question-footer-actions question={question}></c-fk-question-footer-actions>
+        </footer>
+    </article> -->
+
+    <lightning-radio-group name="nps" variant="label-hidden" options={options} value={question.answer} type="button"
+        onchange={handleChange}>
+    </lightning-radio-group>
+</template>

@@ -1,0 +1,46 @@
+.fkbackgroundcolor{
+    background-color: #d2d2cf1f;
+}
+
+.minwidthlayoutitem{
+    min-width:40% !important;
+}
+
+.requiredheight {
+    /* max-height: 330px; */
+    min-height: 300px;
+}
+
+.progressBarContainer {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.wizardBody{
+    width: 80%;
+    margin: auto;
+}
+
+.seqTable{
+    padding: 1px;
+    background: #ECEBEA;
+    border-radius: 5px;
+}
+
+.successIcon{
+    background-color: #F5C924;
+}
+
+.fixedfooter {
+    display: block;
+    position: relative;
+}
+
+.zIndex2 {
+    z-index: 2;
+}
+
+.inlinedisplay {
+    display: inline-block;
+}

@@ -1,0 +1,159 @@
+<template>
+    <lightning-card>
+        <section class="slds-card slds-card_boundary">
+            <div slot="title" class="slds-card__header slds-text-heading_small">
+                {sectionTitle}
+            </div>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                </lightning-spinner>
+            </template>
+            <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y maxheight slds-p-around_none">
+                <div class="slds-modal__content slds-grid slds-nowrap" id="modal-content-id-1">
+                    <div class="slds-col slds-grid slds-grid_vertical slds-nowrap">
+                        <div class="slds-p-vertical_x-small slds-p-horizontal_large slds-shrink-none slds-theme_shade">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label slds-assistive-text" for="combobox-unique-id-21">Search</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-combobox_container">
+                                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                                <input type="text" class="slds-input slds-combobox__input" id="combobox-unique-id-21" aria-autocomplete="list" autocomplete="off" role="textbox" placeholder="Search Question" onchange={handleSearch}/>
+                                                <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                                                    <lightning-icon icon-name="utility:search" alternative-text="Search" title="Search" size="x-small"></lightning-icon>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-text-title slds-m-top_x-small" aria-live="polite">{selectedQuestionCount} Item(s) Selected</div>
+                        </div>
+                        <div class="slds-scrollable slds-grow">
+                            <div class="slds-scrollable_none">
+                                <table aria-multiselectable="true" class="slds-table slds-no-row-hover slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid" aria-label="Available active Question list">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th class="" scope="col" style="width:3.75rem"></th>
+                                            <th aria-label="Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="-1">
+                                                    <!-- <span class="slds-assistive-text">Sort by: </span> -->
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-truncate" title="Name">Name</span>
+                                                        <!-- <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                                            <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
+                                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                                            </svg>
+                                                        </span> -->
+                                                    </div>
+                                                </a>
+                                                <div class="slds-resizable">
+                                                    <input type="range" aria-label="Name column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-69" max="1000" min="20" tabindex="-1" />
+                                                    <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                            <th aria-label="Question" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="-1">
+                                                    <!-- <span class="slds-assistive-text">Sort by: </span> -->
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-truncate" title="Question">Question</span>
+                                                        <!-- <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                                            <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
+                                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                                            </svg>
+                                                        </span> -->
+                                                    </div>
+                                                </a>
+                                                <div class="slds-resizable">
+                                                    <input type="range" aria-label="Question column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-70" max="1000" min="20" tabindex="-1" />
+                                                    <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                            <th aria-label="Type" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="-1">
+                                                    <!-- <span class="slds-assistive-text">Sort by: </span> -->
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-truncate" title="Type">Type</span>
+                                                        <!-- <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                                            <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
+                                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                                            </svg>
+                                                        </span> -->
+                                                    </div>
+                                                </a>
+                                                <div class="slds-resizable">
+                                                    <input type="range" aria-label="Type column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-71" max="1000" min="20" tabindex="-1" />
+                                                    <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                            <th aria-label="Options" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="-1">
+                                                    <!-- <span class="slds-assistive-text">Sort by: </span> -->
+                                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-truncate" title="Options">Options</span>
+                                                        <!-- <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                                            <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
+                                                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                                            </svg>
+                                                        </span> -->
+                                                    </div>
+                                                </a>
+                                                <div class="slds-resizable">
+                                                    <input type="range" aria-label="Options column width" class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-72" max="1000" min="20" tabindex="-1" />
+                                                    <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="slds-scrollable_y maxheight">
+                                        <template for:each={questionsToDisplay} for:item="qs">
+                                            <tr aria-selected={qs.isselected} class={qs.rowclass} key={qs.id}>
+                                                <td class="slds-text-align_right" role="gridcell" tabindex="0">
+                                                    <label class="slds-checkbox-button slds-checkbox-button_is-checked" for={qs.id}>
+                                                        <input type="checkbox" class="slds-assistive-text" id={qs.id} value={qs.id} tabindex="-1" checked="" onclick={selectquestion} name={qs.id} data-index={qs.index}/>
+                                                        <template  if:true={qs.isselected}>
+                                                            <span class="slds-icon_container slds-icon-utility-check slds-current-color" title="">
+                                                                <lightning-icon icon-name="utility:check" alternative-text="Check" title="Check" size="x-small"></lightning-icon>
+                                                                <span class="slds-assistive-text">Selected question</span>
+                                                            </span>
+                                                        </template>
+                                                        <template  if:false={qs.isselected}>
+                                                            <span class="slds-icon_container slds-icon-utility-add slds-current-color" title="">
+                                                                <lightning-icon icon-name="utility:add" alternative-text="Add" title="Add" size="x-small"></lightning-icon>
+                                                                <span class="slds-assistive-text">Add Question</span>
+                                                            </span>
+                                                        </template>
+                                                    </label>
+                                                </td>
+                                                <th scope="row">
+                                                    <div class="slds-truncate" title={qs.name}>{qs.name}</div>
+                                                </th>
+                                                <td role="gridcell">
+                                                    <div class="slds-truncate" title={qs.text}>{qs.text}</div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="slds-truncate" title={qs.type}>{qs.type}</div>
+                                                </td>
+                                                <td role="gridcell">
+                                                    <div class="slds-truncate" title={qs.values}>{qs.values}</div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </lightning-card>
+</template>

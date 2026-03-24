@@ -1,0 +1,26 @@
+/*
+.slds-modal__container {
+    width: 90% !important;
+}
+*/
+
+.cTextArea{
+    /* --sds-c-textarea-sizing-min-height:200px !important; */
+}
+
+.requiredclass{
+    color: red;
+}
+:host {
+    /* --sds-c-textarea-sizing-min-height: 100px; */
+} 
+@media only screen and (max-device-width: 480px) {
+    .absoluteposition {
+        position: absolute;
+    }
+    
+    /* .uiPanel .panel-content {
+        -webkit-overflow-scrolling: unset !important;
+        background-color: red;
+    } */
+}

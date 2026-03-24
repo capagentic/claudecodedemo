@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-text-heading_medium">{question.questionDetails} <lightning-helptext
+            content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+    </div>
+    <!-- <div class="slds-align_absolute-center"> -->
+    <div class="">
+        <lightning-radio-group name="nps" options={options} value={question.answer} type="button"
+            onchange={handleChange}>
+        </lightning-radio-group>
+        <br>
+        <!-- <div><span>Not at all likely</span><span>Extremely likely</span></div> -->
+
+    </div>
+</template>

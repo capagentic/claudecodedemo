@@ -1,0 +1,9 @@
+.cTextArea{
+    --sds-c-textarea-sizing-min-height:100px;
+}
+
+.textfont {
+    font-weight: normal;
+    font-size: 1rem;
+    font-family: Helvetica;
+}

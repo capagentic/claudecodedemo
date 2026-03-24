@@ -1,0 +1,12 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "kinetics-dev",
+  "namespace": "",
+  "sfdcLoginUrl": "https://kinetics-dev-ed.my.salesforce.com/",
+  "sourceApiVersion": "56.0"
+}

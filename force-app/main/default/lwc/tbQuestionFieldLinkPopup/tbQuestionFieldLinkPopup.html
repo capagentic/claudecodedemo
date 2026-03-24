@@ -1,0 +1,77 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                    onclick={handleCancel}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                        size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Object and Field</h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                <template if:true={errormessage}>
+                    <span class="slds-text-color_error">{errormessage}</span>
+                </template>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12">
+                        <lightning-combobox label="Select Object" data-name="Kinetics__Related_To_Object__c"
+                            options={requiredOptions.controllingPicklist_objectnames}
+                            value={currentquestion.Kinetics__Related_To_Object__c} disabled={controllingDisabled}
+                            onchange={fetchDependentFieldValue}>
+                        </lightning-combobox>
+                        <lightning-combobox label="Select Field" data-name="Kinetics__Related_Field_API_Name__c"
+                            options={requiredOptions.dependentFieldList} onchange={handleonchange}
+                            disabled={dependentDisabled} value={currentquestion.Kinetics__Related_Field_API_Name__c}>
+                        </lightning-combobox>
+
+                        <div class="slds-grid slds-wrap slds-align_absolute-center">
+                            <div class="slds-col slds-size_12-of-12 slds-p-left_small">
+                                <label class="slds-form-element__label"
+                                    for="Kinetics__Show_Related_Info_As_a_Answer__c">Show Field value in Answer</label>
+                                <lightning-input type="toggle" data-name="Kinetics__Show_Related_Info_As_a_Answer__c"
+                                    label="Show Field value in Answer"
+                                    checked={currentquestion.Kinetics__Show_Related_Info_As_a_Answer__c}
+                                    onchange={handleToggleChangeOnQuestion} variant="label-hidden">
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-p-left_small">
+                                <label class="slds-form-element__label"
+                                    for="Kinetics__Show_Related_Info_In_Answer_As_ReadOly__c">Make Field value read
+                                    only</label>
+                                <lightning-input type="toggle"
+                                    data-name="Kinetics__Show_Related_Info_In_Answer_As_ReadOly__c"
+                                    label="Make Field value read only"
+                                    checked={currentquestion.Kinetics__Show_Related_Info_In_Answer_As_ReadOly__c}
+                                    onchange={handleToggleChangeOnQuestion} variant="label-hidden">
+
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-p-left_small">
+                                <label class="slds-form-element__label"
+                                    for="Kinetics__Show_Related_Info_In_Question_Text__c">Show Field value in
+                                    Question</label>
+                                <lightning-input type="toggle"
+                                    data-name="Kinetics__Show_Related_Info_In_Question_Text__c"
+                                    label="Show Field value in Question"
+                                    checked={currentquestion.Kinetics__Show_Related_Info_In_Question_Text__c}
+                                    onchange={handleToggleChangeOnQuestion} variant="label-hidden">
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning-button label="Cancel" onclick={handleCancel}
+                    class="slds-p-around_xxx-small"></lightning-button>
+                <lightning-button label="Save" onclick={handleSave} class="slds-p-around_xxx-small"></lightning-button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

@@ -1,0 +1,13 @@
+.cTextArea {
+    --sds-c-textarea-sizing-min-height: 160px !important;
+}
+.popupContainer {
+    position: fixed;
+    z-index: 9000; /* Adjust this value to a higher number if needed */
+}
+@media only screen and (max-device-width: 480px) {
+    .absoluteposition {
+        position: absolute;
+        min-width: 85%;
+    }
+}

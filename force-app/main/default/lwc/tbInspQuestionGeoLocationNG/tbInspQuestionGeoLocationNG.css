@@ -1,0 +1,16 @@
+.googleMap{
+    height: 180px;
+    width:100%;
+}
+.textfont {
+    font-weight: normal;
+    font-size: 1rem;
+    font-family: Helvetica;
+}  
+.zeromargin {
+    margin: 0px;
+}
+  
+.cTextArea{
+    --sds-c-textarea-sizing-min-height:100px;  
+}

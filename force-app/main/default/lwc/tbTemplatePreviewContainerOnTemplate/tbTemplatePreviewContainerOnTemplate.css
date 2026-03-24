@@ -1,0 +1,21 @@
+.previewerContainer {
+    text-align: center;
+    padding: 0px 0px 0px 0px!important;
+}
+.templateContainer {
+    margin: auto;
+    height: 80vh;
+    width: 100%;
+    /* width: 450px; */
+    /* position: fixed; */
+    z-index: 99;
+    top: 185px;
+    right: -10px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    opacity: 0.9;
+    background-color: aliceblue;
+    /* border-radius: 20px; */
+
+    /* box-shadow: rgba(0, 0, 0, 0.25) 10px 10px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; */
+}

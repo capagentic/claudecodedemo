@@ -1,0 +1,13 @@
+.appContainer {
+    height: 1000%;
+    width: 90%;
+    margin: auto;
+}
+
+.header1 {
+    font-size: 2em;
+}
+
+.emailInputContainer {
+    width: 300px;
+}

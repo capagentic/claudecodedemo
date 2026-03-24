@@ -1,0 +1,24 @@
+<template>
+    <div class="slds-page-header slds-p-around_x-small" style="background: none;">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container" title={titleValue}>
+                            <lightning-icon icon-name={iconName} size="small"></lightning-icon>
+                            <span class="slds-assistive-text">{titleValue}</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <span>{titleValue}</span>
+                                <span class="slds-page-header__title slds-truncate" title={subtitleValue}>{subtitleValue}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

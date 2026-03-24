@@ -1,0 +1,55 @@
+<template>
+    <!-- <template if:true={question.noteId}>
+        <p style="text-align: left; color: royalblue;" class="slds-p-left_medium">
+            <lightning-formatted-rich-text value={question.shortNoteDescription} onclick={handleAddNote}>
+
+            </lightning-formatted-rich-text>
+        </p>
+    </template> -->
+    <!-- <div if:true={showTaskCreationPopup}>
+        <c-tb-insp-footer-action-create-task-n-g onclose={closeTaskPopupModel} inspection-rec={inspectionRec}
+            template-name={templateName} ontaskrecordcreate={maintainTaskRecords} question={question}
+            ispreviewshown={ispreviewshown}>
+        </c-tb-insp-footer-action-create-task-n-g>
+    </div>
+    <div if:true={showNoteCreationPopup} class="noteContainer">
+        <c-tb-insp-footer-action-create-note-n-g onclose={closeNotePopupModel} inspection-rec={inspectionRec}
+            template-name={templateName} onnoterecordcreate={maintainVisitNotesRecords} question={question}
+            note-id={question.noteId}></c-tb-insp-footer-action-create-note-n-g>
+    </div> -->
+    <div>
+        <input id="fileInput" type="file" style="display:none;" name="fileuploader" data-name="fileuploader"
+            onchange={handlefilechange} />
+    </div>
+
+    <div class="slds-grid slds-wrap slds-align_absolute-center">
+        <template if:true={question.captureNotesEnabled}>
+            <span class={dynamicactionclass}>
+                <lightning-button-icon icon-name="utility:note" onclick={handleAddNote} variant="container"
+                    alternative-text="Add Note" title="Add Note" class="slds-m-left_x-small"></lightning-button-icon>
+                <span class="slds-badge slds-badge_inverse" style="background-color: green;" onclick={handleAddNote}
+                    if:true={question.totalNumberOfNotesCreated}>{question.totalNumberOfNotesCreated}</span>
+            </span>
+        </template>
+        <template if:true={question.attachPhotoEnabled}>
+            <template if:false={isFileTypeQuestion}>
+                <span class={dynamicactionclass}>
+                    <lightning-button-icon icon-name="utility:attach" onclick={handleAddAttachment} variant="container"
+                        alternative-text="Attachment" title="Attachment"
+                        class="slds-m-left_x-small"></lightning-button-icon>
+                    <span class="slds-badge slds-badge_inverse" style="background-color: green;"
+                        onclick={handleAddAttachment}
+                        if:true={question.totalNumberOfFilesUploaded}>{question.totalNumberOfFilesUploaded}</span>
+                </span>
+            </template>
+        </template>
+        <template if:true={question.assignTaskEnabled}>
+            <span class={dynamicactionclass}>
+                <lightning-button-icon icon-name="utility:task" onclick={handleAddTask} variant="container"
+                    alternative-text="Task" title="Task" class="slds-m-left_x-small"></lightning-button-icon>
+                <span class="slds-badge slds-badge_inverse" style="background-color: green;" onclick={handleAddTask}
+                    if:true={question.totalNumberOfTasksCreated}>{question.totalNumberOfTasksCreated}</span>
+            </span>
+        </template>
+    </div>
+</template>

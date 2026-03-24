@@ -1,0 +1,95 @@
+<template>
+    <div if:true={showRadio} class="modal">
+        <c-insp-question-radio question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-radio>
+    </div>
+    <div if:true={showPassFail} class="modal">
+        <c-insp-question-pass-fail question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-pass-fail>
+    </div>
+    <div if:true={showMultiChoice} class="modal">
+        <c-insp-question-multi-choice question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-multi-choice>
+    </div>
+    <div if:true={showCurrency} class="modal">
+        <c-insp-question-currency question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-currency>
+    </div>
+    <div if:true={showDate} class="modal">
+        <c-insp-question-date question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-date>
+    </div>
+    <div if:true={showDateTime} class="modal">
+        <c-insp-question-date-time question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-date-time>
+    </div>
+    
+    <div if:true={showText} class="modal">
+        <c-insp-question-text question={currentQuestion} onvaluechanged={handleValueChanged}>
+        </c-insp-question-text>
+    </div>
+
+    <div if:true={showTextArea} class="modal">
+        <c-insp-question-text-area question={currentQuestion} onvaluechanged={handleValueChanged}>
+        </c-insp-question-text-area>
+    </div>
+
+    <div if:true={showNum} class="modal">
+        <c-insp-question-number question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId}>
+        </c-insp-question-number>
+    </div>
+
+    <div if:true={showUrl} class="modal">
+        <c-insp-question-url question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId}>
+        </c-insp-question-url>
+    </div>
+    <div if:true={showEmail} class="modal">
+        <c-insp-question-email question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId}>
+        </c-insp-question-email>
+    </div>
+    <div if:true={showPercentage} class="modal">
+        <c-insp-question-percentage question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId}>
+        </c-insp-question-percentage>
+    </div>
+    <div if:true={showSignature} class="modal">
+        <c-insp-question-signature question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.templateQuestionId} files-list={files}>
+        </c-insp-question-signature>
+    </div>
+    <div if:true={showGeoLocation} class="modal">
+        <c-insp-question-geo-location question={currentQuestion} question-id={currentQuestion.templateQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-insp-question-geo-location>
+    </div>
+
+    <div if:true={showNPS} class="modal">
+        <c-insp-question-n-p-s max-number=9 question={currentQuestion}
+            question-id={currentQuestion.templateQuestionId} onvaluechanged={handleValueChanged}>
+        </c-insp-question-n-p-s>
+    </div>
+    
+    <div if:true={showRating} class="modal">
+        <c-insp-question-star-rating question={currentQuestion}
+            question-id={currentQuestion.templateQuestionId} onvaluechanged={handleValueChanged}
+            label-text="Customize Rating colors" label-position="top" color-positive="#4AB615"
+            color-default="#F5C823" color-ok="#F5C823" color-negative="#E54958" number-of-stars="10"
+            rating="5.0" label-hidden show-half-stars="true" size="small" space-between="small">
+        </c-insp-question-star-rating>
+    </div>
+    <div if:true={showFile} class="modal">
+        <c-insp-question-file-upload question={currentQuestion}
+            question-id={currentQuestion.templateQuestionId} onvaluechanged={handleValueChanged}
+            inspection-rec={inspectionRec}>
+        </c-insp-question-file-upload>
+    </div>
+</template>

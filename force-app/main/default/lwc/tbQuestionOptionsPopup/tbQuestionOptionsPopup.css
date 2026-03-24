@@ -1,0 +1,14 @@
+.optionDeleteIcon {
+    top: 16px;
+    position: relative;
+}
+
+.slds-modal__content {
+    min-height: 85%;
+}
+
+.colorPickerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

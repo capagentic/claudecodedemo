@@ -1,0 +1,10 @@
+.helptext{
+  position: relative;
+  top: -7px;
+  left: 4px;
+}
+
+.googleMap{
+  height: 180px;
+  width:100%;
+}

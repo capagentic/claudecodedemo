@@ -1,0 +1,47 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12" small-device-size="9">
+            <!-- <lightning-combobox data-name="Kinetics__Field_Type__c" variant="label-stacked" label="Type"
+                data-uid={currentquestion.uid} value={currentquestion.Kinetics__Field_Type__c}
+                placeholder="Question Type" options={availableQuestionTypes} onchange={handleTypeChange}>
+            </lightning-combobox> -->
+            <label class="slds-form-element__label questionTypeLabel" for="Kinetics__Field_Type__c">Type</label>
+            <lightning-button-menu name="Kinetics__Field_Type__c" alternative-text="Type" variant="border"
+                onchange={handleTypeChange} label={questionTypeLabel} class="typeDropdown slds-form-element_stacked"
+                icon-name={currentquestion.icon}>
+                <template for:each={availableQuestionTypes} for:item="opt">
+                    <lightning-menu-item value={opt.value} label={opt.label} icon-name={opt.icon} icon-size='large'
+                        key={opt.value} onclick={handleTypeChange} data-uid={currentquestion.uid} data-icon={opt.icon}
+                        data-name="Kinetics__Field_Type__c" class=""></lightning-menu-item>
+
+                </template>
+            </lightning-button-menu>
+
+
+            <template if:true={isCheckboxRadioButtonType}>
+                <lightning-formatted-rich-text value={currentquestionOptionValues} onclick={openOptionPopup}
+                    variant="label-hidden" class="optionLabel"></lightning-formatted-rich-text>
+            </template>
+            <template if:true={isFieldReferenceType}>
+                <lightning-formatted-rich-text value={currentselectObjectFieldName} onclick={openReferenceObjectPopup}
+                    variant="label-hidden" class=""></lightning-formatted-rich-text>
+            </template>
+        </lightning-layout-item>
+        <template if:true={showMaxScore}>
+            <lightning-layout-item size="12" small-device-size="3">
+                <lightning-input type="text" data-name="maxscore" value={maxscore} label="Score" variant="label-stacked"
+                    readonly="true"></lightning-input>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+
+    <template if:true={isShowOptionModal}>
+        <c-tb-question-options-popup currentquestion={currentquestion}
+            onquestionupdate={updateQuestion}></c-tb-question-options-popup>
+    </template>
+    <template if:true={isShownObjectReferenceModal}>
+        <c-tb-question-field-link-popup currentquestion={currentquestion} onquestionupdate={updateQuestion}>
+
+        </c-tb-question-field-link-popup>
+    </template>
+</template>

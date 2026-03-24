@@ -1,0 +1,63 @@
+<template>
+    <div if:true={showSpinner} class='spinnerContainer'>
+        <lightning-spinner class="spins" variant="brand" size="large" data-text="Wait... generating response....">
+        </lightning-spinner>
+    </div>
+    <article class="slds-card slds-card_boundary cardbackground">
+        <div class="slds-card__header slds-grid slds-border_bottom slds-p-vertical_medium gptHeader">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="width100">
+                        <div class="slds-card__header-link slds-truncate slds-text-title_bold" title="Template Creator">
+                            <div class="width95 pageInputText">
+                                <img class="gptIcon" src={chatgptLogo}> GPT Template Parameters
+                            </div>
+                        </div>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="slds-card">
+                <div class="slds-p-around_x-small">
+                    <lightning-input data-name="yourrole" type="text" label="What is your role for the inspection?"
+                        onchange={handleGPTParameterInputChange} value={gptParameter.yourrole}
+                        placeholder="e.g. Compliance officer or Auditor" required>
+                    </lightning-input>
+                </div>
+                <div class="slds-p-around_x-small">
+                    <lightning-input data-name="checklistneed" type="text"
+                        label="What do you need the inspection checklist for? " onchange={handleGPTParameterInputChange}
+                        value={gptParameter.checklistneed} placeholder="You need an inspection checklist to" required>
+                    </lightning-input>
+
+                </div>
+                <div class="slds-p-around_x-small">
+                    <lightning-input data-name="inspectionobjective" type="text"
+                        label="What is the objective of the inspection? " onchange={handleGPTParameterInputChange}
+                        value={gptParameter.inspectionobjective} placeholder="The objective of each inspection is to"
+                        required>
+                    </lightning-input>
+                </div>
+                <div class="slds-p-around_x-small">
+                    <lightning-input data-name="applicableStandards" type="text"
+                        label="What are the applicable regulations or standards? (Optional)"
+                        onchange={handleGPTParameterInputChange} value={gptParameter.applicableStandards}
+                        placeholder="The applicable regulations or standards are">
+                    </lightning-input>
+                </div>
+                <div class="slds-p-around_x-small ">
+                    <c-chatgpt-manager-panel></c-chatgpt-manager-panel>
+                </div>
+                <div class="slds-p-around_x-small ">
+                    <lightning-button variant="brand-outline" label="Generate Template" title="Generate Template"
+                        onclick={generateTemplate} class="slds-p-around_xxx-small" icon-name="utility:add"
+                        disabled={disableChatgpt}>
+                    </lightning-button>
+                </div>
+
+
+            </div>
+        </div>
+    </article>
+</template>

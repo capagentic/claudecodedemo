@@ -1,0 +1,4 @@
+<design:component>
+    <design:attribute name="disableSubmission" label="Disable Submission"
+        description="Disable the integration with backend functions for answers submission" />
+</design:component>

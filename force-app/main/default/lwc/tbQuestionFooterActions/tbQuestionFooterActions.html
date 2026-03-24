@@ -1,0 +1,62 @@
+<template>
+    <div class="slds-grid slds-wrap slds-align_absolute-center">
+        <template if:true={showRequiredToggleButton}>
+            <div class="slds-col slds-size_1-of-6 slds-p-left_small">
+                <label class="slds-form-element__label" for="Kinetics__Required__c">Required</label>
+                <lightning-input type="toggle" name="Kinetics__Required__c" label="" data-uid={currentquestion.uid}
+                    checked={currentquestion.Kinetics__Required__c} onchange={handleToggleChangeOnQuestion}
+                    variant="label-hidden">
+                </lightning-input>
+            </div>
+        </template>
+        <template if:true={showNotesToggleButton}>
+            <div class="slds-col slds-size_1-of-6 slds-p-left_small">
+                <label class="slds-form-element__label" for="Kinetics__Capture_Notes__c">Capture Notes</label>
+                <lightning-input type="toggle" name="Kinetics__Capture_Notes__c" label="" data-uid={currentquestion.uid}
+                    checked={currentquestion.Kinetics__Capture_Notes__c} onchange={handleToggleChangeOnQuestion}
+                    variant="label-hidden">
+
+                </lightning-input>
+            </div>
+        </template>
+        <template if:true={showAttachPhotoToggleButton}>
+            <div class="slds-col slds-size_1-of-6 slds-p-left_small">
+                <label class="slds-form-element__label" for="Kinetics__Attach_Photos_or_Files__c">Attach
+                    Photos/Files</label>
+                <lightning-input type="toggle" name="Kinetics__Attach_Photos_or_Files__c" label=""
+                    data-uid={currentquestion.uid} disabled={isFileType}
+                    checked={currentquestion.Kinetics__Attach_Photos_or_Files__c} onchange={handleToggleChangeOnQuestion}
+                    variant="label-hidden">
+                </lightning-input>
+
+            </div>
+        </template>
+        <template if:true={showTasksToggleButton}>
+            <div class="slds-col slds-size_1-of-6 slds-p-left_small">
+                <label class="slds-form-element__label" for="Kinetics__Assign_Tasks__c">Assign Tasks</label>
+                <lightning-input type="toggle" name="Kinetics__Assign_Tasks__c" label="" data-uid={currentquestion.uid}
+                    checked={currentquestion.Kinetics__Assign_Tasks__c} onchange={handleToggleChangeOnQuestion}
+                    variant="label-hidden">
+                </lightning-input>
+            </div>
+        </template>
+        <template if:true={showGptGuidenceToggleButton}>
+            <div class="slds-col slds-size_1-of-6 slds-p-left_small">
+                <label class="slds-form-element__label" for="captureGuidanceForGPT">Guidance for GPT</label>
+                <lightning-input type="toggle" name="captureGuidanceForGPT" label="" data-uid={currentquestion.uid}
+                    checked={currentquestion.captureGuidanceForGPT} onchange={handleToggleChangeOnQuestion}
+                    variant="label-hidden">
+                </lightning-input>
+            </div>
+        </template>
+        <template if:true={showInstructionsToggleButton}>
+            <div class="slds-col slds-size_1-of-6 slds-p-left_small">
+                <label class="slds-form-element__label" for="captureQuestionInstructions">Instructions</label>
+                <lightning-input type="toggle" name="captureQuestionInstructions" label="" data-uid={currentquestion.uid}
+                    checked={currentquestion.captureQuestionInstructions} onchange={handleToggleChangeOnQuestion}
+                    variant="label-hidden">
+                </lightning-input>
+            </div>
+        </template>
+    </div>
+</template>

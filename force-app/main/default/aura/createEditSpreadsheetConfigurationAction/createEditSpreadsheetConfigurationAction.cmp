@@ -1,0 +1,4 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride,force:lightningQuickAction" access="global">
+    <aura:attribute name="recordId" type="String"></aura:attribute>
+    <c:tbSpreadsheetTemplateBuilder recordId="{!v.recordId}" ></c:tbSpreadsheetTemplateBuilder>
+</aura:component>

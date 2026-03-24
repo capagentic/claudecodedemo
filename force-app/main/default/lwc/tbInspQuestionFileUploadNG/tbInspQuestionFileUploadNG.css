@@ -1,0 +1,24 @@
+.helptext {
+    position: relative;
+    top: -7px;
+    left: 4px;
+  }
+  
+  .fileUploadContainer {
+    font-size: 1.0rem;
+  }
+  
+  .textfont {
+    font-weight: 100;
+    font-size: 1rem;
+    font-family: Helvetica;
+  }
+  
+  .zeromargin {
+    margin: 0px;
+  }
+  
+  .cardborder {
+    border: solid grey 0.1px;
+    border-radius: 16px;
+  }

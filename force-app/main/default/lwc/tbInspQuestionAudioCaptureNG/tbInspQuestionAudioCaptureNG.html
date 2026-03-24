@@ -1,0 +1,35 @@
+<!-- <template>
+    <div>
+        <div class="slds-p-around_x-small">
+            <lightning-button variant="brand-outline" label="Record" title="Record" onclick={startRecording}
+                class="slds-p-around_xxx-small" icon-name="utility:record">
+            </lightning-button>
+        </div>
+        <div class="slds-p-around_x-small">
+            <lightning-button variant="brand-outline" label="Stop" title="Stop" onclick={stopRecording}
+                class="slds-p-around_xxx-small" icon-name="utility:stop">
+            </lightning-button>
+        </div>
+        <div class="slds-p-around_x-small">
+            <lightning-button variant="brand-outline" label="Save" title="Save" onclick={saveRecording}
+                class="slds-p-around_xxx-small" icon-name="utility:stop">
+            </lightning-button>
+        </div>
+    </div>
+</template> -->
+
+<template>
+    <lightning-card title="Audio Recorder">
+        <div class="slds-m-around_medium">
+            <lightning-button label="Start Recording" onclick={startRecording} variant="brand"
+                class="slds-m-bottom_small" disabled={readOnly}>
+
+            </lightning-button>
+            <lightning-button label="Stop Recording" onclick={stopRecording} variant="destructive" disabled={readOnly}>
+
+            </lightning-button>
+        </div>
+        <audio controls="controls" class="slds-m-around_medium" lwc:dom="manual"></audio>
+        <!-- onload={loadAudio} -->
+    </lightning-card>
+</template>

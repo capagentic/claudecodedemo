@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copy_of_RMC_Humidity_Readings_View</fullName>
+    <columns>NAME</columns>
+    <columns>Spreadsheet_Configuration__c</columns>
+    <columns>Account__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Spreadsheet_Configuration__c</field>
+        <operation>startsWith</operation>
+        <value>Hum</value>
+    </filters>
+    <label>RMC: Humidity Readings View</label>
+</ListView>

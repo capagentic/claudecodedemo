@@ -1,0 +1,42 @@
+.zeromargin {
+    margin: 0px;
+}
+/* lightning-button.colorDefault  slds-radio_button [type=radio]:checked {
+	--sds-c-radio-color-background-checked: #999;
+    --sds-c-button-text-color: #f4f7f9;
+}
+lightning-button.colorOk  slds-radio_button [type=radio]:checked {
+	--sds-c-radio-color-background-checked: #f6da3f;
+    --sds-c-button-text-color: #f4f7f9;
+}
+lightning-button.colorPositive  slds-radio_button [type=radio]:checked {
+	--sds-c-radio-color-background-checked: #029bdb;
+    --sds-c-button-text-color: #f4f7f9;
+} */
+/* .slds-radio_button-group.colorNegative [type=radio]:checked {
+	--sds-c-radio-color-background-checked: #f03c56;
+    --slds-c-radio-color-background: #f03c56;
+    --sds-c-button-text-color: #f4f7f9;
+} */
+/* .slds-radio_button [type=radio]:checked+.slds-radio_button__label {
+    background-color:  #f03c56;
+    color: rgb(255, 255, 255);
+} */
+
+/* :host {
+    --slds-c-radio-color-background: #f03c56;
+} */
+/* .colorDefault {
+    background-color: #999;
+} 
+
+.colorOk {
+    background-color: #f6da3f;
+}
+
+.colorPositive {
+    background-color: #029bdb;
+}
+.colorNegative{
+    background-color: #f03c56;
+} */

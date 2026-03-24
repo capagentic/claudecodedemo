@@ -1,0 +1,305 @@
+<template>
+    <!-- Obj: Kinetics__Kinetic_Question__c -->
+    <section class="slds-card slds-card_boundary">
+        <lightning-messages></lightning-messages>
+        <div slot="title" class="slds-card__header slds-p-around_none slds-border_bottom">
+            <c-page-header title-value={labels.headerTitle} subtitle-value={labels.headerSubTitle}
+                icon-name="utility:connected_apps"></c-page-header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner maxheight" style="min-height:75%;min-width:30%;">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                </lightning-spinner>
+            </template>
+
+            <lightning-layout class="slds-align_absolute-center">
+                <lightning-layout-item class="minwidthlayoutitem">
+                    <lightning-record-edit-form object-api-name={objectapiname} record-id={recordId}>
+                        <template if:true={metadataObj.isStepOne}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.firstStepHelpText}
+                                    </div>
+                                    <div
+                                        class="custom-box slds-box slds-text-align_center slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y requiredheight">
+                                        <c-visual-picker type-collection={quesTypes} selected-value={selectedValue}
+                                            fieldname="Kinetics__Field_Type__c_parent"
+                                            onfieldvalueupdate={handlefieldvalueupdate}></c-visual-picker>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <template if:true={metadataObj.isStepTwo}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.secondStepHelpText}
+                                    </div>
+                                    <div
+                                        class="custom-box slds-box slds-text-align_center slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y requiredheight">
+                                        <c-visual-picker type-collection={childquestType} selected-value={selectedValue}
+                                            fieldname="Kinetics__Field_Type__c"
+                                            onfieldvalueupdate={handlefieldvalueupdate}></c-visual-picker>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <template if:true={metadataObj.isStepThree}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.thirdStepHelpText}
+                                    </div>
+                                    <div
+                                        class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor requiredheight">
+                                        <div class="slds-col slds-wrap slds-grid">
+                                            <template if:true={showCustomQuestionNumber}>
+                                                <div
+                                                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                    <div class="slds-col slds-size_1-of-1">
+                                                        <lightning-input-field
+                                                            field-name="Kinetics__Custom_Question_Number__c"
+                                                            onchange={handleInputFieldChange}
+                                                            value={selectedValue.Kinetics__Custom_Question_Number__c}></lightning-input-field>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <div
+                                                class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <lightning-input-field field-name="Kinetics__Question__c"
+                                                        onchange={handleInputFieldChange}
+                                                        value={selectedValue.Kinetics__Question__c}
+                                                        required="true"></lightning-input-field>
+                                                </div>
+                                            </div>
+
+                                            <template if:true={showRadio_Checkbox_dependantFields}>
+                                                <div
+                                                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                    <div class="slds-col slds-size_1-of-1">
+                                                        <lightning-input-field field-name="Kinetics__Values__c"
+                                                            onchange={handleInputFieldChange}
+                                                            value={selectedValue.Kinetics__Values__c}
+                                                            disabled={isPassFailType}></lightning-input-field>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                    <div class="slds-col slds-size_1-of-1">
+                                                        <lightning-input-field field-name="Kinetics__Default_Value__c"
+                                                            onchange={handleInputFieldChange}
+                                                            value={selectedValue.Kinetics__Default_Value__c}></lightning-input-field>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <!-- <template if:true={metadataObj.isStepFour}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.fourthStepHelpText}
+                                    </div>
+                                    <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor requiredheight">
+                                        <div class="slds-col slds-wrap slds-grid">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <lightning-input-field field-name="Kinetics__Take_Photo__c" onchange={handleInputFieldChange}
+                                                        value={selectedValue.Kinetics__Take_Photo__c}></lightning-input-field>
+                                                </div>
+                                            </div>
+                                            <template if:true={showPhotoMandatoryCheckbox}>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                    <div class="slds-col slds-size_1-of-1" >
+                                                        <lightning-input-field field-name="Kinetics__Is_Photo_Mandatory__c" onchange={handleInputFieldChange}
+                                                            value={selectedValue.Kinetics__Is_Photo_Mandatory__c}></lightning-input-field>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-m-top_x-small">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <lightning-button type="button" variant="brand" class="slds-m-around_xx-small"
+                                                        name="Add attachment to Question"
+                                                        label="Add attachment to Questions" onclick={addQuestionAttachment}></lightning-button>
+                                                </div>
+                                            </div>
+                                            <template if:true={showRadio_Checkbox_dependantFields}>
+                                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-m-top_x-small">
+                                                    <div class="slds-col slds-size_1-of-1">
+                                                        <lightning-button variant="brand" class="slds-m-around_xx-small"
+                                                            name="Add attachments to picklist Options"
+                                                            label="Add attachments to picklist Options" onclick={addOptionAttachments}></lightning-button>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template> -->
+                        <template if:true={metadataObj.isStepFour}>
+                            <c-render-field-set objectname={objectapiname} fieldsetname={fieldsetname} isforinput="true"
+                                onfieldvalueupdate={handlefieldvalueupdate} selectedvalue={selectedValue}
+                                cardtitle={labels.fourthStepHelpText} extra-detail-fields={extraDetailFields}
+                                record-id={recordId}>
+                            </c-render-field-set>
+                        </template>
+                        <!-- <template if:true={metadataObj.isStepSix}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.sixthStepHelpText}
+                                    </div>
+                                    <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor requiredheight">
+                                        <div class="slds-col slds-wrap slds-grid">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <lightning-button type="button" variant="brand" class="slds-m-around_xx-small"
+                                                    name="Link_Followup_Question"
+                                                    label="Link Followup Question" onclick={linkFollowupQuestion}></lightning-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template> -->
+                        <template if:true={metadataObj.isStepFive}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.fifthStepHelpText}
+                                    </div>
+                                    <div
+                                        class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor requiredheight">
+                                        <div class="slds-col slds-wrap slds-grid">
+                                            <div
+                                                class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                <div class="slds-col slds-size_1-of-1 slds-p-around_small">
+                                                    <label class="slds-form-element__label"
+                                                        for="Kinetics__Capture_Notes__c">Capture Notes</label>
+                                                    <lightning-input type="toggle" name="Kinetics__Capture_Notes__c"
+                                                        label="" checked={selectedValue.Kinetics__Capture_Notes__c}
+                                                        onchange={handleToggleChange} variant="label-hidden"
+                                                        message-toggle-active="Users will be able to create a Note for this Question"
+                                                        message-toggle-inactive="Users will not be able to create a Note for this Question">
+
+                                                    </lightning-input>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-p-around_small">
+                                                    <label class="slds-form-element__label"
+                                                        for="Kinetics__Attach_Photos_or_Files__c">Attach
+                                                        Photos/Files</label>
+                                                    <lightning-input type="toggle"
+                                                        name="Kinetics__Attach_Photos_or_Files__c" label=""
+                                                        disabled={isFileType}
+                                                        checked={selectedValue.Kinetics__Attach_Photos_or_Files__c}
+                                                        onchange={handleToggleChange} variant="label-hidden"
+                                                        message-toggle-active="Users will be able to attach a Photo or File to this Question"
+                                                        message-toggle-inactive="Users will not be able to attach a Photo or File to this Question">
+                                                    </lightning-input>
+
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-1 slds-p-around_small">
+                                                    <label class="slds-form-element__label"
+                                                        for="Kinetics__Assign_Tasks__c">Assign Tasks</label>
+                                                    <lightning-input type="toggle" name="Kinetics__Assign_Tasks__c"
+                                                        label="" checked={selectedValue.Kinetics__Assign_Tasks__c}
+                                                        onchange={handleToggleChange} variant="label-hidden"
+                                                        message-toggle-active="Users will be able to create and assign a Tasks for this Question"
+                                                        message-toggle-inactive="Users will not be able to create and assign a Tasks for this Question">
+                                                    </lightning-input>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <template if:true={metadataObj.isStepSix}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.sixthStepHelpText}
+                                    </div>
+                                    <div
+                                        class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor requiredheight">
+                                        <div class="slds-col slds-wrap slds-grid">
+                                            <div
+                                                class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                <div class="slds-col slds-size_1-of-1">
+                                                    <lightning-input-field field-name="Kinetics__Status__c"
+                                                        onchange={handleInputFieldChange}
+                                                        value={selectedValue.Kinetics__Status__c}></lightning-input-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+
+                    </lightning-record-edit-form>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div slot="footer"
+            class="slds-grid_vertical-align-center slds-card__footer slds-docked-form-footer fixedfooter">
+            <div class="slds-grid slds-gutters slds-p-around_x-small">
+                <div class="slds-col slds-size_1-of-12 inlinedisplay">
+                    <template if:true={isEnableCancel}>
+                        <lightning-button class="slds-m-left_x-small slds-float_left" variant="brand-outline"
+                            label="Cancel" onclick={handleCancel}></lightning-button>
+                    </template>
+                    <template if:true={isEnablePrev}>
+                        <lightning-button class="slds-m-left_x-small slds-float_left" variant="brand-outline"
+                            label="Back" onclick={handlePrev}></lightning-button>
+                    </template>
+                </div>
+                <div class="slds-col slds-size_10-of-12 inlinedisplay">
+                    <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+                        <lightning-progress-step label={labels.firstStepHelpText} value="1"
+                            onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.secondStepHelpText} value="2"
+                            onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.thirdStepHelpText} value="3"
+                            onclick={handleOnStepClick}></lightning-progress-step>
+                        <!-- <lightning-progress-step label={labels.fourthStepHelpText} value="4" onclick={handleOnStepClick}></lightning-progress-step> -->
+                        <template if:true={showAdditionalDetailStep}>
+                            <lightning-progress-step label={labels.fourthStepHelpText} value="4"
+                                onclick={handleOnStepClick}></lightning-progress-step>
+                        </template>
+                        <!-- <template if:true={showRadio_dependantFields}>
+                            <lightning-progress-step label={labels.sixthStepHelpText} value="6" onclick={handleOnStepClick}></lightning-progress-step>
+                        </template> -->
+                        <lightning-progress-step label={labels.fifthStepHelpText} value="5"
+                            onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.sixthStepHelpText} value="6"
+                            onclick={handleOnStepClick}></lightning-progress-step>
+
+                    </lightning-progress-indicator>
+                </div>
+                <div class="slds-col slds-size_1-of-12 inlinedisplay">
+                    <template if:true={isEnableNext}>
+                        <lightning-button class="slds-m-left_x-small slds-float_right" label="Next" variant="brand"
+                            onclick={handleNext}></lightning-button>
+                    </template>
+                    <template if:true={isEnableFinish}>
+                        <lightning-button class="slds-m-left_x-small slds-float_right" label="Finish" variant="brand"
+                            onclick={handleFinish}></lightning-button>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <template if:true={isModalOpen}>
+            <c-attach-file record-id={recordId} onpopupclose={handlepopupclose} allowed-type-of-attachment=".png, .jpeg"
+                values={values}></c-attach-file>
+        </template>
+    </section>
+</template>

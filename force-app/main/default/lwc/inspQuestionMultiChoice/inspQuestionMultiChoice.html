@@ -1,0 +1,44 @@
+<template>
+    <!-- <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <div  slot="title" class="slds-card__header slds-text-heading_small textfont">
+                            {question.questionDetails} <lightning-helptext
+                                content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+                        </div>
+                    </h2>
+                </div>
+          </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner" style="text-align: center;">
+            <ul class="radioButtonGroup">
+                <template for:each={options} for:item="option">
+                    <li key={option.value}>
+                        <div>
+                            <input type="checkbox" id={option.value} name={option.questionId} onclick={handleOptionSelected}
+                                value={option.value} checked={option.checked} />
+                            <label for={option.value}>{option.value}</label>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </div>
+        <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+            <c-fk-question-footer-actions question={question}></c-fk-question-footer-actions>
+        </footer>
+    </article> -->
+
+    <ul class="radioButtonGroup">
+        <template for:each={options} for:item="option">
+            <li key={option.value}>
+                <div>
+                    <input type="checkbox" id={option.value} name={option.questionId} onclick={handleOptionSelected}
+                        value={option.value} checked={option.checked} disabled={readOnly} />
+                    <label for={option.value}>{option.value}</label>
+                </div>
+            </li>
+        </template>
+    </ul>
+</template>

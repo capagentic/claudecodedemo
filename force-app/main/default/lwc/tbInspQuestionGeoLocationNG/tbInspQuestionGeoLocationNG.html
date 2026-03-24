@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-m-around_small">
+        <lightning-button variant="Neutral" label="Share My Location" title="Share My Location" onclick={showmap}
+            icon-name="utility:location"></lightning-button>
+    </div>
+    <div class="slds-m-around_large">
+        <lightning-map if:true={displayMap} map-markers={mapMarkers} zoom-level="12" class="googleMap"></lightning-map>
+    </div>
+    <div class="slds-m-around_large">
+        <lightning-textarea class="textfont cTextArea" variant="label-hidden" type="text" onchange={updateAddress}
+            value={address} disabled={readOnly}>
+        </lightning-textarea>
+    </div>
+</template>

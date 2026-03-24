@@ -1,0 +1,19 @@
+.fkbackgroundcolor {
+    background-color: #d2d2cf1f;
+}
+
+.minwidthlayoutitem {
+    min-width: 40% !important;
+}
+
+.maxheight {
+    /* max-height: 500px; */
+    /* reduced height to fit on smaller screen, as more people have smaller screen laptop */
+    min-height: 350px;
+    max-height: 350px;
+}
+
+.searchbox {
+    width: 350px;
+    float: right;
+}

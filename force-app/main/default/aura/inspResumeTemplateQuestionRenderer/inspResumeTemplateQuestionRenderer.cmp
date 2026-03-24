@@ -1,0 +1,18 @@
+<aura:component
+    implements="force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable,flexipage:availableForAllPageTypes,force:hasRecordId"
+    access="global">
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="fetchAllQuestions" type="Boolean" default="false"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="isloading" type="Boolean" default="true" />
+    <aura:attribute name="isNotDesktop" type="Boolean" default="true" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.isloading}">
+        <div class="slds-align--absolute-center">
+            <lightning:spinner alternativeText="Loading" />
+        </div>
+    </aura:if>
+    <aura:if isTrue="{!v.isNotDesktop}">
+        <c:inspTemplateQuestionRenderer recordId="{!v.recordId}" fetchAllQuestions="{!v.fetchAllQuestions}"></c:inspTemplateQuestionRenderer>
+    </aura:if>
+</aura:component>

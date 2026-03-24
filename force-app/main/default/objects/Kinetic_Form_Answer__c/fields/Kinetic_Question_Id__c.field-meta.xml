@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Kinetic_Question_Id__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <deprecated>false</deprecated>
+    <description>Link to kinetic Question for which this answer is captured</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Link to kinetic Question for which this answer is captured</inlineHelpText>
+    <label>Kinetic Question Id</label>
+    <referenceTo>Kinetic_Question__c</referenceTo>
+    <relationshipName>Kinetic_Form_Answers</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,51 @@
+<template>
+    <!-- Modal/Popup Box LWC starts here -->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+        <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title={label.Close} onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text={label.Close}
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">{label.Close}</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{label.Add_Attachment}</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-card>
+                    <template for:each={values} for:item="optn">
+                        <div class="slds-col slds-size_1-of-1"  key={optn.key}>
+                            <div class="slds-m-around_medium slds-grid slds-gutters">
+                                <lightning-input type="file" 
+                                    accept={allowedTypeOfAttachment}
+                                    onchange={openfileUpload}
+                                    name={optn.key}
+                                    label={optn.value}
+                                    variant="label-inline">
+                                </lightning-input>
+                                <div>
+                                    <img height=50 width=50
+                                        src={optn.existingAtt} style="background-color:grey" data-my-id={optn.key}/>
+                                    <!-- <p><lightning-formatted-text data-my-id={optn.key} value="" ></lightning-formatted-text></p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </lightning-card>
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral slds-float_left" onclick={closeModal} title={label.Cancel}>{label.Cancel}</button>
+                <button class="slds-button slds-button_brand slds-float_right" onclick={handleClick} title={label.Save}>{label.Save}</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

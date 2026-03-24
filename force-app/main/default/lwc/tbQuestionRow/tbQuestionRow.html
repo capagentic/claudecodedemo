@@ -1,0 +1,113 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12" small-device-size="8" padding="left-small">
+            <div if:true={questionNumber} class="questionNumber">
+                {questionNumber}
+            </div>
+            <div class="questionInput">
+                <template if:true={showQuestionInstructions}>
+                    <lightning-input-rich-text value={currentquestion.qInstructions}
+                        onchange={handleQuestionInputChange} data-name="qInstructions" data-uid={currentquestion.uid}
+                        placeholder="Type Instructions for question" label="Instructions" variant="label-stacked">
+                    </lightning-input-rich-text>
+                </template>
+                <template if:false={isSalesforceFlowQuestion}>
+                    <lightning-input type="text" data-name="Name" data-uid={currentquestion.uid}
+                        value={currentquestion.Name} onchange={handleQuestionInputChange} placeholder="Type Question"
+                        required={currentquestion.Kinetics__Required__c}
+                        aria-required={currentquestion.Kinetics__Required__c} label="Question" variant="label-stacked"
+                        onfocus={handleonfocus} onblur={handleofffocus} autocomplete="off">
+                    </lightning-input>
+                </template>
+                <template if:true={isSalesforceFlowQuestion}>
+                    <c-custom-lookup-for-screen-flow class="flowInputContainer" label="Question"
+                        icon-name="standard:apex" s-object-api-name="FlowDefinitionView"
+                        onlookupupdate={lookupFlowRecordForQuestionType} data-name="Name" data-uid={currentquestion.uid}
+                        value={currentquestion.Name} onchange={handleQuestionInputChange} placeholder="Type Flow Name"
+                        required={currentquestion.Kinetics__Required__c}
+                        aria-required={currentquestion.Kinetics__Required__c} variant="label-stacked"
+                        onfocus={handleonfocus} onblur={handleofffocus} autocomplete="off"
+                        default-record-id={currentquestion.flowName}
+                        search-key={currentquestion.Name}></c-custom-lookup-for-screen-flow>
+                </template>
+                <template if:true={showguidanceforgpttext}>
+                    <lightning-input type="text" data-name="Kinetics__AI_Guidance__c" data-uid={currentquestion.uid}
+                        value={currentquestion.Kinetics__AI_Guidance__c} onchange={handleQuestionInputChange}
+                        placeholder="Type Guidance for GPT" label="GPT Guidance" variant="label-stacked"
+                        onfocus={handleonfocus} onblur={handleofffocus} autocomplete="off">
+                    </lightning-input>
+                </template>
+                <lightning-formatted-rich-text value={currentquestionselectedActions}
+                    variant="label-hidden"></lightning-formatted-rich-text>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" small-device-size="4" padding="left-small" class="questionTypeContainer">
+            <c-tb-question-types currentquestion={currentquestion}
+                onvaluechanged={handleQuestionUpdate}></c-tb-question-types>
+        </lightning-layout-item>
+    </lightning-layout>
+    <template if:true={currentquestion.gotfocus}>
+        <div class="actionFooterContainer">
+            <c-tb-question-footer-actions currentquestion={currentquestion}
+                onvaluechanged={handleQuestionUpdate}></c-tb-question-footer-actions>
+        </div>
+    </template>
+
+    <template lwc:if={allowLogicBuilder}>
+        <div class="logicBuilderContainer">
+            <a onclick={addLogicBuilder}>Add Logic</a>
+            <template for:each={logicList} for:item="l">
+                <div key={l.id} class="slds-grid slds-wrap slds-m-bottom_medium">
+                    <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12">
+                        If answer is
+                        <a onclick={selectTriggerAnswer} class="link" data-lid={l.id}> {l.triggerAnswer} </a>
+                        then
+                        <a onclick={selectTriggerAction} class="link" data-lid={l.id}> {l.triggerAction} </a>
+                        <ul if:true={l.showTriggerOptions} class="triggerOptionsContainer optionContainer">
+                            <template for:each={triggerOptions} for:item="option">
+                                <li key={option.value}>
+                                    <a onclick={handleTriggerOptionSelected} data-value={option.value}
+                                        class="logicOption" data-lid={l.id}>{option.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+
+                        <ul if:true={l.showTriggerActions} class="actionOptionsContainer optionContainer">
+                            <template for:each={actionOptions} for:item="option">
+                                <li key={option.value}>
+                                    <a onclick={handleTriggerActionSelected} data-value={option.value}
+                                        class="logicOption" data-lid={l.id}>{option.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    <div class="slds-col slds-6-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                        <lightning-button-icon variant="bare" icon-name="utility:delete" alternative-text="Delete"
+                            class="slds-m-left_large" title="Delete" onclick={handleLogicDelete}
+                            data-lid={l.id}></lightning-button-icon>
+                    </div>
+                    <div class="slds-col slds-12-of-12 slds-large-size_12-of-12">
+                        <div lwc:if={l.showAdditionalQuestionBox} class="additionalQuestionContainer">
+                            <c-tb-question-row currentquestion={l.additionalQuestion}
+                                question-number={l.additionalQuestionNum}
+                                onvaluechanged={handleAdditionalQuestionUpdate} is-additional-question=true
+                                trigger-answer={l.triggerAnswer}></c-tb-question-row>
+                        </div>
+                        <div lwc:if={l.showFlowBox} class="additionalQuestionContainer">
+                            <!-- <lightning-input class="additionalInput" type="text" data-uid={currentquestion.uid}
+                                value={l.flowName} onchange={handleFlowNameUpdate}
+                                placeholder="Name of the Salesforce Flow" label="Flow Label Name"
+                                variant="label-stacked" data-lid={l.id}>
+                            </lightning-input> -->
+                            <c-custom-lookup-lwc class="flowInputContainer" label="Salesforce Flow Name"
+                                icon-name="standard:apex" s-object-api-name="FlowDefinitionView"
+                                onlookupupdate={lookupFlowRecord} parent-uid={l.id}
+                                search-key={l.flowName}></c-custom-lookup-lwc>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

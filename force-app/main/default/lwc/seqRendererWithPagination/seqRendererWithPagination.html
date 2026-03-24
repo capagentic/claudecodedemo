@@ -1,0 +1,119 @@
+<template>
+    <div if:false={showComplete}>
+        <div class="previewpageheader header-bottom-border">
+            <div class="slds-page-header" style="background-color: white;">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title={pageTitle}>{pageTitle}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        
+                            <template if:true={currentPageDisplayIndex}>
+                                <div class="slds-page-header__name-meta textcenteraligned slds-p-top_small">
+                                    {currentPageDisplayIndex} of {totalPageNo}
+                                </div>
+                                <div class="slds-page-header__name-meta textcenteraligned slds-p-top_small">
+                                    <lightning-progress-bar value={currentpageprogress} size="small"></lightning-progress-bar>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-m-horizontal_medium slds-m-vertical_large">
+        <div if:true={showSpinner} class='spinnerContainer'>
+            <lightning-spinner class="spins" variant="brand" size="large" data-text="Uploading....">
+            </lightning-spinner>
+        </div>
+        <div class={openState}>
+            <div>
+                <div if:true={showError}>
+                    <c-seq-question-error error-message={errorMessage}></c-seq-question-error>
+                </div>
+                <div if:true={showWelcome} class="slds-align_absolute-center">
+                    <center>
+                        <c-seq-question-welcome welcome-text={instruction}></c-seq-question-welcome>
+                    </center>
+                </div>
+
+                <div if:true={showComplete} class="modal">
+                    <c-seq-question-complete></c-seq-question-complete>
+                </div>
+
+                <div if:false={showComplete}>
+                    <template if:false={showWelcome}>
+                        <div class="questionContainer">
+                            <template for:each={selectedpage.sectionlist} for:item="section">
+                                <div aria-selected="true" class="sectionBreakBar" key={section.sectionno}>
+                                    <span class="slds-hint-parent slds-text-heading_small sectionBreakBarText">
+                                        {section.stitle}
+                                    </span>
+                                </div>
+                                <template for:each={section.questionWrapperList} for:item="currentQuestion"
+                                    key={currentQuestion.surveyQuestionId}>
+                                    <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder"
+                                        key={currentQuestion.surveyQuestionId}>
+                                        <div class="slds-card__header slds-grid zeromargin">
+                                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                                <lightning-formatted-rich-text value={currentQuestion.qInstructions}
+                                                    class="slds-text-heading_small">
+                                        
+                                                </lightning-formatted-rich-text>  
+                                            </header>
+                                        </div>
+                                        <div class="slds-card__body slds-card__body_inner">
+                                            <c-seq-question-renderer current-question={currentQuestion}
+                                                question-id={currentQuestion.surveyQuestionId}
+                                                onvaluechanged={handleValueChanged}>
+                                                
+                                            </c-seq-question-renderer>
+                                        </div>
+                                    </article>
+                                </template>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="btnContainer">
+                <template if:true={showBackBtn}>
+                    <button name="backBtn" class="formBtn slds-button slds-button_neutral slds-m-horizontal_medium"
+                        onclick={handleBack}>
+                        Back </button>
+                </template>
+                <template if:true={showNextBtn}>
+                    <button name="nextBtn" class="formBtn slds-button slds-button_brand slds-m-horizontal_medium"
+                        onclick={handleNext}>
+                        Next
+                    </button>
+                </template>
+                <template if:true={isLastQuestion}>
+                    <button disabled={disableSubmitBtn} name="submitBtn"
+                        class="formBtn submitBtn slds-button slds-button_brand slds-m-horizontal_medium"
+                        onclick={handleSubmit}>
+                        I’m Done
+                    </button>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div slot="footer" class="footer">
+        <template if:true={showWelcome}>
+            <button name="startBtn" class="startBtn slds-button slds-button_stretch slds-align_absolute-center"
+                onclick={handleNext}> Get Started </button>
+        </template>
+        <div class="slds-grid slds-wrap">
+           
+        </div>
+    </div>
+</template>

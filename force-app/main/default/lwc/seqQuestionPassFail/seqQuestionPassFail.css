@@ -1,0 +1,91 @@
+.helptext{
+    position: relative;
+    top: -7px;
+    left: 4px;
+  }
+
+
+  .qLabel {
+    font-size: 1.5em;
+  }
+  
+  .customRadioCls {
+    font-size: 30px;
+  }
+  
+  .fkquestionbackgroundcolor {
+    /*background-color: whitesmoke; */
+    background-color: white;
+  }
+  
+  .radioButtonGroup {
+    list-style-type: none;
+    /* margin: 25px 0 0 0; */
+    padding: 0;
+  }
+  
+  .radioButtonGroup li {
+    margin: 0 5px 0 0;
+    /* height: 40px; */
+    height: 45px;
+    position: relative;
+    margin: 10px 0;
+    line-height: 2.1rem;
+  }
+  
+  .radioButtonGroup label,
+  .radioButtonGroup input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .radioButtonGroup input[type="radio"] {
+    opacity: 0.01;
+    /* z-index: 100; */
+  }
+  
+  .radioButtonGroup input[type="radio"]:checked+label,
+  .Checked+label {
+    background: rgb(1, 118, 211);
+    color: rgb(248, 248, 248);
+  }
+  
+  .radioButtonGroup input[type="radio"]:checked+label.Pass,
+  .Checked+label.Pass {
+    background: green;
+    color: rgb(248, 248, 248);
+  }
+  
+  .radioButtonGroup input[type="radio"]:checked+label.Fail,
+  .Checked+label.Fail {
+    background: red;
+    color: rgb(248, 248, 248);
+  }
+  
+  .radioButtonGroup label {
+    padding: 5px;
+    border: 1px solid #CCC;
+    cursor: pointer;
+    /* z-index: 90; */
+    border-radius: 4px;
+    background: #DDD4;
+    font-size: 15px;
+    padding-left: 15px;
+    font-family: Helvetica;
+    font-weight: 100;
+  }
+  
+  .radioButtonGroup label:hover {
+    background: #DDD;
+  
+  }
+  
+  .helptext {
+    position: relative;
+    top: -7px;
+    left: 4px;
+  }

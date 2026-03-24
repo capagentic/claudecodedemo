@@ -1,0 +1,108 @@
+<template>
+    <div if:true={showRadio} class="modal">
+        <c-seq-question-radio question={currentQuestion} question-id={currentQuestion.surveyQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-seq-question-radio>
+    </div>
+
+    <div if:true={showNPS} class="modal">
+        <c-seq-question-n-p-s max-number=9 question={currentQuestion}
+            question-id={currentQuestion.surveyQuestionId} onvaluechanged={handleValueChanged}>
+        </c-seq-question-n-p-s>
+    </div>
+
+
+    <div if:true={showText} class="modal">
+        <c-seq-question-text question={currentQuestion} onvaluechanged={handleValueChanged}>
+        </c-seq-question-text>
+    </div>
+    <div if:true={showTextArea} class="modal">
+        <c-seq-question-text-area question={currentQuestion} onvaluechanged={handleValueChanged}>
+        </c-seq-question-text-area>
+    </div>
+
+    <div if:true={showNum} class="modal">
+        <c-seq-question-number question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-number>
+    </div>
+
+    <div if:true={showMultiChoice} class="modal">
+        <c-seq-question-multi-choice question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-multi-choice>
+    </div>
+
+    <div if:true={showGeoLocation} class="modal">
+        <c-seq-geo-location question={currentQuestion} question-id={currentQuestion.surveyQuestionId}
+            onvaluechanged={handleValueChanged}>
+        </c-seq-geo-location>
+    </div>
+
+
+    <div if:true={showFile} class="modal">
+        <c-seq-question-file-upload question={currentQuestion}
+            question-id={currentQuestion.surveyQuestionId} onvaluechanged={handleValueChanged}>
+        </c-seq-question-file-upload>
+    </div>
+
+    <div if:true={showRating} class="modal">
+        <c-seq-question-star-rating question={currentQuestion}
+            question-id={currentQuestion.surveyQuestionId} onvaluechanged={handleValueChanged}
+            label-text="Customize Rating colors" label-position="top" color-positive="#4AB615"
+            color-default="#F5C823" color-ok="#F5C823" color-negative="#E54958" number-of-stars="10"
+            rating="5.0" label-hidden show-half-stars="true" size="small" space-between="small">
+        </c-seq-question-star-rating>
+    </div>
+
+    <div if:true={showEmail} class="modal">
+        <c-seq-question-email question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-email>
+    </div>
+    <div if:true={showUrl} class="modal">
+        <c-seq-question-url question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-url>
+    </div>
+    <div if:true={showCurrency} class="modal">
+        <c-seq-question-currency question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-currency>
+    </div>
+    <div if:true={showPercentage} class="modal">
+        <c-seq-question-percentage question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-percentage>
+    </div>
+    <div if:true={showDate} class="modal">
+        <c-seq-question-date question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-date>
+    </div>
+    <div if:true={showDateTime} class="modal">
+        <c-seq-question-date-time question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-date-time>
+    </div>
+    <div if:true={showSignature} class="modal">
+        <c-seq-question-signature question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId} files-list={files}>
+        </c-seq-question-signature>
+    </div>
+    <div if:true={showCalendly} class="modal">
+        <c-seq-question-calendly question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-calendly>
+    </div>
+    <div if:true={showStripe} class="modal">
+        <c-seq-question-stripe question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-stripe>
+    </div>
+    <div if:true={showPassFail} class="modal">
+        <c-seq-question-pass-fail question={currentQuestion} onvaluechanged={handleValueChanged}
+            question-id={currentQuestion.surveyQuestionId}>
+        </c-seq-question-pass-fail>
+    </div>
+</template>

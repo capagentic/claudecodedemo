@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="" class="slds-m-left_medium">
+        <h3 slot="title">
+            <lightning-icon icon-name="standard:agent_session" size="small"></lightning-icon>
+            <span class="cardTitleLabel">Kinetic Link Sender</span>
+        </h3>
+
+        <div class="cardBody">
+            <c-record-lookup lookup-label="Please select a survey to send to the contact"
+                onrecordselection={recordSelectionHandler} object-api-name="Kinetics__Kinetic_Form__c">
+            </c-record-lookup>
+            <div class="slds-text-align_right slds-m-top_x-large">
+                <lightning-button class="slds-m-right_medium" variant="neutral" name="seqpreview" label="Preview"
+                    onclick={handlePreview}>
+                </lightning-button>
+                <lightning-button variant="brand" name="sendseq" label="Send Kinetic Link" onclick={handleSendSeqSms}>
+                </lightning-button>
+            </div>
+
+            <div><a href={url} target="_blank"> {url} </a> </div>
+        </div>
+
+
+
+    </lightning-card>
+</template>

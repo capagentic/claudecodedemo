@@ -1,0 +1,31 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="slds-card-wrapper container">
+        <template if:true={newTemplatePresent}>
+            <div class="slds-grid slds-gutters slds-grid_align-spread ">
+
+            </div>
+
+            <div class="">
+                <div class="templateContainer">
+                    <c-tb-template-question-renderer-n-g template-page-metadata={templatePageMetadata}
+                        scoredetails={scoredetails} inspection-rec={inspectionRec} template-name={templateName}
+                        onquestionupdate={updateQuestionAnswer} onnoterecordcreate={maintainVisitNotesRecords}
+                        ontaskrecordcreate={maintainTaskRecords} onfileupload={maintainFileUpload}
+                        oncancel={handleCancel} onsave={handleSave}>
+                    </c-tb-template-question-renderer-n-g>
+                </div>
+
+                <div style="height:20px;">
+
+                </div>
+            </div>
+        </template>
+        <template if:false={newTemplatePresent}>
+            <p>Inspection preview is not available for this Template</p>
+        </template>
+    </div>
+</template>

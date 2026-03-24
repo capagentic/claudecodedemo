@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used to hold the data required for creating Kinetic Job and sending Kinetic invites</description>
+    <eventType>HighVolume</eventType>
+    <label>Kinetics Job Invite</label>
+    <pluralLabel>Kinetic Jobs Invites</pluralLabel>
+    <publishBehavior>PublishAfterCommit</publishBehavior>
+</CustomObject>

@@ -1,0 +1,14 @@
+<template>
+    <template if:true={flowname}>
+        <lightning-flow
+            flow-api-name={flowname}
+            flow-input-variables={inputVariables}
+            onstatuschange={handleStatusChange}
+            flow-finish-behavior="NONE">
+        </lightning-flow>
+    </template>
+    
+    <template if:false={flowname}>
+        Please select required Flow to render.
+    </template>
+</template>

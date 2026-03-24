@@ -1,0 +1,118 @@
+<template>
+   
+    <div class="slds-vertical-tabs">
+        <ul class="slds-vertical-tabs__nav" role="tablist" aria-orientation="vertical">
+            <li class="slds-vertical-tabs__nav-item slds-is-active" title="Tab 0" role="presentation">
+                <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="0" aria-selected="true" aria-controls="slds-vertical-tabs-0" id="slds-vertical-tabs-0__nav">
+                    <span class="slds-vertical-tabs__left-icon"></span>
+                    <span class="slds-truncate" title="Tab 0">Configuration</span>
+                    <span class="slds-vertical-tabs__right-icon"></span>
+                </a>
+            </li>
+            <li class="slds-vertical-tabs__nav-item" title="Tab 1" role="presentation">
+                <a class="slds-vertical-tabs__link" href="#" role="tab" tabindex="-1" aria-selected="false" aria-controls="slds-vertical-tabs-1" id="slds-vertical-tabs-1__nav">
+                    <span class="slds-vertical-tabs__left-icon"></span>
+                    <span class="slds-truncate" title="Tab 1">Support</span>
+                    <span class="slds-vertical-tabs__right-icon"></span>
+                </a>
+            </li>
+        </ul>
+        
+        <div class="slds-vertical-tabs__content slds-show" id="slds-vertical-tabs-0" role="tabpanel" aria-labelledby="slds-vertical-tabs-0__nav">
+          <div class="slds-text-longform">
+            <h3 class="slds-text-heading_medium">
+                Configuration 
+                <div style="color: red;"> Development - In progress when package was created on 8-2-2022</div>
+            </h3>
+            
+                 <!-- <section class="slds-card">
+                    <header class="slds-theme_shade slds-p-around_medium slds-m-bottom_small">
+                        <div>
+                            <div class="slds-grid slds-grid_align-spread slds-p-bottom_x-small" id="progress-bar-label-id-5">
+                                <span>Complete all the steps below to finish setting up Kinetic configuration</span>
+                            </div>
+                        </div>
+                    </header>
+                   
+                    <lightning-accordion active-section-name="customsetting">
+                        <lightning-accordion-section name="customsetting" label="Configure custom settings">
+                            <c-seq-setup-assistant-custom-setting 
+                                onnavigatetopage={navigateToPage}
+                                onhandleerror={handleerror}>
+                            </c-seq-setup-assistant-custom-setting>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="filesetting" label="Salesforce Files Setting for Guest User">
+                            <div class="slds-box slds-theme_shade">
+                                <p>Please update the file settings to Allow Guest user to upload files/photos from <a href="#" onclick={navigateToSalesforceFileSetup}>here</a> by checking the checkbox for 'Allow site guest users to upload files'</p>
+                                <p>Please follow steps from below screenshot</p>
+                                <img src={FileSettingScreenshot} class="height_350px"/>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="setplatformuser" label="Set Salesfore Platform running user">
+                            <div class="slds-box slds-theme_shade">
+                                <p>Please set running user for Salesforce Platform trigger to send SMS/Email notification, this user will be used to send the notifications</p>
+                                <c-record-lookup lookup-label={userSearchPlaceHolderText}
+                                    onrecordselection={handleUserSearch} object-api-name="User" icon-name="standard:user">
+                                </c-record-lookup>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-center">
+                                    <div>
+                                        <button class="slds-button slds-button_outline-brand" onclick={setRunningUser}>Save</button>
+                                        <button class="slds-button slds-button_outline-brand" onclick={cancelsetRunningUser}>Cancel</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configurerendererComponent" label="Configure Kinetics Renderer Component">
+                            <div class="slds-box slds-theme_shade">
+                                CONFIGURING THE KINETICS ‘SEQRENDERER’ COMPONENT
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configurepermissionsets" label="Assign permission sets">
+                            <div class="slds-box slds-theme_shade">
+                                ASSIGNING THE STANDARD KINETICS PERMISSION SETS
+                                <p> TODO: show list of permission sets</p>
+                                <p> TODO: show list of active users those are not assigned yet permission set</p>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configurepackagelicense" label="Assign Kinetic License">
+                            <div class="slds-box slds-theme_shade">
+                                <p>Please add/remove the Kinetics package license to the required users </p>
+                                <p> TODO: show list of permission sets</p>
+                                <p> TODO: show list of active users those are not assigned yet permission set</p>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configuresendkineticsbuttons" label="Configure Send Kinetic Link button">
+                            <div class="slds-box slds-theme_shade">
+                                ADDING THE ‘SEND KINETIC LINK’ BUTTONS
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configuremapscsp" label="Configure CSP for maps">
+                            <div class="slds-box slds-theme_shade">
+                                    <p>Please add/update the CSP in order to show the Google Map to capture user location information. </p>
+                                    <p>Please find below image for reference, navigate <a href="#" onclick={navigateToSalesforceCSPSetup}>here</a> to complete these below steps</p>
+                                    <img src={CSPMapsScreenshots} class="height_350px"/>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configureemailtemplate" label="Configure Email Template">
+                            <div class="slds-box slds-theme_shade"> 
+                                <p>Please create/update email template so that it will be availble for sending Kinetic Link email notification.</p> 
+                                <p>Please find below image for reference, navigate <a href="#" onclick={navigateToClassicEmailTemplate}>here</a> to complete these below steps</p>
+                                <img src={ClassicEmailTemplateScreenshot} class="height_350px"/>
+                            </div>
+                        </lightning-accordion-section>
+                        <lightning-accordion-section name="configureaddmorefields" label="Configure New fields">
+                            <div class="slds-box slds-theme_shade">
+                              
+                                <p> (OPTIONAL) Add new fields on Kinetic Question from <a href="#" onclick={navigateToQuestionFieldSet}>here</a> by selecting and dragging, dropping required fields 'In the field set' section </p>
+                                
+
+                                <p> (OPTIONAL) Add new fields on Kinetic Form from <a href="#" onclick={navigateToFormFieldSet}>here</a> by selecting and dragging, dropping required fields 'In the field set' section </p>
+                            </div>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </section> -->
+            </div>
+        </div>
+    </div>
+</template>

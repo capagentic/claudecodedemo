@@ -1,0 +1,114 @@
+<aura:component
+    implements="force:lightningQuickActionWithoutHeader,lightning:isUrlAddressable,flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes"
+    access="global">
+    <aura:html tag="style">
+        .slds-template_default {
+        padding: 0rem !important;
+        }
+        <!-- @media only screen and (min-device-width: 1201px) {
+            .slds-modal__content { 
+                overflow: initial !important; 
+                padding: 5px !important;
+            }
+            .slds-modal__container{ 
+                min-width: 80% !important; 
+                width:80% !important;
+            }
+        }          -->
+    </aura:html>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChanged}" />
+    <aura:attribute name="disableSubmission" type="Boolean" default="false" access="global" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="titletext" type="String" />
+    <aura:attribute name="isDesktop" type="Boolean" default="false" />
+    <aura:attribute name="currentPageNumber" type="Decimal" default="1" />
+    <aura:attribute name="totalPages" type="Decimal" default="1" />
+    <aura:attribute name="currentScore" type="Decimal" default="000" />
+    <aura:attribute name="totalOutOfScore" type="Decimal" default="000" />
+    <aura:attribute name="percentageScore" type="Decimal" default="000" />
+    <aura:attribute name="fetchAllQuestions" type="Boolean" default="true" />
+    <aura:attribute name="contentclassValue" type="String" />
+    <aura:attribute name="footerclassValue" type="String" />
+    <aura:attribute name="headerclassValue" type="String" />
+
+    <article class="">
+        <!-- <div style="width: 100%; height:100%"> -->
+        <div>
+            <header class="{!v.headerclassValue}">
+                <div class="slds-media__body">
+                    <div class="slds-card__header-title"
+                        style="padding-left: 22px;padding-right: 22px;padding-top: 10px;">
+                        <span class="slds-card__header-link slds-truncate" style="width: 100%;">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-row slds-size_1-of-1">
+                                    <h4 class="slds-text-heading--x_small slds-truncate"><strong>{!v.titletext}</strong>
+                                    </h4>
+                                </div>
+                                <!-- <div class="slds-row slds-size_1-of-1">
+                                    <span
+                                        class="slds-text-heading-x_small fontsize_10">Page
+                                        {!v.currentPageNumber}/{!v.totalPages}</span>
+                                </div> -->
+                                <div class="slds-row slds-size_1-of-1 slds-clearfix slds-p-top_small">
+                                    <div class="slds-col slds-float_left">
+                                        <span class="slds-text-heading--x_small fontsize_10">Score
+                                            {!v.currentScore}/{!v.totalOutOfScore} ({!v.percentageScore}%)</span>
+                                    </div>
+                                    <div class="slds-col slds-float_right">
+                                        <lightning:progressRing value="{!v.percentageScore}" size="large"
+                                            variant="base-autocomplete" />
+                                    </div>
+                                </div>
+                                <div class="slds-row slds-size_1-of-1 slds-p-top_x-small slds-p-bottom_small">
+                                    <lightning:progressBar value="{! v.currentPageNumber*100/v.totalPages }"
+                                        size="small" />
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <div class="{!v.contentclassValue}" aura:id="inspTemplateQuestionRendererDiv">
+                <lightning:layout class="slds-align_absolute-center">
+                    <lightning:layoutItem>
+                        <div class="height100height questionContainer">
+                            <c:inspTemplateQuestionRendererLWC inspectionRecordId="{!v.recordId}"
+                                onclosepopup="{!c.closePopup}" aura:id="inspTemplateQuestionRendererLWC"
+                                onscoreupdate="{!c.handleUpdateScore}"
+                                onupdateValuesAtParent="{!c.updateValuesAtParent}"
+                                fetchAllQuestions="{!v.fetchAllQuestions}" disableSubmission="{!v.disableSubmission}">
+                            </c:inspTemplateQuestionRendererLWC>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+            <footer class="{!v.footerclassValue}">
+                <span class="slds-card__footer-action">
+                    <div class="slds-grid slds-wrap slds-align_absolute-center slds-gutters slds-p-around_x-small">
+                        <div class="slds-col slds-size_1-of-3">
+                            <aura:if isTrue="{!v.currentPageNumber != 1}">
+                                <lightning:buttonIcon class="slds-button slds-float_left" size="medium"
+                                    iconName="utility:chevronleft" variant="bare" alternativeText="Prev" title="Prev"
+                                    onclick="{!c.handlePrevClick}" />
+                            </aura:if>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-align_absolute-center">
+                            <lightning:button variant="Neutral" class="slds-button" label="Cancel"
+                                onclick="{!c.closePopup}" />
+                            <lightning:button variant="Brand" class="slds-button" label="Save"
+                                onclick="{!c.handleSubmit}" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-3">
+                            <aura:if isTrue="{!v.currentPageNumber != v.totalPages }">
+                                <lightning:buttonIcon class="slds-button slds-float_right" size="medium"
+                                    iconName="utility:chevronright" variant="bare" alternativeText="Next" title="Next"
+                                    onclick="{!c.handleNextClick}" />
+                            </aura:if>
+                        </div>
+                    </div>
+                </span>
+            </footer>
+        </div>
+    </article>
+</aura:component>

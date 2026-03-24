@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bot_Status__c</fullName>
+    <description>Status of the bot from Recall AI</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Status of the bot from Recall AI</inlineHelpText>
+    <label>Bot Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ready</fullName>
+                <default>false</default>
+                <label>ready</label>
+            </value>
+            <value>
+                <fullName>joining_call</fullName>
+                <default>false</default>
+                <label>joining_call</label>
+            </value>
+            <value>
+                <fullName>call_ended</fullName>
+                <default>false</default>
+                <label>call_ended</label>
+            </value>
+            <value>
+                <fullName>done</fullName>
+                <default>false</default>
+                <label>done</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,74 @@
+<template>
+    <!-- <div class="slds-card-wrapper container"> -->
+    <div if:true={showHeader} class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container">
+                            <lightning-icon icon-name="action:follow" alternative-text="follow"
+                                title="preview"></lightning-icon>
+                            <span class="slds-assistive-text">{jobName}</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="">{jobName}</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <!-- <div if:true={fullscreenLink} class="fullscreenLink"> -->
+                        <div class="fullscreenLink">
+                            <lightning-button variant="base" label="Full-screen Mode" title="Full-screen Mode"
+                                icon-name="utility:expand" class="slds-m-left_x-small"
+                                onclick={gotoFullScreen}></lightning-button>
+
+                        </div>
+                        <div class="slds-m-vertical_medium">
+                            <div>Property: {propertyName}</div>
+                            <div>Job Number: {jobNumber}</div>
+                            <div>PM: {pmName}</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btnContrainer">
+    </div>
+    <!-- <div class="btnContrainer ">
+        <lightning-button-icon icon-name="utility:arrow_right" size="small" alternative-text="New Column"
+            class="slds-m-left_x-small" title="New Column" onclick={handleNewColumn}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:filter" size="small" alternative-text="New Row"
+            class="slds-m-left_x-small" title="New Row" onclick={handleNewRow}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:zoomin" size="small" alternative-text="Zoom in"
+            class="slds-m-left_x-small" title="Zoom in" onclick={handleZoomIn}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:zoomout" size="small" alternative-text="Zoom out"
+            class="slds-m-left_x-small" title="Zoom out" onclick={handleZoomOut}></lightning-button-icon>
+        <lightning-button class="slds-m-around_small" label="Back" title="propertyNameBack"
+            onclick={handleCancel}></lightning-button>
+    </div> -->
+
+    <div class="table">
+        <lightning-datatable class={tableStyleClass} min-column-width="100" key-field="localKey" data={data}
+            draft-values={draftValues} hide-checkbox-column="true" show-row-number-column row-number-offset={rowOffset}
+            columns={columns} onrowaction={handleRowAction} onsave={handleSave}>
+        </lightning-datatable>
+    </div>
+    <div class="btnContrainer ">
+        <lightning-button-icon icon-name="utility:arrow_right" size="small" alternative-text="New Column"
+            class="slds-m-left_x-small" title="New Column" onclick={handleNewColumn}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:filter" size="small" alternative-text="New Row"
+            class="slds-m-left_x-small" title="New Row" onclick={handleNewRow}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:zoomin" size="small" alternative-text="Zoom in"
+            class="slds-m-left_x-small" title="Zoom in" onclick={handleZoomIn}></lightning-button-icon>
+        <lightning-button-icon icon-name="utility:zoomout" size="small" alternative-text="Zoom out"
+            class="slds-m-left_x-small" title="Zoom out" onclick={handleZoomOut}></lightning-button-icon>
+        <div if:true={showHeader}><lightning-button class="slds-m-around_small" label="Back" title="propertyNameBack"
+                onclick={handleCancel}></lightning-button></div>
+
+    </div>
+</template>

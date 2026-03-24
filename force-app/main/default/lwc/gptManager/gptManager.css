@@ -1,0 +1,23 @@
+.appContainer {
+    /* height: 1000%; */
+    width: 90%;
+    margin: auto;
+}
+
+.header1 {
+    font-size: 2em;
+}
+
+.totalTokenBox h2 {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.spinnerContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}

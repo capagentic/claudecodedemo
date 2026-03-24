@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AI_Guidance__c</fullName>
+    <deprecated>false</deprecated>
+    <description>AI Guidance text used to provide more context to ChatGPT API</description>
+    <externalId>false</externalId>
+    <inlineHelpText>AI Guidance text used to provide more context to ChatGPT API</inlineHelpText>
+    <label>AI Guidance</label>
+    <length>500</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

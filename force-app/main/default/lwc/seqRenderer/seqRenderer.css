@@ -1,0 +1,86 @@
+.welcomePageTitle{
+    font-size: 45px;
+}
+.fontcolor {
+    color: gray;
+}
+
+.startBtn{
+    background-color: #F5C924;
+    height: 50px;
+    color: black;
+    width:70%;
+    font-size: 1.15em;
+}
+
+.formBtn{
+    width: 40%;
+    height: 40px;
+    font-size: 1.15em;
+    border-radius: 7px;
+}
+
+.btnContainer{
+    text-align: center;
+}
+
+.submitBtn{
+    background-color: #F5C924;
+    color: black;
+    border-color: #F5C924;
+    font-size: 1.15em;
+}
+
+.footer{
+    bottom: 20px;
+    position: fixed;
+    width: 48%;
+    font-size: 1.15em;
+    /* max-width:608.5px; */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+}
+
+@media only screen and (max-width: 768px) {
+    .footer{
+        bottom: 20px;
+        position: fixed;
+        width: 95%;
+        font-size: 1.15em;
+        left: 50%;
+        transform: translateX(-50%); /* Center horizontally */
+    }
+  }
+
+.opening{
+    opacity: 0;
+}
+
+.open{
+    opacity: 1;
+}
+
+.modal {
+    transform: translateY(4px);
+    opacity: 0;
+    transition: transform .4s linear, opacity .4s linear;
+}
+
+.opening .modal {
+    transform: translateY(4px);
+    opacity: 0;
+}
+
+.open .modal {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.spins::after {
+    position: absolute;
+    content: 'Submitting';
+    width: 100%;
+    text-align: center;
+    top: calc(50% + 3em);
+    font-weight: bold;
+}

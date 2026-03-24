@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId"
+    access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChanged}" />
+    <aura:attribute name="recordId" type="String" />
+    
+    <c:inspSendInspectionToContact inspectionRecordId="{!v.recordId}"
+    onclosepopup="{!c.closePopup}"></c:inspSendInspectionToContact>
+</aura:component>

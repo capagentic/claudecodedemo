@@ -1,0 +1,62 @@
+<template>
+    <div if:true={showSpinner} class='spinnerContainer'>
+        <lightning-spinner class="spins" variant="brand" size="large" data-text="Wait... generating response....">
+        </lightning-spinner>
+    </div>
+    <div if:false={autoGenerateReportOnLoad} >
+        <article class="slds-card slds-card_boundary cardbackground">
+            <div class="slds-card__header slds-grid slds-border_bottom slds-p-vertical_medium">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="width100">
+                            <div class="slds-card__header-link slds-truncate slds-text-title_bold"
+                                title="Inspection Summary and Recommendantion">
+                                <div class="width95 pageInputText">
+                                    Summary and Recommendations
+                                </div>
+                            </div>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner">
+                <div class="slds-card">
+                    <div class="slds-p-around_x-small">
+                        <input type="text" data-name="yourrole"
+                            onchange={handleGPTParameterInputChange}
+                            value={gptParameter.yourrole} placeholder="Your role"
+                            class="inputTextclass" 
+                            autocomplete="off"></input>
+                    </div>
+                    <div class="slds-p-around_x-small">
+                        <input type="text" data-name="description"
+                            onchange={handleGPTParameterInputChange}
+                            value={gptParameter.description} placeholder="You need to"
+                            class="inputTextclass" 
+                            autocomplete="off"></input>
+                    </div>
+                    <div class="slds-p-around_x-small">
+                        <input type="text" data-name="inspectionobjective"
+                            onchange={handleGPTParameterInputChange}
+                            value={gptParameter.inspectionobjective} placeholder="The objective is to"
+                            class="inputTextclass" 
+                            autocomplete="off"></input>
+                    </div>
+                
+                    <div class="slds-p-around_x-small" if:false={autoGenerateReportOnLoad}>
+                        <lightning-button variant="brand-outline" label="Generate Summary"
+                            title="Generate Summary" onclick={generateInspectionSummary}
+                            class="slds-p-around_xxx-small" icon-name="utility:add">
+                        </lightning-button>
+                    </div>
+
+
+                    <lightning-formatted-rich-text
+                        value={summary}
+                    ></lightning-formatted-rich-text>
+                    
+                </div>
+            </div>
+        </article>  
+    </div>  
+</template>

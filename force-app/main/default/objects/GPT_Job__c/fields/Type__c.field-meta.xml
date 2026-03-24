@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Type of the request that is sent to GPT</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Type of the request that is sent to GPT</inlineHelpText>
+    <label>Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Create a template</fullName>
+                <default>false</default>
+                <label>Create a template</label>
+            </value>
+            <value>
+                <fullName>Create a summary</fullName>
+                <default>false</default>
+                <label>Create a summary</label>
+            </value>
+            <value>
+                <fullName>Chat</fullName>
+                <default>false</default>
+                <label>Chat</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

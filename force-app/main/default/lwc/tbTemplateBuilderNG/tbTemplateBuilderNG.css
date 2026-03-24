@@ -1,0 +1,228 @@
+.titleBody {
+    /* margin: 0 20px; */
+    background-color: #F3F3F3;
+}
+
+.templateTitleInputText {
+    border: transparent;
+    background: #F3F3F3;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+
+    width: 100%;
+    /* margin-left: -0.5rem; */
+    padding: 0.5rem;
+}
+
+.templateTitleInputText:focus {
+    background: #FFFFFF;
+}
+
+.templateInstructionInput {
+    width: 100%;
+    /* margin-left: -0.5rem; */
+    padding: 0.5rem;
+
+    border: transparent;
+    background: #F3F3F3;
+}
+
+.templateInstructionInput:focus {
+    background: #FFFFFF;
+}
+
+.questionIconContainer {
+    text-align: right;
+    display: none;
+}
+
+.titleContainer {
+    background: #F3F3F3;
+}
+
+.questionDragDropIcon {
+    top: 13px;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: white;
+    transition: background-color 1s;
+}
+
+.questionNumber {
+    vertical-align: top;
+    top: 29px;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: white;
+    transition: background-color 1s;
+
+}
+
+.questionContainer {
+    display: inline-block;
+}
+
+.questionDragDropIcon:hover {
+    height: 32px;
+    width: 32px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.questionActionIcon {
+    /* top: 16px; */
+    position: relative;
+    margin-right: 13px;
+}
+
+.deleteIcon {
+    position: relative;
+
+}
+
+.sectionIconContainer {
+    text-align: right;
+}
+
+.cardbackground {
+    background-color: #F3F3F3;
+}
+
+.pageSectionInputText {
+    border: transparent;
+    background: #F3F3F3;
+    font-size: 1rem;
+    font-weight: 300;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.pageSectionInputText:focus {
+    background: #FFFFFF;
+}
+
+.pageInputText {
+    border: transparent;
+    /* background: #F3F3F3; */
+    font-size: 1rem;
+    font-weight: 300;
+    /* width: 100%; */
+    padding: 0.5rem;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.buttonBox {
+    width: 50%;
+    display: inline-block;
+}
+
+.titleBox {
+    width: 50%;
+    display: inline-block;
+}
+
+.width95 {
+    width: 95%;
+    display: inline-block;
+}
+
+.width5 {
+    width: 5%;
+    display: inline-block;
+}
+
+.previewerContainer {
+    text-align: center;
+}
+
+.previewButtonContainer {
+    float: right;
+    margin: 5px 10px;
+}
+
+
+
+
+.buttonGlowing {
+    /* background-color: #1c87c9; */
+    /* -webkit-border-radius: 60px; */
+    background-color: #0E45A1;
+    border-radius: 0.25rem;
+    border: none;
+    color: #eeeeee;
+    cursor: pointer;
+    display: inline-block;
+    font-family: sans-serif;
+    /* font-size: 20px; */
+    padding: 5px 15px;
+    margin: 0 10px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.buttonGreyOut {
+    opacity: 0.4;
+}
+
+@keyframes glowing {
+    0% {
+        background-color: #2ba805;
+        box-shadow: 0 0 5px #2ba805;
+    }
+
+    50% {
+        background-color: #49e819;
+        box-shadow: 0 0 20px #15340c;
+    }
+
+    100% {
+        background-color: #2ba805;
+        box-shadow: 0 0 5px #2ba805;
+    }
+}
+
+.buttonGlowing {
+    /* animation: glowing 2s infinite; */
+    /* animation: glowing 2000ms 20s; */
+}
+
+.buttonIcon {
+    --sds-c-icon-color-foreground-default: #1C76D3;
+    margin-right: 10px;
+}
+
+.buttonIconWhite {
+    --sds-c-icon-color-foreground-default: #ffffff;
+    margin-right: 5px;
+}
+
+.gptIcon {
+    width: 20px;
+    margin-right: 8px;
+}
+
+.gptContainer {
+    margin: 10px 0;
+}
+
+.questionRow:hover {
+    /* background-color: #D8EBFB; */
+    background-color: #FCF3E0;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 10px;
+}
+
+.questionRow:hover .questionIconContainer {
+    display: block;
+}

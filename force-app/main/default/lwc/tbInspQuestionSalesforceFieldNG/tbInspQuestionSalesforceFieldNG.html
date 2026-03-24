@@ -1,0 +1,15 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <!-- <lightning-input class="textfont" type="text" variant="label-hidden" label="" onchange={handleChange} 
+        value={question.answer} disabled={question.markAnswerReadOnly} 
+        required={question.answerrequired}
+        placeholder={salesforcefieldplaceholder}>
+    </lightning-input> -->
+    <lightning-input class="textfont" type="text" variant="label-hidden" label="" onchange={handleChange}
+        value={question.answer} disabled={readOnly} required={question.answerrequired}
+        placeholder={salesforcefieldplaceholder}>
+    </lightning-input>
+</template>

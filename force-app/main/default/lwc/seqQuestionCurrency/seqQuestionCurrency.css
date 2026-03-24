@@ -1,0 +1,14 @@
+.qCard{
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.qLabel{
+    font-size:1.5em;
+}
+
+.helptext{
+    position: relative;
+    top: -7px;
+    left: 4px;
+  }

@@ -1,0 +1,26 @@
+<template>
+    <!-- <article class="slds-card slds-card_boundary slds-m-around_x-small cardborder">
+        <div class="slds-card__header slds-grid zeromargin">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <div  slot="title" class="slds-card__header slds-text-heading_small textfont">
+                            {question.questionDetails} <lightning-helptext
+                                content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+                        </div>
+                    </h2>
+                </div>
+        </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner" style="text-align: center;">
+            <lightning-input type="text" variant="label-hidden" name="url" class="textfont" onchange={handleChange}
+            value={question.answer} pattern='(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?'></lightning-input>
+        </div>
+        <footer class="slds-card__footer slds-p-around_xxx-small" style="border: 0px;">
+            <c-fk-question-footer-actions question={question}></c-fk-question-footer-actions>
+        </footer>
+    </article> -->
+
+    <lightning-input type="text" variant="label-hidden" name="url" class="textfont" onchange={handleChange}
+            value={question.answer} pattern='(([\w]+:)?\/\/)?(([\d\w]|%[a-fA-f\d]{2,2})+(:([\d\w]|%[a-fA-f\d]{2,2})+)?@)?([\d\w][-\d\w]{0,253}[\d\w]\.)+[\w]{2,63}(:[\d]+)?(\/([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)*(\?(&?([-+_~.\d\w]|%[a-fA-f\d]{2,2})=?)*)?(#([-+_~.\d\w]|%[a-fA-f\d]{2,2})*)?'></lightning-input>
+</template>

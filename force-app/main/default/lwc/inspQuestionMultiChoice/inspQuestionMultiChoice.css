@@ -1,0 +1,70 @@
+.radioButtonGroup {
+  list-style-type: none;
+  /* margin: 25px 0 0 0; */
+  padding: 0;
+}
+
+.radioButtonGroup li {
+  /* float: left; */
+  margin: 0 5px 0 0;
+  /* width: 100px; */
+  height: 40px;
+  position: relative;
+  margin: 10px 0;
+}
+
+.radioButtonGroup label,
+.radioButtonGroup input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.radioButtonGroup input[type="checkbox"] {
+  opacity: 0.01;
+  /* z-index: 100; */
+}
+
+.radioButtonGroup input[type="checkbox"]:checked+label,
+.Checked+label {
+  background: rgb(1, 118, 211);
+  color: rgb(243, 243, 243);
+}
+
+.radioButtonGroup label {
+  padding: 5px;
+  border: 1px solid #CCC;
+  cursor: pointer;
+  /* z-index: 90; */
+  border-radius: 4px;
+  background: rgb(255, 255, 255);
+  font-size: 15px;
+  padding-left: 15px;
+  font-family: Helvetica;
+  font-weight: 100;
+}
+
+.radioButtonGroup label:hover {
+  background: #DDD;
+
+}
+
+.helptext {
+  position: relative;
+  top: -7px;
+  left: 4px;
+}
+
+.textfont {
+  font-weight: normal;
+  font-size: 1rem;
+  font-family: Helvetica;
+}
+
+.cardborder {
+  border: solid grey 0.1px;
+  border-radius: 16px;
+}

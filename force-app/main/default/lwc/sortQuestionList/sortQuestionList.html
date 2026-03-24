@@ -1,0 +1,263 @@
+<template>
+    <lightning-card>
+        <section class="slds-card slds-card_boundary">
+            <div class={sidePanelCls}>
+
+                <div if:true={showOpenIcon} class="leftArrowContainer">
+                    <lightning-icon icon-name="action:back" size="x-small" onclick={openNav}></lightning-icon>
+                </div>
+                <div if:false={showOpenIcon} class="leftArrowContainer">
+                    <lightning-icon icon-name="action:reject" size="x-small" onclick={closeNav}></lightning-icon>
+                </div>
+
+                <div class="sidePanelContainer">
+                    <div class="btnContainer">
+                        <p>Drag and drop the component into the questions</p>
+                        <div class="slds-box slds-m-around_xxx-small sidePanelBtn" draggable="true"
+                            ondragstart={pageBreakElementDrag}>
+                            <img class="btnIcon" src={icons.pagebreak}>Page Break
+                        </div>
+                        <div class="slds-box slds-m-around_xxx-small sidePanelBtn" draggable="true"
+                            ondragstart={sectionBreakElementDrag}>
+                            <img class="btnIcon" src={icons.section}> Section
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div slot="title" class="slds-card__header slds-text-heading_small">
+                {sectionTitle}
+            </div>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                </lightning-spinner>
+            </template>
+            <div
+                class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y maxheight slds-p-around_none slds-col slds-grid slds-grid_vertical slds-nowrap">
+                <div class="slds-modal__content slds-grid slds-nowrap" id="modal-content-id-1">
+                    <div class="slds-col slds-grid slds-grid_vertical slds-nowrap">
+                        <div class="slds-scrollable slds-grow">
+                            <div class="slds-scrollable_none">
+                                <table aria-multiselectable="true"
+                                    class="slds-table slds-no-row-hover slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
+                                    role="grid" aria-label="Selected Questions list">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <th aria-label="Question" aria-sort="none"
+                                                class="slds-is-resizable slds-is-sortable" scope="col"
+                                                style="width: 70%;">
+                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button"
+                                                    tabindex="-1">
+                                                    <div
+                                                        class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-truncate" title="Question">Question</span>
+                                                    </div>
+                                                </a>
+                                                <div class="slds-resizable">
+                                                    <input type="range" aria-label="Question column width"
+                                                        class="slds-resizable__input slds-assistive-text"
+                                                        id="cell-resize-handle-70" max="1000" min="20" tabindex="-1" />
+                                                    <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                            <!-- <th aria-label="Type" aria-sort="none"
+                                                class="slds-is-resizable slds-is-sortable" scope="col"
+                                                style="width: 10%;">
+                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button"
+                                                    tabindex="-1">
+                                                    <div
+                                                        class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-truncate" title="Type">Type</span>
+                                                    </div>
+                                                </a>
+                                                <div class="slds-resizable">
+                                                    <input type="range" aria-label="Type column width"
+                                                        class="slds-resizable__input slds-assistive-text"
+                                                        id="cell-resize-handle-71" max="1000" min="20" tabindex="-1" />
+                                                    <span class="slds-resizable__handle">
+                                                        <span class="slds-resizable__divider"></span>
+                                                    </span>
+                                                </div>
+                                            </th> -->
+                                            <!-- <template if:true={isScoringEnabled}>
+                                                <th aria-label="Options" aria-sort="none" class="slds-is-resizable"
+                                                    scope="col" style="width: 20%;">
+
+                                                    <div
+                                                        class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                        <span class="slds-m-horizontal_small" title="Scoring">Scoring
+                                                            Action</span>
+                                                    </div>
+                                                </th>
+                                            </template> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody class="slds-scrollable_y maxheight">
+                                        <template for:each={selectedQuestionsList} for:item="qs" for:index="index">
+
+                                            <template if:true={qs.isPageBreakAdded}>
+                                                <div key={qs.pagebreak.pagenumber} aria-selected="true"
+                                                    class="pageBreakBar" draggable="true" ondragstart={pageBreakDrag}
+                                                    data-pagenumber={qs.pagebreak.pagenumber}>
+                                                    <span
+                                                        class="slds-hint-parent slds-text-heading_small pageBreakBarText">
+                                                        <!-- {qs.pagebreak.pagenumberName} -->
+                                                        &lt;--------- Page Break ---------&gt;
+                                                    </span>
+                                                    <div style="display: inline;">
+                                                        <div class="slds-float_right">
+                                                            <lightning-icon icon-name="action:reject" size="xx-small"
+                                                                class="removePageBreakIcon" onclick={removePageBreak}
+                                                                data-pagenumber={qs.pagebreak.pagenumber}
+                                                                data-forloopindex={index}></lightning-icon>
+                                                            <!-- <a class="removePageBreakLink" onclick={removePageBreak}
+                                                                data-pagenumber={qs.pagebreak.pagenumber}
+                                                                data-forloopindex={index}>remove</a> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template if:true={qs.isSectionBreakAdded}>
+                                                <div key={qs.sectionbreak.sectionnumber} aria-selected="true"
+                                                    class="sectionBreakBar" draggable="true" ondragstart={sectionBreakDrag}
+                                                    data-sectionnumber={qs.sectionbreak.sectionnumber}>
+                                                    <span
+                                                        class="slds-hint-parent slds-text-heading_small sectionBreakBarText">
+                                                        <!-- {qs.sectionbreak.sectionnumberName} -->
+                                                        &lt;--------- {qs.sectionbreak.title} ---------&gt;
+                                                    </span>
+                                                    <div style="display: inline;">
+                                                        <div class="slds-float_right">
+                                                            <lightning-button-icon icon-name="utility:edit" data-questid={qs.id} 
+                                                                data-sectionnumber={qs.sectionbreak.sectionnumber}
+                                                                alternative-text="Edit title" class="slds-m-right_xx-small" 
+                                                                title="Edit title" onclick={updateSectionTitle}></lightning-button-icon>
+                                                            <lightning-icon icon-name="action:reject" size="xx-small"
+                                                                class="removeSectionBreakIcon" onclick={removeSectionBreak}
+                                                                data-sectionnumber={qs.sectionbreak.sectionnumber}
+                                                                data-forloopindex={index}></lightning-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                            <template if:true={qs.isdragover}>
+                                                <div class="slds-drop-zone_drag__slot" key={qs.id}></div>
+                                            </template>
+                                            <tr aria-selected={qs.isselected} class="slds-hint-parent Items" key={qs.id}
+                                                onchange={Change} draggable="true" ondrop={Drop} ondragstart={DragStart}
+                                                ondragover={DragOver} data-name={qs.id} data-forloopindex={index}
+                                                data-recindex={qs.index} style="line-height: 1.75rem;">
+                                                
+                                                <td role="gridcell" data-name={qs.id} data-forloopindex={index}>
+                                                    
+                                                    <div class="slds-truncate" title={qs.text} data-name={qs.id}
+                                                        data-forloopindex={index}>
+                                                        {qs.text}
+                                                    </div>
+                                                </td>
+                                                <!-- <td role="gridcell" data-name={qs.id} data-forloopindex={index}>
+                                                    <div class="slds-truncate" title={qs.type} data-name={qs.id}
+                                                        data-forloopindex={index}>{qs.type}</div>
+                                                </td> -->
+                                                
+                                                <!-- <template if:true={isScoringEnabled}>
+                                                    <td role="gri dcell" data-name={qs.id} data-forloopindex={index}>
+                                                        <template if:true={qs.scoringEnabled}>
+                                                            <template if:true={qs.scoreConfirmed}>
+                                                                <lightning-button icon-name="utility:edit"
+                                                                    variant="brand-outline" name={qs.id} label="Update "
+                                                                    title="Update " onclick={openModal}
+                                                                    class="slds-m-left_x-small">
+                                                                </lightning-button>
+                                                            </template>
+
+                                                            <template if:false={qs.scoreConfirmed}>
+                                                                <lightning-button icon-name="utility:warning"
+                                                                    variant="destructive-text" name={qs.id} label="Add "
+                                                                    title="Add " onclick={openModal}
+                                                                    class="slds-m-left_x-small scoreBtnText">
+                                                                </lightning-button>
+                                                            </template>
+
+                                                        </template>
+                                                    </td>
+                                                </template> -->
+                                            </tr>
+
+                                        </template>
+                                        <template if:true={noquestionsfound}>
+                                            No questions selected
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </lightning-card>
+
+
+    <!-- <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Set Scores -
+                        {queSelectedForScoring.name}
+                    </h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium " id="modal-content-id-2">
+                    <template if:true={queSelectedForScoring.optionsForScore}
+                        for:each={queSelectedForScoring.optionsForScore} for:item="opt" for:index="index">
+                        <div key={opt.optionName}
+                            class="slds-row slds-m-vertical_small slds-grid slds-wrap slds-align_absolute-center">
+                            <div class="slds-size_1-of-2 slds-align_absolute-center">{opt.optionLabel}</div>
+                            <div class="slds-size_1-of-2 slds-align_absolute-center">
+                                <span class="slds-m-horizontal_medium">
+                                    <input type="number" name={opt.optionName} data-optname={opt.optionName}
+                                        data-qid={queSelectedForScoring.id} value={opt.selectedScore}
+                                        class="scoreNumber" min="0" max="10" onchange={onScoreChange}>
+                                </span>
+                            </div>
+                        </div>
+                    </template> -->
+
+                    <!-- Future scope - support for all type of question score 
+                    <template if:false={queSelectedForScoring.optionsForScore}>	
+                        <div class="slds-row slds-m-vertical_small slds-grid slds-wrap slds-align_absolute-center">	
+                            <div class="slds-size_1-of-2 slds-align_absolute-center" >	
+                                {queSelectedForScoring.type}	
+                            </div>	
+                            <div class="slds-size_1-of-2 slds-align_absolute-center">	
+                                <span class="slds-m-horizontal_medium">	
+                                    <input type="number" name={queSelectedForScoring.id} value=0 class="scoreNumber" min="0"	
+                                        max="10">	
+                                </span>	
+                            </div>	
+                        </div>	
+                    </template> -->
+
+                <!-- </div> -->
+<!--                 
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={confirmScoreSetting}
+                        title="Confirm">Confirm</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> -->
+</template>

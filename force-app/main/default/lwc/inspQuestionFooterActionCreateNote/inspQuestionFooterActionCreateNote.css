@@ -1,0 +1,23 @@
+/* .slds-modal__container {
+    margin-top: 40px;
+} */
+
+
+.cTextArea {
+    --sds-c-textarea-sizing-min-height: 220px !important;
+}
+@media only screen and (max-device-width: 480px) {
+    .absoluteposition {
+        position: absolute;
+        min-width: 85%;
+    }
+}
+
+
+/* :host {
+    --sds-c-textarea-sizing-min-height: 200px;
+} */
+/* 
+.uiPanel .panel-content{
+    -webkit-overflow-scrolling:auto !important;
+} */

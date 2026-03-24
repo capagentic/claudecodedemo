@@ -1,0 +1,9 @@
+<template>
+    <div class="qCard">
+        <div class="slds-text-heading_medium">{question.questionDetails}<lightning-helptext
+                content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+        </div>
+        <lightning-input type="date" name="date" class="slds-text-heading_medium" onchange={handleChange}
+            value={question.answer}></lightning-input>
+    </div>
+</template>

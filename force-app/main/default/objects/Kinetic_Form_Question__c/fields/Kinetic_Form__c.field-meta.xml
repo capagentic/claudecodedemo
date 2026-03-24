@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Kinetic_Form__c</fullName>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>Kinetic Form</label>
+    <referenceTo>Kinetic_Form__c</referenceTo>
+    <relationshipName>Kinetic_Form_Questions</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>true</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>true</writeRequiresMasterRead>
+</CustomField>

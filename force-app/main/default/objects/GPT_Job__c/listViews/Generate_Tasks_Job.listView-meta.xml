@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generate_Tasks_Job</fullName>
+    <columns>NAME</columns>
+    <columns>Status__c</columns>
+    <columns>Type__c</columns>
+    <columns>Retry_Count__c</columns>
+    <columns>Original_Request_Record_ID__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>Generate Tasks Job</label>
+</ListView>

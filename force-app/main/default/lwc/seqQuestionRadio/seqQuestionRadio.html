@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-text-heading_medium">{question.questionDetails} <lightning-helptext
+            content={question.helpText} class="helptext" icon-variant="inverse" if:true={question.helpText}></lightning-helptext>
+    </div>
+    <!-- <div class="slds-align_absolute-center">
+        <lightning-radio-group name="radioGroup" options={options} value={question.answer} type="button"
+            onchange={handleChange}>
+        </lightning-radio-group>
+    </div> -->
+
+    <!-- <div class="">
+        <lightning-radio-group name="radioGroup" options={options} value={question.answer} type="radio"
+            onchange={handleChange} class="customRadioCls">
+        </lightning-radio-group>
+    </div> -->
+
+    <ul class="radioButtonGroup">
+        <template for:each={options} for:item="option">
+            <li key={option.value}>
+                <div>
+                    <input type="radio" id={option.value} name={option.questionId} onclick={handleOptionSelected}
+                        value={option.value} checked={option.checked} />
+                    <label for={option.value}>{option.label}</label>
+                </div>
+            </li>
+        </template>
+        <!-- <li>
+            <input type="text" id="otherAmount" name="numAmount" />
+        </li> -->
+
+    </ul>
+</template>

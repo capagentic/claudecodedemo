@@ -1,0 +1,50 @@
+<template>
+    <div>
+        <div class="slds-row slds-m-vertical_xx-small slds-grid slds-wrap slds-align_absolute-center">
+            <div class="slds-size_1-of-2 slds-form-element__label">Template Name</div>
+            <div class="slds-size_1-of-2">{inspectionRec.templateName}</div>
+        </div>
+        <div class="slds-row slds-m-vertical_xx-small slds-grid slds-wrap slds-align_absolute-center">
+            <div class="slds-size_1-of-2 slds-form-element__label">Contact Name</div>
+            <div class="slds-size_1-of-2">{inspectionRec.contactName}</div>
+        </div>
+        <div class="slds-row slds-m-vertical_xx-small slds-grid slds-wrap slds-align_absolute-center">
+            <div class="slds-size_1-of-2 slds-form-element__label">Contact Email</div>
+            <div class="slds-size_1-of-2">{inspectionRec.contactEmail}</div>
+        </div>
+        <div class="slds-row slds-m-vertical_xx-small slds-grid slds-wrap slds-align_absolute-center">
+            <div class="slds-size_1-of-2 slds-form-element__label"> Contact Mobile</div>
+            <div class="slds-size_1-of-2">{inspectionRec.contactMobile}</div>
+        </div>
+        <div class="slds-row slds-m-vertical_xx-small slds-grid slds-wrap slds-align_absolute-center" style="display: inline;">
+            <div class="slds-size_1-of-1 slds-scrollable_y">
+                <div>
+                    <lightning-combobox name="delivery" label="Select a Delivery Method" value={deliveryMethod}
+                        placeholder="--- Select ---" options={deliveryOptions} onchange={handleDeliveryChange}>
+                    </lightning-combobox>
+                </div>
+                <div if:true={showSMSTemplate} class="slds-m-vertical_medium">
+                    <lightning-textarea name="sms" label="SMS Message" value={smsTemplate} data-name="smsTemplate" onkeyup={changeSMSTemplateHandler}></lightning-textarea>
+                </div>
+                <div if:true={showEmailTemplate} class="slds-m-vertical_medium">
+                    <c-record-lookup lookup-label="Please select an email template"
+                        onrecordselection={emailSelectionHandler} object-api-name="EmailTemplate">
+                    </c-record-lookup>
+
+                    <div class="slds-m-vertical_medium">
+                        <span class="slds-form-element__label">Email Message </span>
+                        <div class="slds-border_top slds-border_right slds-border_bottom slds-border_left slds-textarea">
+                            <lightning-formatted-rich-text value={emailObj.HtmlValue}>
+                            </lightning-formatted-rich-text>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-row slds-m-vertical_small slds-grid slds-wrap slds-align_absolute-center">
+            <button class="slds-button slds-button_brand" 
+                onclick={submitSendRequest} title="Send"
+                disabled={sendNotAllowed}>Send</button>
+        </div>
+    </div>
+</template>

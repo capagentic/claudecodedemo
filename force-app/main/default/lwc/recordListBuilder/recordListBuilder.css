@@ -1,0 +1,21 @@
+.fkbackgroundcolor{
+    background-color: #d2d2cf1f;
+}
+
+.minwidthlayoutitem{
+    min-width:40% !important;
+}
+
+.maxheight {
+    max-height: 300px;
+}
+.requiredheight {
+    max-height: 330px;
+    min-height: 300px;
+}
+.nobottomBorder {
+    border-bottom: none !important;
+}
+.thinbottomBorder {
+    border-bottom:var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));
+}

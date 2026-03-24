@@ -1,0 +1,236 @@
+<template>
+    <center>
+        <div if:false={showComplete}>
+            <div class={pageTitleClass}>
+                <br />
+                <strong>{pageTitle}</strong>
+            </div>
+
+            <div if:true={showQuestionProgress} class="fontcolor">
+                {currentQuestion.displayIndex} of {maxIndex}
+            </div>
+            <!-- <div if:true={showQuestionProgress} class="fontcolor">
+                {totalScore} of {totalAvailableScore}
+            </div> -->
+        </div>
+    </center>
+
+    <div class="slds-m-horizontal_medium slds-m-vertical_large">
+        <div if:true={showSpinner} class='spinnerContainer'>
+            <lightning-spinner class="spins" variant="brand" size="large" data-text="Uploading....">
+            </lightning-spinner>
+        </div>
+        <div class={openState}>
+            <div>
+                <div if:true={showError}>
+                    <c-seq-question-error error-message={errorMessage}></c-seq-question-error>
+                </div>
+                <div if:true={showWelcome} class="slds-align_absolute-center">
+                    <center>
+                        <c-seq-question-welcome welcome-text={instruction}></c-seq-question-welcome>
+                    </center>
+                </div>
+
+                <div if:true={showComplete} class="modal">
+                    <c-seq-question-complete></c-seq-question-complete>
+                </div>
+
+                <div if:false={showComplete}>
+                    <div class="slds-p-bottom_large">
+                        <lightning-formatted-rich-text value={currentQuestion.qInstructions}
+                            class="slds-text-heading_medium" style="font-size: 1rem;">
+
+                        </lightning-formatted-rich-text>
+                    </div>
+                    <div if:true={showRadio} class="modal">
+                        <c-seq-question-radio question={currentQuestion} question-id={currentQuestion.surveyQuestionId}
+                            onvaluechanged={handleValueChanged}>
+                        </c-seq-question-radio>
+                    </div>
+
+                    <div if:true={showNPS} class="modal">
+                        <c-seq-question-n-p-s max-number=9 question={currentQuestion}
+                            question-id={currentQuestion.surveyQuestionId} onvaluechanged={handleValueChanged}>
+                        </c-seq-question-n-p-s>
+                    </div>
+
+
+                    <div if:true={showText} class="modal">
+                        <c-seq-question-text question={currentQuestion} onvaluechanged={handleValueChanged}>
+                        </c-seq-question-text>
+                    </div>
+                    <div if:true={showTextArea} class="modal">
+                        <c-seq-question-text-area question={currentQuestion} onvaluechanged={handleValueChanged}>
+                        </c-seq-question-text-area>
+                    </div>
+
+                    <div if:true={showNum} class="modal">
+                        <c-seq-question-number question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-number>
+                    </div>
+
+                    <div if:true={showMultiChoice} class="modal">
+                        <c-seq-question-multi-choice question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-multi-choice>
+                    </div>
+
+                    <div if:true={showGeoLocation} class="modal">
+                        <c-seq-geo-location question={currentQuestion} question-id={currentQuestion.surveyQuestionId}
+                            onvaluechanged={handleValueChanged}>
+                        </c-seq-geo-location>
+                    </div>
+
+
+                    <div if:true={showFile} class="modal">
+                        <c-seq-question-file-upload question={currentQuestion}
+                            question-id={currentQuestion.surveyQuestionId} onvaluechanged={handleValueChanged}>
+                        </c-seq-question-file-upload>
+                    </div>
+
+                    <div if:true={showRating} class="modal">
+                        <c-seq-question-star-rating question={currentQuestion}
+                            question-id={currentQuestion.surveyQuestionId} onvaluechanged={handleValueChanged}
+                            label-text="Customize Rating colors" label-position="top" color-positive="#4AB615"
+                            color-default="#F5C823" color-ok="#F5C823" color-negative="#E54958" number-of-stars="10"
+                            rating="5.0" label-hidden show-half-stars="true" size="small" space-between="small">
+                        </c-seq-question-star-rating>
+                    </div>
+
+                    <div if:true={showEmail} class="modal">
+                        <c-seq-question-email question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-email>
+                    </div>
+                    <div if:true={showUrl} class="modal">
+                        <c-seq-question-url question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-url>
+                    </div>
+                    <div if:true={showCurrency} class="modal">
+                        <c-seq-question-currency question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-currency>
+                    </div>
+                    <div if:true={showPercentage} class="modal">
+                        <c-seq-question-percentage question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-percentage>
+                    </div>
+                    <div if:true={showDate} class="modal">
+                        <c-seq-question-date question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-date>
+                    </div>
+                    <div if:true={showDateTime} class="modal">
+                        <c-seq-question-date-time question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-date-time>
+                    </div>
+                    <div if:true={showSignature} class="modal">
+                        <c-seq-question-signature question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId} files-list={files}>
+                        </c-seq-question-signature>
+                    </div>
+                    <div if:true={showCalendly} class="modal">
+                        <c-seq-question-calendly question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-calendly>
+                    </div>
+                    <div if:true={showStripe} class="modal">
+                        <c-seq-question-stripe question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-stripe>
+                    </div>
+                    <div if:true={showPassFail} class="modal">
+                        <c-seq-question-pass-fail question={currentQuestion} onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}>
+                        </c-seq-question-pass-fail>
+                    </div>
+                    <div  if:true={showSalesforceFlow} class="modal">
+                        <c-seq-question-salesforce-flow question={currentQuestion} 
+                            onvaluechanged={handleValueChanged}
+                            question-id={currentQuestion.surveyQuestionId}
+                            onflowsubmit={handleSubmit}
+                            islastquestion={isLastQuestion}
+                            seqnumber={seqnumber}>
+                        </c-seq-question-salesforce-flow>
+                    </div>
+                </div>
+            </div>
+            <div class="btnContainer">
+                <template if:true={showBackBtn}>
+                    <button name="backBtn" class="formBtn slds-button slds-button_neutral slds-m-horizontal_medium"
+                        onclick={handleBack}>
+                        Back </button>
+                </template>
+                <template if:true={showNextBtn}>
+                    <button name="nextBtn" class="formBtn slds-button slds-button_brand slds-m-horizontal_medium"
+                        onclick={handleNext}>
+                        Next
+                    </button>
+                </template>
+                <template if:true={isLastQuestion}>
+                    <template if:true={showSubmitButton}>
+                        <button disabled={disableSubmitBtn} name="submitBtn"
+                            class="formBtn submitBtn slds-button slds-button_brand slds-m-horizontal_medium"
+                            onclick={handleSubmit}>
+                            I’m Done
+                        </button>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div slot="footer" class="footer">
+        <template if:true={showWelcome}>
+            <button name="startBtn" class="startBtn slds-button slds-button_stretch slds-align_absolute-center"
+                onclick={handleNext}> Get Started </button>
+        </template>
+        <div class="slds-grid slds-wrap">
+
+        </div>
+    </div>
+
+    <!-- <div slot="footer" class="footer">
+        <template if:true={showWelcome}>
+            <button name="startBtn" class="startBtn slds-button slds-button_stretch slds-align_absolute-center"
+                onclick={handleNext}> Get Started </button>
+        </template>
+        <div class="slds-grid slds-wrap">
+            <template if:true={showBackBtn}>
+                <div
+                    class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-small-size_12-of-12 slds-align_absolute-center slds-m-vertical_x-small">
+                    <button name="backBtn" class="formBtn slds-button slds-button_neutral slds-button_stretch"
+                        onclick={handleBack}>
+                        Back </button>
+                </div>
+            </template>
+            <template if:true={showNextBtn}>
+                <div
+                    class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-small-size_12-of-12 slds-align_absolute-center slds-m-vertical_x-small">
+
+                    <button name="nextBtn" class="formBtn slds-button slds-button_brand slds-button_stretch"
+                        onclick={handleNext}>
+                        Next
+                    </button>
+
+                </div>
+            </template>
+            <template if:true={isLastQuestion}>
+                <div
+                    class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-small-size_12-of-12 slds-align_absolute-center slds-m-vertical_x-small">
+
+                    <button disabled={disableSubmitBtn} name="submitBtn"
+                        class="formBtn submitBtn slds-button slds-button_brand slds-button_stretch"
+                        onclick={handleSubmit}>
+                        Submit
+                    </button>
+                </div>
+            </template>
+        </div>
+    </div> -->
+
+</template>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TemplateChangeAllowedForNotStartedStatus</fullName>
+    <active>true</active>
+    <description>Changing Template is only allowed for Not Started Inspections</description>
+    <errorConditionFormula>ISCHANGED( Template__c ) &amp;&amp;   NOT(ISPICKVAL(Status__c, &apos;Not Started&apos;))</errorConditionFormula>
+    <errorDisplayField>Template__c</errorDisplayField>
+    <errorMessage>The Template can only be changed when the Inspection Status is Not Started</errorMessage>
+</ValidationRule>

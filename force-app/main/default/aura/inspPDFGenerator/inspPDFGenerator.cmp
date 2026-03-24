@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" 
+    access="global" controller="inspPDFReportController">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="render" value="{!this}" action="{!c.savePDFLocal}"/>
+    <!-- <iframe src="{! '/apex/inspPDFReport?id='+v.recordId}" width="100%" height="500px;" frameBorder="0"/> -->
+    <div class="slds-align--absolute-center">
+        <lightning:spinner aura:id="spinner" variant="brand" size="large" class="slds=hide"/>
+    </div>
+</aura:component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attach_Photos_or_Files__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Enable to allow user to capture Photo or Files during inspection</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Enable to allow user to capture Photo or Files during inspection</inlineHelpText>
+    <label>Attach Photos or Files</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

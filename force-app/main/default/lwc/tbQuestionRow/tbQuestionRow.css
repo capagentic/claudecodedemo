@@ -1,0 +1,98 @@
+.questionNumber {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 15px
+}
+
+.questionInput {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.link-hidden {
+    text-decoration: none;
+    /* Remove the underline */
+    cursor: pointer;
+}
+
+
+
+/* ****** */
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.options {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+}
+
+.options li {
+    margin: 0.5rem 0;
+}
+
+.options a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+
+/*******************/
+
+.logicBuilderContainer {
+    margin: 5px 48px;
+}
+
+.logicBuilderButtons {
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.triggerOptionsContainer {
+    background-color: #F3F3F3;
+    position: relative;
+    /* width: 180px; */
+    border-radius: 5px;
+}
+
+.actionOptionsContainer {
+    background-color: #F3F3F3;
+    position: relative;
+    /* width: 180px; */
+    border-radius: 5px;
+}
+
+.optionContainer {
+    padding: 3px 5px 5px 12px;
+}
+
+
+.actionFooterContainer {
+    margin-left: 37px;
+}
+
+.questionTypeContainer {
+    margin-top: 0px
+}
+
+
+.additionalQuestionContainer {
+    border-left: 6px solid #ccc;
+    border-color: #E0E9FC;
+    background-color: #F8E1B1;
+    padding: 25px;
+}
+
+.additionalInput {
+    padding-left: 37px;
+    width: 80%;
+}

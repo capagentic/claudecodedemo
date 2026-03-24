@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Response_Payload__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Payload of the response returned from ChatGPT</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Payload of the response returned from ChatGPT</inlineHelpText>
+    <label>Response Payload</label>
+    <length>131072</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>7</visibleLines>
+</CustomField>

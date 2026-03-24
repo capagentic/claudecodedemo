@@ -1,0 +1,231 @@
+<template>
+    <!-- Obj: Kinetics__Kinetic_Job__c -->
+    <section class="slds-card slds-card_boundary"> 
+        <lightning-messages></lightning-messages>
+        <div slot="title" class="slds-card__header slds-p-around_none slds-border_bottom">
+            <c-page-header title-value={labels.headerTitle} subtitle-value={labels.headerSubTitle} icon-name="utility:connected_apps"></c-page-header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner requiredheight" style="min-height:75%;min-width:30%;">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                </lightning-spinner>
+            </template>
+            <lightning-layout class="slds-align_absolute-center">
+                <lightning-layout-item class="minwidthlayoutitem wizardBody requiredheight">
+                    <lightning-record-edit-form 
+                        object-api-name={objectapiname}
+                        record-id={recordId} >
+                        <template if:true={metadataObj.isStepOne}>
+                            <c-record-list-builder section-title={labels.firstStepHelpText}
+                                onrecordselected={updateContactSelection}
+                                all-available-records-by-id={allContactsById}
+                                selected-records-count={selectedContactsCount}
+                                columns-to-display={contactColumnsToDisplay}
+                                search-place-holder-text={labels.searchPlaceHolderTextForContact}>
+                            </c-record-list-builder>
+                        </template>
+                        <template if:true={metadataObj.isStepTwo}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.secondStepHelpText}
+                                    </div>
+                                    <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y requiredheight">
+                                        <c-record-lookup lookup-label="Please select a Kinetic Form to send"
+                                            onrecordselection={seqSelectionHandler} object-api-name="Kinetics__Kinetic_Form__c"
+                                            icon-name="custom:custom18">
+                                        </c-record-lookup>
+                        
+                                        <div if:true={showRelatedQuestions} class="seqTable slds-m-vertical_large">
+                                            <lightning-datatable key-field="id" data={relatedquestions} columns={columns} hide-checkbox-column=true>
+                                            </lightning-datatable>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <template if:true={metadataObj.isStepThree}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.thirdStepHelpText}
+                                    </div>
+                                    <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y requiredheight">
+                                        <div>
+                                            <lightning-combobox name="delivery" label={labels.thirdStepHelpText} value={deliveryMethod}
+                                                placeholder="--- Select ---" options={deliveryOptions} onchange={handleDeliveryChange}>
+                                            </lightning-combobox>
+                                        </div>
+                                        <div if:true={showSMSTemplate} class="slds-m-vertical_large">
+                                            <lightning-textarea name="sms" label="SMS Message" value={smsTemplate} data-name="smsTemplate" onkeyup={changeSMSTemplateHandler}></lightning-textarea>
+                                        </div>
+                                        <div if:true={showEmailTemplate} class="slds-m-vertical_large">
+                                            <c-record-lookup lookup-label="Please select an email template"
+                                                onrecordselection={emailSelectionHandler} object-api-name="EmailTemplate">
+                                            </c-record-lookup>
+                        
+                                            <div class="slds-m-vertical_large">Email Message
+                                                <div class="slds-border_top slds-border_right slds-border_bottom slds-border_left">
+                                                    <lightning-formatted-rich-text value={emailObj.HtmlValue}>
+                                                    </lightning-formatted-rich-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <template if:true={metadataObj.isStepFour}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.fourthStepHelpText}
+                                    </div>
+                                    <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor slds-scrollable_y requiredheight">
+                                        <div class="slds-summary-detail slds-is-open" style="display: block;">
+                                            <div>
+                                                <div class="slds-summary-detail__title">
+                                                    <div class="slds-grid">
+                                                        <h3 class="slds-text-heading_small slds-truncate slds-p-right_small" 
+                                                            title="Reminders">Reminders</h3>
+                                                    </div>
+                                                </div>
+                                                <div aria-hidden="false" class="slds-summary-detail__content">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small">
+                                                            <span class="slds-form-element__label slds-m-bottom_none">Send automatic reminders</span>
+                                                        </div>
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small">
+                                                            <label class="slds-checkbox_toggle">
+                                                                <lightning-input type="toggle" name="sendAutoReminders"
+                                                                    onchange={handleInputFieldChange} value={sendAutoReminders}
+                                                                    checked={sendAutoReminders}></lightning-input>
+                                                            </label>
+                                                        </div>
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small" if:true={sendAutoReminders}>
+                                                            <span class="slds-form-element__label slds-m-bottom_none">
+                                                                Number of days before sending first reminder
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small" if:true={sendAutoReminders}>
+                                                            <input type="number" 
+                                                                id="daysForFirstReminder" 
+                                                                class="slds-input" 
+                                                                onchange={handleInputFieldChange}
+                                                                value={daysForFirstReminder}
+                                                                name="daysForFirstReminder"/>
+                                                        </div>
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small" if:true={sendAutoReminders}>
+                                                            <span class="slds-form-element__label slds-m-bottom_none">
+                                                                Number of days between reminders 
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small" if:true={sendAutoReminders}>
+                                                            <input type="number" 
+                                                                id="daysbetweenReminder" 
+                                                                class="slds-input" 
+                                                                onchange={handleInputFieldChange}
+                                                                value={daysbetweenReminder}
+                                                                name="daysbetweenReminder"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-summary-detail slds-is-open slds-p-top_large" style="display: block;">
+                                            <div>
+                                                <div class="slds-summary-detail__title">
+                                                    <div class="slds-grid">
+                                                        <h3 class="slds-text-heading_small slds-truncate slds-p-right_small" 
+                                                            title="Expiration">Expiration</h3>
+                                                    </div>
+                                                </div>
+                                                <div aria-hidden="false" class="slds-summary-detail__content">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small">
+                                                            <span class="slds-form-element__label slds-m-bottom_none">
+                                                                Number of days before request expires
+                                                            </span>
+                                                        </div>
+                                                        <div class="slds-size--1-of-2 slds-medium-size--1-of-2 slds-large-size--1-of-2 slds-p-around_xx-small">
+                                                            <input type="number" 
+                                                                id="daysbeforerequestexpires" 
+                                                                class="slds-input" 
+                                                                onchange={handleInputFieldChange}
+                                                                value={daysbeforerequestexpires}
+                                                                name="daysbeforerequestexpires"/>
+                                                                
+                                                            <span class="slds-form-element__label slds-m-bottom_none">
+                                                                Envelope will be queued for expiration on {expirationQueueDate}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                        <template if:true={metadataObj.isStepFive}>
+                            <lightning-card>
+                                <section class="slds-card slds-card_boundary">
+                                    <div slot="title" class="slds-card__header slds-text-heading_small">
+                                        {labels.fifthStepHelpText}
+                                    </div>
+                                    <div class="custom-box slds-box slds-card__body slds-card__body_inner slds-m-horizontal_small fkbackgroundcolor">
+                                        <div class="slds-col slds-wrap slds-grid">
+                                            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                                <h3 class="slds-text-heading--medium slds-text-align--center slds-m-vertical_medium ">
+                                                    <div class="slds-text-heading_large slds-m-vertical_x-large">
+                                                        <lightning-icon class="successIcon" icon-name="action:approval" size="medium" variant="Warning">
+                                                        </lightning-icon>
+                                                        <span class="slds-m-horizontal_small">
+                                                            Your Kinetic Form has been successfully set up and will be delivered to the recipients. View the status of your job here: 
+                                                            <a href={job.Url} target="blank"> {job.Name}</a>
+                                                        </span>
+                                                    </div>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </lightning-card>
+                        </template>
+                    </lightning-record-edit-form>        
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div slot="footer" class="slds-grid_vertical-align-center slds-card__footer slds-docked-form-footer fixedfooter">
+            <div class="slds-grid slds-gutters slds-p-around_x-small">
+                <div class="slds-col slds-size_1-of-12 inlinedisplay">
+                    <template if:true={isEnableCancel} >
+                        <lightning-button class="slds-m-left_x-small slds-float_left zIndex2" variant="brand-outline" label={labels.Cancel} onclick={handleCancel}></lightning-button>
+                    </template>
+                    <template if:true={isEnablePrev} >
+                        <lightning-button class="slds-m-left_x-small slds-float_left zIndex2" variant="brand-outline" label={labels.Back} onclick={handlePrev}></lightning-button>
+                    </template>
+                </div>
+               
+                <div class="slds-col slds-size_10-of-12 inlinedisplay">
+                    <lightning-progress-indicator current-step={currentStep} type="base" variant="base">
+                        <lightning-progress-step label={labels.firstStepHelpText} value="1" onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.secondStepHelpText} value="2" onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.thirdStepHelpText} value="3" onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.fourthStepHelpText} value="4" onclick={handleOnStepClick}></lightning-progress-step>
+                        <lightning-progress-step label={labels.fifthStepHelpText} value="5" onclick={handleOnStepClick}></lightning-progress-step>
+                    </lightning-progress-indicator>
+                </div>
+
+                <div class="slds-col slds-size_1-of-12 inlinedisplay">
+                    <template if:true={isEnableNext}>
+                        <lightning-button class="slds-m-left_x-small slds-float_right zIndex2" label={labels.Next} variant="brand" onclick={handleNext}></lightning-button>
+                    </template>
+                    <template if:true={isEnableFinish}>
+                        <lightning-button class="slds-m-left_x-small slds-float_right zIndex2" label={labels.Finish} variant="brand" onclick={handleFinishAction}></lightning-button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

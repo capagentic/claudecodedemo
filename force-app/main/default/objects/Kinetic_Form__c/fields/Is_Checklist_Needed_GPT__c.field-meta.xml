@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Checklist_Needed_GPT__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Is a checklist needed from ChatGPT</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Is a checklist needed from ChatGPT</inlineHelpText>
+    <label>Is Checklist Needed (GPT)</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

@@ -1,0 +1,32 @@
+.fkbackgroundcolor {
+    background-color: #d2d2cf1f;
+}
+
+.minwidthlayoutitem {
+    min-width: 40% !important;
+}
+
+.maxheight {
+    /* max-height: 300px; */
+    /* min-height: 500px; */
+    /* reduced height to fit on smaller screen, as more people have smaller screen laptop */
+    min-height: 350px;
+}
+
+.fixedfooter {
+    display: block;
+    position: relative;
+}
+
+.zIndex2 {
+    z-index: 2;
+}
+
+.requiredheight {
+    /* max-height: 330px; */
+    min-height: 300px;
+}
+
+.inlinedisplay {
+    display: inline-block;
+}

@@ -1,0 +1,11 @@
+.fkbackgroundcolor{
+    background-color: #d2d2cf1f;
+}
+
+.minwidthlayoutitem{
+    min-width:40% !important;
+}
+
+.maxheight {
+    max-height: 300px;
+}

@@ -1,0 +1,100 @@
+<template>
+    <div class="demo-only">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+            </div>
+            <div class="slds-modal__container absoluteposition" style="-webkit-overflow-scrolling:initial">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}> 
+                        <lightning-icon icon-name="utility:close" size="medium"> 
+                        </lightning-icon> 
+                        <span class="slds-assistive-text">Close</span> 
+                    </button> 
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Task</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="padding-top: 0;padding-bottom: 10px;">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-p-around_xxx-small slds-text-align_left slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                            <label class="slds-form-element__label" for="Subjectfield">
+                                <abbr class="requiredclass">*</abbr>
+                                <span>Subject</span>
+                            </label>
+                            <lightning-input id="Subjectfield" type="text" value={taskRecord.Subject} data-fieldname="Subject" 
+                                onchange={handleChange} name="Subject" placeholder=""
+                                style="text-align:left;" label="Subject" 
+                                variant="label-hidden" required="true"> </lightning-input>
+                        </div>
+
+                        <div class="slds-p-around_xxx-small slds-text-align_left slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                            <label class="slds-form-element__label" for="Descriptionfield">Comments</label>
+                            <lightning-textarea name="Description" placeholder="" 
+                                value={taskRecord.Description} data-fieldname="Description" onchange={handleChange} 
+                                style="text-align:left;" label="Comments" 
+                                variant="label-hidden" ></lightning-textarea>
+                        </div>  
+                        
+                        <div class="slds-p-around_xxx-small slds-text-align_left slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                            <c-record-lookup onrecordselection={recordSelectionHandler} object-api-name="User" lookup-label="Assigned To" 
+                                place-holder-text="Search People" data-fieldname="OwnerId" name="OwnerId" icon-name="standard:user" selected-record-id={taskRecord.OwnerId}
+                                selected-value={currentUserName}> 
+
+                            </c-record-lookup>
+                        </div>
+                        
+                        <div class="slds-p-around_xxx-small slds-text-align_left slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-grid slds-gutters slds-wrap">
+                            <div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <label class="slds-form-element__label" for="DueDatefield">Due Date</label>
+                                <lightning-input id="DueDatefield" type="date" name="ActivityDate" placeholder="" 
+                                    value={taskRecord.ActivityDate} data-fieldname="ActivityDate" onchange={handleChange} 
+                                    style="text-align:left;" label="Due Date" 
+                                    variant="label-hidden"> </lightning-input>
+                            </div>  
+                            <div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                <div class="slds-grid slds-gutters slds-wrap">
+                                    <div class="slds-p-around_xxx-small slds-text-align_left slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label">
+                                                <abbr class="requiredclass">*</abbr>
+                                                <span>Priority</span>
+                                            </label>
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-select_container">
+                                                    <select class="slds-select" 
+                                                            name="Priority" 
+                                                            data-fieldname="Priority" onchange={handleChange} 
+                                                            style="text-align:left;height: 45px;"
+                                                            required>
+                                                        <option value="">Select</option>
+                                                        <template for:each={priorityOptions} for:item="option">
+                                                            <option key={option.value} class="uiInputSelectOption" value={option.value}>{option.label}</option>
+                                                        </template>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer"> 
+                    <lightning-button
+                        class="slds-m-top_small"
+                        label="Cancel"
+                        onclick={closeModal}
+                    ></lightning-button>
+                    <lightning-button class="slds-m-around_x-small" 
+                        type="submit" 
+                        name="Save" 
+                        label="Save" 
+                        onclick={handleSubmit} variant="brand"> </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+</template>

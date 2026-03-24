@@ -1,0 +1,249 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div>
+        <div class="width100 slds-align--absolute-center titleContainer">
+            <div class="titleBody titleBox">
+                <input type="text" data-name="Name" onchange={handleInputFieldChange}
+                    value={templatePageMetadata.selectedFormValue.Name} required placeholder="Untitled Template"
+                    class="templateTitleInputText"></input>
+                <textarea data-name="Kinetics__Instructions__c" onchange={handleInputFieldChange}
+                    value={templatePageMetadata.selectedFormValue.Kinetics__Instructions__c}
+                    placeholder="Add instructions" rows="2"
+                    class="templateInstructionInput">{templatePageMetadata.selectedFormValue.Kinetics__Instructions__c}</textarea>
+            </div>
+            <div class="buttonBox" align="right">
+                <ul class="slds-button-group-list">
+                    <li>
+                        <!-- <button type="button" class="buttonGlowing" onclick={handleShowGPTBuilder}><lightning-icon
+                                icon-name="utility:einstein" alternative-text="clone" title="clone button"
+                                class="buttonIconWhite" size="x-small"></lightning-icon>Beta: GPT
+                            Builder</button> -->
+                        <button type="button" class="buttonGlowing" onclick={handleShowGPTBuilder}><img class="gptIcon"
+                                src={chatgptLogo}>GPT
+                            Parameters</button>
+                        <button type="button" class="slds-button slds-button_neutral"
+                            onclick={cloneTemplate}><lightning-icon icon-name="utility:copy" alternative-text="clone"
+                                title="clone button" class="buttonIcon" size="x-small"></lightning-icon>Clone</button>
+
+                        <button type="button" class="slds-button slds-button_neutral"
+                            onclick={saveTemplate}><lightning-icon icon-name="utility:save" alternative-text="Save"
+                                title="save button" class="buttonIcon" size="x-small"></lightning-icon>Save</button>
+
+                        <div class="previewButtonContainer">
+                            <label class="slds-checkbox_toggle slds-grid">
+                                <span class="slds-form-element__label slds-m-bottom_none">Preview</span>
+                                <input type="checkbox" value="checkbox-toggle-16" aria-describedby="checkbox-toggle-16"
+                                    onclick={handlePreview} />
+                                <span id="checkbox-toggle-16" class="slds-checkbox_faux_container"
+                                    aria-live="assertive">
+                                    <span class="slds-checkbox_faux"></span>
+                                    <span class="slds-checkbox_on">Enabled</span>
+                                    <span class="slds-checkbox_off">Disabled</span>
+                                </span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div if:true={showExtraFields} class="gptContainer">
+            <c-render-field-set objectname={objectapiname} fieldsetname={fieldsetname} isforinput="true"
+                onfieldvalueupdate={handlefieldvalueupdate} selectedvalue={templatePageMetadata.selectedFormValue}
+                cardtitle="Populate More information" extra-detail-fields={extraDetailFields}
+                record-id={recordId}>
+            </c-render-field-set>
+        </div>
+        <div if:true={showGPTBuilder} class="gptContainer">
+            <c-tb-generate-template-using-chat-g-p-t
+                gpt-parameter={templatePageMetadata.selectedFormValue.Kinetics__Chat_GPT_Parameters__c}
+                ontemplategenerated={handleTemplateGenerated} ongptparametervalueupdate={maintainGPTParameterValues}
+                disable-chatgpt={disableChatGPT}></c-tb-generate-template-using-chat-g-p-t>
+        </div>
+    </div>
+    <div class="slds-grid slds-wrap">
+        <!-- <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12"> -->
+        <div class={questionContainerGrid}>
+            <template for:each={templatePageMetadata.pagelist} for:item="page">
+                <article class="slds-card slds-card_boundary slds-grow" key={page.pageno}>
+                    <div class="slds-card__header slds-grid slds-border_bottom slds-p-vertical_medium">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__body">
+                                <h2 class="width100">
+                                    <div class="slds-card__header-link slds-truncate slds-text-title_bold slds-grid slds-wrap"
+                                        title="Page">
+                                        <div class="pageInputText slds-col slds-size_10-of-12">
+                                            Page {page.displayno}
+                                        </div>
+                                        <div class="sectionIconContainer slds-col slds-size_2-of-12">
+                                            <!-- <lightning-button-icon variant="bare" icon-name="utility:down"
+                                                alternative-text="Move Page Down" title="Move Page Down"
+                                                class="questionActionIcon" onclick={handlePageDown} size="large"
+                                                data-pageno={page.pageno}></lightning-button-icon>
+                                            <lightning-button-icon variant="bare" icon-name="utility:up"
+                                                alternative-text="Move Page Up" title="Move Page Up"
+                                                class="questionActionIcon" onclick={handlePageUp} size="large"
+                                                data-pageno={page.pageno}></lightning-button-icon>
+                                            <lightning-button-icon variant="bare" icon-name="utility:copy"
+                                                alternative-text="Clone Page" title="Clone Page"
+                                                class="questionActionIcon" onclick={handlePageClone} size="large"
+                                                data-pageno={page.pageno}></lightning-button-icon> -->
+                                            <lightning-button-icon variant="bare" icon-name="utility:delete"
+                                                alternative-text="Delete Page" title="Delete Page"
+                                                class="questionActionIcon" onclick={deletePage} size="large"
+                                                data-pageno={page.pageno}></lightning-button-icon>
+
+                                        </div>
+                                    </div>
+                                </h2>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner">
+                        <div class="slds-card">
+                            <template for:each={page.sectionlist} for:item="section">
+                                <article class="slds-card slds-card_boundary cardbackground" key={section.sectionno}>
+                                    <div class="slds-card__header slds-grid slds-border_bottom slds-p-vertical_medium">
+                                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                            <div class="slds-media__body">
+                                                <h2 class="">
+                                                    <div class="slds-card__header-link slds-truncate slds-text-title_bold slds-grid slds-wrap"
+                                                        title="Section">
+                                                        <div class="titleBody slds-col slds-size_10-of-12 ">
+                                                            <input type="text" data-name="sectionTitle"
+                                                                onchange={handleSectionInputFieldChange}
+                                                                value={section.stitle} placeholder="Untitled Section"
+                                                                class="pageSectionInputText" data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}
+                                                                autocomplete="off"></input>
+                                                        </div>
+                                                        <div class="sectionIconContainer slds-col slds-size_2-of-12 ">
+                                                            <!-- 
+                                                            <lightning-button-icon variant="bare"
+                                                                icon-name="utility:down"
+                                                                alternative-text="Move Section Down"
+                                                                title="Move Section Down" class="questionActionIcon"
+                                                                onclick={handleSectionDown} data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}>
+                                                            </lightning-button-icon>
+                                                            <lightning-button-icon variant="bare" icon-name="utility:up"
+                                                                alternative-text="Move Section Up"
+                                                                title="Move Section Up" class="questionActionIcon"
+                                                                onclick={handleSectionUp} data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}>
+                                                            </lightning-button-icon>
+                                                            <lightning-button-icon variant="bare"
+                                                                icon-name="utility:copy"
+                                                                alternative-text="Clone Section" title="Clone Section"
+                                                                class="questionActionIcon" onclick={handleSectionClone}
+                                                                data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}>
+                                                            </lightning-button-icon> -->
+                                                            <lightning-button-icon variant="bare"
+                                                                icon-name="utility:delete"
+                                                                alternative-text="Delete Section" title="Delete Section"
+                                                                class="questionActionIcon" onclick={deleteSection}
+                                                                data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                    </div>
+                                                </h2>
+                                            </div>
+                                        </header>
+                                    </div>
+                                    <div class="slds-card__body slds-card__body_inner content">
+                                        <div class="slds-card">
+                                            <template for:each={section.questionWrapperList} for:item="qwrapper">
+                                                <!-- <div key={qwrapper.uid} class="slds-p-around_medium"> -->
+                                                <div key={qwrapper.uid} class="slds-p-vertical_medium questionRow">
+                                                    <div class="slds-grid slds-wrap slds-hint-parent questionItem"
+                                                        data-customuid={qwrapper.uid} ondrop={onQuestionDrop}
+                                                        ondragover={onQuestionDragOver} data-uid={qwrapper.uid}
+                                                        ondragenter={onQuestionDragEnter}
+                                                        ondragleave={onQuestionDragLeave} data-pageno={page.pageno}
+                                                        data-sectionno={section.sectionno}>
+                                                        <div class="slds-col slds-size_10-of-12 ">
+                                                            <c-tb-question-row currentquestion={qwrapper}
+                                                                question-number={qwrapper.displayQuestionNo}
+                                                                onvaluechanged={handleQuestionUpdate}></c-tb-question-row>
+
+                                                        </div>
+                                                        <div
+                                                            class="slds-col slds-size_2-of-12 slds-p-top_small questionIconContainer">
+                                                            <lightning-button-icon variant="bare"
+                                                                icon-name="utility:down"
+                                                                alternative-text="Move Question Down"
+                                                                title="Move Question Down" class="questionActionIcon "
+                                                                onclick={handleQuestionDown} data-uid={qwrapper.uid}
+                                                                data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}></lightning-button-icon>
+                                                            <lightning-button-icon variant="bare" icon-name="utility:up"
+                                                                alternative-text="Move Question Up"
+                                                                title="Move Question Up" class="questionActionIcon"
+                                                                onclick={handleQuestionUp} data-uid={qwrapper.uid}
+                                                                data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}></lightning-button-icon>
+                                                            <lightning-button-icon variant="bare"
+                                                                icon-name="utility:copy"
+                                                                alternative-text="Clone Question" title="Clone Question"
+                                                                class="questionActionIcon" onclick={handleQuestionClone}
+                                                                data-uid={qwrapper.uid} data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}></lightning-button-icon>
+
+                                                            <lightning-button-icon icon-name="utility:delete"
+                                                                alternative-text="Delete Question"
+                                                                title="Delete Question" class="questionActionIcon"
+                                                                onclick={deleteQuestion} variant="bare"
+                                                                data-uid={qwrapper.uid} data-pageno={page.pageno}
+                                                                data-sectionno={section.sectionno}></lightning-button-icon>
+                                                        </div>
+                                                    </div>
+                                                    <template if:true={qwrapper.isdragover}>
+                                                        <div class="slds-drop-zone_drag__slot"></div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                            <div class="slds-p-around_x-small">
+                                                <lightning-button variant="brand-outline" label="Add Question"
+                                                    title="Add Question" onclick={addQuestionInList}
+                                                    class="slds-p-around_xxx-small" icon-name="utility:add"
+                                                    data-pageno={page.pageno} data-sectionno={section.sectionno}>
+                                                </lightning-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </template>
+                            <div class="slds-p-around_x-small">
+                                <lightning-button variant="brand-outline" label="Add Section" title="Add Section"
+                                    onclick={addSectionInList} class="slds-p-around_xxx-small" icon-name="utility:add"
+                                    data-pageno={page.pageno}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </template>
+            <div class="slds-p-around_x-small">
+                <lightning-button variant="brand-outline" label="Add Page" title="Add Page" onclick={addPageInList}
+                    class="slds-p-around_xxx-small" icon-name="utility:add">
+                </lightning-button>
+            </div>
+            <div style="height: var(--lwc-heightDockedBar,2.5rem);"></div>
+        </div>
+        <div class={previewerContainerGrid} style="width:0px">
+            <div if:true={showPreviewer}>
+                <!-- <c-tb-template-preview-container-on-template
+                    template-page-metadata={templatePageMetadata}></c-tb-template-preview-container-on-template> -->
+                <c-tb-template-previewer-n-g
+                    template-page-metadata={templatePageMetadata}></c-tb-template-previewer-n-g>
+            </div>
+        </div>
+    </div>
+
+
+
+</template>

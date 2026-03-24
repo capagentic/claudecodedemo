@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Evaluting_Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>Evaluting Stage</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>assessment</fullName>
+                <default>false</default>
+                <label>assessment</label>
+            </value>
+            <value>
+                <fullName>next_steps</fullName>
+                <default>false</default>
+                <label>next_steps</label>
+            </value>
+            <value>
+                <fullName>opportunity</fullName>
+                <default>false</default>
+                <label>opportunity</label>
+            </value>
+            <value>
+                <fullName>risks</fullName>
+                <default>false</default>
+                <label>risks</label>
+            </value>
+            <value>
+                <fullName>all_done</fullName>
+                <default>false</default>
+                <label>all_done</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

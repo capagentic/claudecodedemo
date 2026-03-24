@@ -1,0 +1,15 @@
+<template>
+    <div class="previewerContainer slds-card-wrapper">
+        <template if:true={newTemplateFound}>
+            <div class="container">
+                <div class="templateContainer">
+                    <c-tb-template-question-renderer-n-g template-page-metadata={templatePageMetadata}
+                        onquestionupdate={updateQuestionAnswer}></c-tb-template-question-renderer-n-g>
+                </div>
+            </div>
+        </template>
+        <template if:false={newTemplateFound}>
+            <p>Template preview is not available for this Template</p>
+        </template>
+    </div>
+</template>

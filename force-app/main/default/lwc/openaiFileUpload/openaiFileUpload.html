@@ -1,0 +1,10 @@
+<template>
+    <lightning-file-upload label="Upload files to ChatGPT" name="fileUploader" accept={acceptedFormats}
+        record-id={recordId} onuploadfinished={handleUploadFinished}>
+    </lightning-file-upload>
+
+    <div lwc:if={showDeleteBtn}>
+        <lightning-button variant="destructive" label="Delete File in OpenAI" title="Delete File in OpenAI"
+            onclick={handleDeleteFile} class="slds-m-left_x-small"></lightning-button>
+    </div>
+</template>

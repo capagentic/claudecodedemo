@@ -1,0 +1,172 @@
+.fkbackgroundcolor {
+    background-color: #d2d2cf1f;
+}
+
+.minwidthlayoutitem {
+    min-width: 40% !important;
+}
+
+.maxheight {
+    /* max-height: 500px;
+    min-height: 500px; */
+    /* reduced height to fit on smaller screen, as more people have smaller screen laptop */
+    min-height: 350px;
+    max-height: 350px;
+}
+
+.modalBody {
+    text-align: center;
+}
+
+.scoreNumber {
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    border-color: #F3F3F3;
+    border-radius: 5px;
+}
+
+.sidepanelClosed {
+    height: 450px;
+    width: 54px;
+    position: fixed;
+    z-index: 1;
+    top: 150px;
+    right: -10px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    opacity: 0.9;
+    background-color: #E4F5FD;
+    border-radius: 20px;
+}
+
+.sidepanelOpen {
+    height: 450px;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 150px;
+    right: -10px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    opacity: 0.9;
+    background-color: #E4F5FD;
+    border-radius: 20px;
+}
+
+/* The sidepanel links */
+.sidepanel a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+.sidepanelOpen:hover {
+    background-color: #73C6F7;
+}
+
+.sidepanelClosed:hover {
+    background-color: #73C6F7;
+}
+
+.sidePanelContainer {
+    padding: 15px 35px;
+}
+
+.btnContainer {
+    margin-top: 20px;
+}
+
+.btnContainer p {
+    margin-left: 10px;
+}
+
+.sidePanelBtn {
+    text-align: center;
+    margin: 10px;
+    background-color: white;
+    border-color: #313131;
+    z-index: 999;
+}
+
+.sidePanelBtn:hover {
+    background-color: #F3F3F3;
+    border: 1px solid;
+    box-shadow: 2px 2px #888888;
+}
+
+.btnIcon {
+    max-width: 40px;
+}
+
+.arrowIcon {
+    max-width: 23px;
+}
+
+.leftArrowContainer {
+    margin-top: 12px;
+    margin-left: 3px;
+}
+
+.pageBreakBar {
+    line-height: 2.75rem;
+    background-color: #E7F6FD;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
+}
+
+.pageBreakBarText {
+    display: inline;
+    margin-left: 8px;
+    font-size: 1em;
+}
+
+.removePageBreakIcon {
+    background-color: #F6A000;
+    margin-right: 10px;
+}
+
+.removePageBreakLink {
+    color: #A50720;
+    margin-right: 10px;
+    text-decoration: underline;
+}
+
+.sectionBreakBar {
+    line-height: 2.5rem;
+    background-color: rgb(230,230,250);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.sectionBreakBarText {
+    display: inline;
+    margin-left: 8px;
+    font-size: 1em;
+}
+
+.removeSectionBreakIcon {
+    background-color: #F6A000;
+    margin-right: 10px;
+}
+
+.scoreBtnText {
+    color: black;
+}

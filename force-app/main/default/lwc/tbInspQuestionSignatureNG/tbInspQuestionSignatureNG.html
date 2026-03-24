@@ -1,0 +1,9 @@
+<template>
+    <div class="outerDiv">
+        <canvas class="signature-pad canvasBorder" lwc:dom="manual" style="width: 100%;"></canvas>
+        <div class="slds-var-m-top_small">
+            <lightning-button variant="destructive" label="Clear" title="Clear" onclick={handleClearClick}
+                disabled={readOnly}></lightning-button>
+        </div>
+    </div>
+</template>

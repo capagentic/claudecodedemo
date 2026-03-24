@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Event__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Create Event for each invite status update, so that is visible in activity timeline</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Create Event for each invite status update, so that is visible in activity timeline</inlineHelpText>
+    <label>Create Event</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

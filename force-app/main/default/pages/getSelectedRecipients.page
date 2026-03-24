@@ -1,0 +1,28 @@
+<apex:page standardController="Contact" extensions="getSelectedRecipientController" 
+    recordSetVar="Contact" lightningStylesheets="true"
+    showHeader="false" sidebar="false">
+    
+    <script>
+        var records = JSON.parse('{!JSENCODE(conIdsString)}');//.replace('[','').replace(']','');;
+        //var records = '{!JSINHTMLENCODE(conIdsString)}'.replace('[','').replace(']','');
+        //records = records.split(',');
+        if(records.length ==0 ||(records.length == 1 && records[0].length == 0)){
+            alert('Please select atleast one contact to proceed.');
+            window.history.back();
+        } else {
+            var selectedRecords = [];
+            for(var i=0;i<records.length;i++) {
+                selectedRecords.push(records[i].trim());
+            }
+            var compDefinition = {
+               componentDef: "Kinetics:seqSenderWizard",
+                attributes: {
+                    selectedContactIds: selectedRecords
+                }
+            };
+            // Base64 encode the compDefinition JS object
+            var encodedCompDef = btoa(JSON.stringify(compDefinition));
+            window.open("/one/one.app#" + encodedCompDef, '_self');
+        }
+    </script>
+</apex:page>

@@ -1,0 +1,83 @@
+<template>
+    <div class="slds-box slds-theme_shade">
+        <!-- <lightning-accordion active-section-name="fieldkokineticsetting">
+            <lightning-accordion-section name="fieldkokineticsetting" label="FieldKo Kinetics settings">
+                <div class="slds-box slds-theme_shade">
+                    <p>Please setup Google Key, Base url for site from where the user will complete the forms, sms text message that can be sent. Please ensure that you have Google Key registered, and site is already created.</p>
+                    <p>These configurations will be stored at org level, If you want to setup values at Profile/User level then visit <a href="#" id={fieldkokineticssetting.objkeyprefix} onclick={navigateToCustomSettingPage}> here </a></p>
+                    <div class="slds-progress slds-progress_vertical slds-progress_success">
+                        <ol class="slds-progress__  list slds-progress__list-bordered">
+                            <li class="slds-progress__item">
+                                 <div class="slds-progress__marker"></div>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <div class="slds-size_3-of-4">Create Event
+                                        <lightning-helptext
+                                            content={fieldkokineticssetting.createeventhelp} class="helptext" icon-variant="inverse" if:true={fieldkokineticssetting.createeventhelp}></lightning-helptext>
+                                    </div>
+                                    
+                                    <div class="slds-grid slds-grid_align-end slds-size_1-of-4">
+                                        <div class="slds-form-element">
+                                            <label class="slds-checkbox_toggle slds-grid">
+                                                <span class="slds-form-element__label slds-m-bottom_none slds-assistive-text">Create Event</span>
+                                                <input type="checkbox" name="createevent" value={fieldkokineticssetting.createevent} aria-describedby="createevent" checked={fieldkokineticssetting.createevent} onchange={handleInputFieldChange}/>
+                                                <span id="createevent" class="slds-checkbox_faux_container" aria-live="assertive">
+                                                    <span class="slds-checkbox_faux"></span>
+                                                    <span class="slds-checkbox_on">On</span>
+                                                    <span class="slds-checkbox_off">Off</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="slds-progress__item">
+                                <div class="slds-progress__marker"></div>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <div class="slds-size_3-of-4">Google API Key
+                                        <lightning-helptext
+                                            content={fieldkokineticssetting.googleapikeyhelp} class="helptext" icon-variant="inverse" if:true={fieldkokineticssetting.googleapikeyhelp}></lightning-helptext>
+                                    </div>
+                                    <div class="slds-grid slds-grid_align-end slds-size_1-of-4">
+                                        <input type="text" name="googleapikey" value={fieldkokineticssetting.googleapikey} onchange={handleInputFieldChange}/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="slds-progress__item">
+                                <div class="slds-progress__marker"></div>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <div class="slds-size_3-of-4">Form Renderer Page URL
+                                        <lightning-helptext
+                                            content={fieldkokineticssetting.formrendereurlhelp} class="helptext" icon-variant="inverse" if:true={fieldkokineticssetting.formrendereurlhelp}></lightning-helptext>
+                                    </div>
+                                    <div class="slds-grid slds-grid_align-end slds-size_1-of-4">
+                                        <input type="text" name ="formrendereurl" value={fieldkokineticssetting.formrendereurl} onchange={handleInputFieldChange}/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="slds-progress__item">
+                                <div class="slds-progress__marker"></div>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <div class="slds-size_3-of-4">SMS Template
+                                        <lightning-helptext
+                                            content={fieldkokineticssetting.smstemplatehelp} class="helptext" icon-variant="inverse" if:true={fieldkokineticssetting.smstemplatehelp}></lightning-helptext>
+                                    </div>
+                                    <div class="slds-grid slds-grid_align-end slds-size_1-of-4">
+                                        <input type="text" name ="smstemplate" value={fieldkokineticssetting.smstemplate} onchange={handleInputFieldChange}/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li style="list-style: none;">
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-center">
+                                    <div>
+                                        <button class="slds-button slds-button_outline-brand" onclick={saveCustomSettingSection}>Save</button>
+                                        <button class="slds-button slds-button_outline-brand" onclick={cancelCustomSettingSection}>Cancel</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </lightning-accordion-section>
+        </lightning-accordion> -->
+    </div>
+</template>

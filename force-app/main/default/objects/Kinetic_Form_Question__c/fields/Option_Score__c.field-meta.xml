@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Option_Score__c</fullName>
+    <deprecated>false</deprecated>
+    <description>Hold score for each option</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Hold score for each option</inlineHelpText>
+    <label>Option Score</label>
+    <length>1000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

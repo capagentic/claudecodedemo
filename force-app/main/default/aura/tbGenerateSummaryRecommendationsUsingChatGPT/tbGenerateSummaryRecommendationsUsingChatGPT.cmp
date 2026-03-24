@@ -1,0 +1,18 @@
+<aura:component 
+    implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" 
+    access="global">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="isloading" type="Boolean" default="true" />
+    <aura:attribute name="autoGenerateReportOnLoad" type="Boolean" default="TRUE"/>
+    <aura:handler name="render" value="{!this}" action="{!c.init}"/>
+    <aura:if isTrue="{!v.isloading}">
+        <div class="slds-align--absolute-center">
+            <lightning:spinner aura:id="spinner" variant="brand" size="large" class="slds=hide"/>
+        </div>
+    </aura:if>
+    <c:tbGenerateSummaryRecommendationUsingChatGPT 
+        recordId="{!v.recordId}" 
+        autoGenerateReportOnLoad="{!v.autoGenerateReportOnLoad}"
+        onclosepopup="{!c.closePopup}">
+    </c:tbGenerateSummaryRecommendationUsingChatGPT>
+</aura:component>
