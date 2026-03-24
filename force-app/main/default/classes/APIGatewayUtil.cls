@@ -1,8 +1,21 @@
 /**
- * Author: 
+ * Author:
  * Purpose: helper class for calling api gateway to send sms
  * Date: 23-12-2021
  *
+ * This utility class implements AWS Signature Version 4 (SigV4) authentication
+ * to securely sign HTTP requests sent to AWS API Gateway endpoints.
+ * It handles the full signing workflow: canonical request construction,
+ * string-to-sign generation, HMAC-SHA256 signing key derivation, and
+ * Authorization header assembly.
+ *
+ * Usage:
+ *   APIGatewayUtil.AWSConfig config = new APIGatewayUtil.AWSConfig();
+ *   config.accessKey = 'YOUR_ACCESS_KEY';
+ *   config.accessSecret = 'YOUR_SECRET_KEY';
+ *   config.awsRegion = 'us-east-1';
+ *   APIGatewayUtil gateway = new APIGatewayUtil('https://your-api-id.execute-api.us-east-1.amazonaws.com', config);
+ *   HttpResponse res = gateway.sendRequest('myFunction', 'POST', 'param=value', 'prod');
  */
 public with sharing class APIGatewayUtil {
 	private String ACCESS_KEY;
